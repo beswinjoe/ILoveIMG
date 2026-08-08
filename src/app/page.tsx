@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { 
   FileImage, 
@@ -7,19 +8,8 @@ import {
   ShieldCheck,
   Zap,
   ArrowRight,
-  Maximize,
-  ImageDown,
-  Repeat,
-  Copy,
-  FilePlus2,
-  FileArchive,
-  Shrink,
-  RotateCw,
-  FileUp,
-  ArrowRightLeft,
-  Volume2,
-  Scissors
 } from 'lucide-react';
+import { toolsData } from '@/lib/tools';
 
 export default function Home() {
   return (
@@ -127,47 +117,20 @@ export default function Home() {
         </div>
 
         <div className="category-grid">
-          <Link href="/image-compressor" className="glass-card tool-card">
-            <div className="icon-container"><ImageDown size={20} style={{ color: 'var(--primary)' }} /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>Image Compressor</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Shrink file size of JPG, PNG, WebP while keeping quality.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Compress Image <ArrowRight size={14} /></div>
-          </Link>
-          
-          <Link href="/image-resizer" className="glass-card tool-card">
-            <div className="icon-container"><Maximize size={20} style={{ color: 'var(--primary)' }} /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>Image Resizer</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Resize images exactly to your needed dimensions.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Resize Image <ArrowRight size={14} /></div>
-          </Link>
-
-          <Link href="/jpg-to-png" className="glass-card tool-card">
-            <div className="icon-container"><Copy size={20} style={{ color: 'var(--primary)' }} /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>JPG to PNG</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Easily convert your JPEG files to PNG format.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Convert JPG <ArrowRight size={14} /></div>
-          </Link>
-
-          <Link href="/pdf-merge" className="glass-card tool-card">
-            <div className="icon-container"><FilePlus2 size={20} className="text-danger" /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>Merge PDF</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Combine multiple PDFs into one document.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Merge PDF <ArrowRight size={14} /></div>
-          </Link>
-
-          <Link href="/pdf-compress" className="glass-card tool-card">
-            <div className="icon-container"><Shrink size={20} className="text-danger" /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>Compress PDF</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Reduce file size of your PDFs for easy sharing.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Compress PDF <ArrowRight size={14} /></div>
-          </Link>
-
-          <Link href="/wav-to-mp3" className="glass-card tool-card">
-            <div className="icon-container"><ArrowRightLeft size={20} className="text-success" /></div>
-            <h3 style={{ fontSize: '1.125rem', margin: 0 }}>WAV to MP3</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Convert uncompressed WAV audio to MP3.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Convert Audio <ArrowRight size={14} /></div>
-          </Link>
+          {["/image-compressor", "/image-resizer", "/jpg-to-png", "/pdf-merge", "/pdf-compress", "/wav-to-mp3"].map((route) => {
+            const tool = toolsData.find(t => t.href === route);
+            if (!tool) return null;
+            return (
+              <Link key={tool.href} href={tool.href} className="glass-card tool-card">
+                <div className="icon-container" style={{ color: tool.category === 'PDF Tools' ? 'var(--danger)' : tool.category === 'Audio Tools' ? 'var(--success)' : 'var(--primary)' }}>
+                  {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20 })}
+                </div>
+                <h3 style={{ fontSize: '1.125rem', margin: 0 }}>{tool.name}</h3>
+                <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>{tool.description}</p>
+                <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Open Tool <ArrowRight size={14} /></div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

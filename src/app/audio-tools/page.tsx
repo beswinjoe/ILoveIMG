@@ -1,6 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowRightLeft, Shrink, Repeat, Scissors, Volume2, Music, ArrowRight } from "lucide-react";
+import { ArrowRight, Music } from "lucide-react";
+import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "Audio Tools - Free Browser Audio Processing | FileFlow",
@@ -8,44 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function AudioToolsPage() {
-  const tools = [
-    {
-      name: "WAV to MP3",
-      description: "Convert uncompressed WAV audio into efficient MP3 format.",
-      href: "/wav-to-mp3",
-      icon: <ArrowRightLeft size={20} className="text-success" />,
-    },
-    {
-      name: "MP3 to WAV",
-      description: "Convert MP3 audio into high-fidelity WAV format.",
-      href: "/mp3-to-wav",
-      icon: <ArrowRightLeft size={20} className="text-success" />,
-    },
-    {
-      name: "Audio Compressor",
-      description: "Reduce audio file sizes for faster sharing and storage.",
-      href: "/audio-compressor",
-      icon: <Shrink size={20} className="text-success" />,
-    },
-    {
-      name: "Audio Converter",
-      description: "Convert between any common audio formats easily.",
-      href: "/audio-converter",
-      icon: <Repeat size={20} className="text-success" />,
-    },
-    {
-      name: "Audio Cutter",
-      description: "Trim and cut audio files to keep only the parts you need.",
-      href: "/audio-cutter",
-      icon: <Scissors size={20} className="text-success" />,
-    },
-    {
-      name: "Audio Volume",
-      description: "Increase or decrease the volume of your audio tracks.",
-      href: "/audio-volume",
-      icon: <Volume2 size={20} className="text-success" />,
-    },
-  ];
+  const tools = toolsData.filter(t => t.category === "Audio Tools");
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
@@ -80,7 +45,7 @@ export default function AudioToolsPage() {
                 padding: '0.5rem', borderRadius: '12px', 
                 backgroundColor: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' 
               }}>
-                {tool.icon}
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--success)' } })}
               </div>
               <h3 style={{ fontSize: "1.125rem", margin: 0 }}>{tool.name}</h3>
             </div>

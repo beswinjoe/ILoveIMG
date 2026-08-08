@@ -1,6 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { Maximize, Minimize, Crop, Repeat, Layers, ArrowRight, FileImage, Copy } from "lucide-react";
+import { ArrowRight, FileImage } from "lucide-react";
+import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "Image Tools - Free Browser Image Processing | FileFlow",
@@ -8,56 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function ImageToolsPage() {
-  const tools = [
-    {
-      name: "Image Compressor",
-      description: "Compress JPG, PNG, or WebP while preserving quality.",
-      href: "/image-compressor",
-      icon: <Minimize size={20} className="text-primary" />,
-    },
-    {
-      name: "Image Resizer",
-      description: "Resize images to your exact dimensions.",
-      href: "/image-resizer",
-      icon: <Maximize size={20} className="text-primary" />,
-    },
-    {
-      name: "JPG to PNG",
-      description: "Convert JPG to transparent PNG format.",
-      href: "/jpg-to-png",
-      icon: <Copy size={20} className="text-primary" />,
-    },
-    {
-      name: "PNG to JPG",
-      description: "Convert PNG to optimized JPG.",
-      href: "/png-to-jpg",
-      icon: <Copy size={20} className="text-primary" />,
-    },
-    {
-      name: "WebP Converter",
-      description: "Convert between WebP and other formats.",
-      href: "/webp-converter",
-      icon: <Repeat size={20} className="text-primary" />,
-    },
-    {
-      name: "Image Cropper",
-      description: "Crop photos easily in your browser.",
-      href: "/image-cropper",
-      icon: <Crop size={20} className="text-primary" />,
-    },
-    {
-      name: "Image Converter",
-      description: "Universal image format converter.",
-      href: "/image-converter",
-      icon: <Repeat size={20} className="text-primary" />,
-    },
-    {
-      name: "Bulk Image Compressor",
-      description: "Compress multiple images at once.",
-      href: "/bulk-image-compressor",
-      icon: <Layers size={20} className="text-primary" />,
-    },
-  ];
+  const tools = toolsData.filter(t => t.category === "Image Tools");
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
@@ -92,7 +45,7 @@ export default function ImageToolsPage() {
                 padding: '0.5rem', borderRadius: '12px', 
                 backgroundColor: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' 
               }}>
-                {tool.icon}
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--primary)' } })}
               </div>
               <h3 style={{ fontSize: "1.125rem", margin: 0 }}>{tool.name}</h3>
             </div>

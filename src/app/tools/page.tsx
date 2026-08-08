@@ -1,6 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { QrCode, KeyRound, Braces, AlignLeft, Palette, Code, Hash, Type, Clock, Scale, Percent, Wrench, ArrowRight } from "lucide-react";
+import { ArrowRight, Wrench } from "lucide-react";
+import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "Other Utilities - Free Browser Tools | FileFlow",
@@ -8,74 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function UtilitiesPage() {
-  const tools = [
-    {
-      name: "QR Code Generator",
-      description: "Generate customized QR codes from text or URLs.",
-      href: "/qr-generator",
-      icon: <QrCode size={20} className="text-secondary" />,
-    },
-    {
-      name: "Password Generator",
-      description: "Create strong, secure, randomized passwords instantly.",
-      href: "/password-generator",
-      icon: <KeyRound size={20} className="text-secondary" />,
-    },
-    {
-      name: "JSON Formatter",
-      description: "Format, validate, and beautify your JSON data.",
-      href: "/json-formatter",
-      icon: <Braces size={20} className="text-secondary" />,
-    },
-    {
-      name: "Word Counter",
-      description: "Count words, characters, and sentences in your text.",
-      href: "/word-counter",
-      icon: <AlignLeft size={20} className="text-secondary" />,
-    },
-    {
-      name: "Color Picker",
-      description: "Pick colors and convert between HEX, RGB, and HSL.",
-      href: "/color-picker",
-      icon: <Palette size={20} className="text-secondary" />,
-    },
-    {
-      name: "Base64 Encoder",
-      description: "Encode and decode text or files to Base64 format.",
-      href: "/base64",
-      icon: <Code size={20} className="text-secondary" />,
-    },
-    {
-      name: "UUID Generator",
-      description: "Generate unique random UUIDs (v4) for your projects.",
-      href: "/uuid-generator",
-      icon: <Hash size={20} className="text-secondary" />,
-    },
-    {
-      name: "Text Case Converter",
-      description: "Convert text to uppercase, lowercase, title case, and more.",
-      href: "/text-case",
-      icon: <Type size={20} className="text-secondary" />,
-    },
-    {
-      name: "Timestamp Converter",
-      description: "Convert Unix timestamps to human-readable dates.",
-      href: "/timestamp",
-      icon: <Clock size={20} className="text-secondary" />,
-    },
-    {
-      name: "Unit Converter",
-      description: "Convert between various units of measurement.",
-      href: "/unit-converter",
-      icon: <Scale size={20} className="text-secondary" />,
-    },
-    {
-      name: "Percentage Calculator",
-      description: "Calculate percentage increases, decreases, and differences.",
-      href: "/percentage-calculator",
-      icon: <Percent size={20} className="text-secondary" />,
-    },
-  ];
+  const tools = toolsData.filter(t => t.category === "Other Utilities");
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
@@ -110,7 +45,7 @@ export default function UtilitiesPage() {
                 padding: '0.5rem', borderRadius: '12px', 
                 backgroundColor: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' 
               }}>
-                {tool.icon}
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--secondary)' } })}
               </div>
               <h3 style={{ fontSize: "1.125rem", margin: 0 }}>{tool.name}</h3>
             </div>

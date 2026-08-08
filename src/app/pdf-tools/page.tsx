@@ -1,6 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { FilePlus2, FileArchive, Shrink, FileImage, ImageDown, RotateCw, FileUp, ArrowRight, FileText, Trash, Droplets } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
+import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "PDF Tools - Free Browser PDF Processing | FileFlow",
@@ -8,62 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function PdfToolsPage() {
-  const tools = [
-    {
-      name: "Merge PDF",
-      description: "Combine multiple PDFs into one unified document.",
-      href: "/pdf-merge",
-      icon: <FilePlus2 size={20} className="text-danger" />,
-    },
-    {
-      name: "Split PDF",
-      description: "Extract specific pages or separate a PDF into multiple files.",
-      href: "/pdf-split",
-      icon: <FileArchive size={20} className="text-danger" />,
-    },
-    {
-      name: "Compress PDF",
-      description: "Reduce file size of your PDFs for easy sharing.",
-      href: "/pdf-compress",
-      icon: <Shrink size={20} className="text-danger" />,
-    },
-    {
-      name: "PDF to Images",
-      description: "Extract each page of your PDF as a separate image.",
-      href: "/pdf-to-images",
-      icon: <ImageDown size={20} className="text-danger" />,
-    },
-    {
-      name: "Images to PDF",
-      description: "Convert a collection of images into a single PDF.",
-      href: "/image-to-pdf",
-      icon: <FileImage size={20} className="text-danger" />,
-    },
-    {
-      name: "Rotate PDF",
-      description: "Rotate individual PDF pages or the entire document.",
-      href: "/pdf-rotate",
-      icon: <RotateCw size={20} className="text-danger" />,
-    },
-    {
-      name: "Extract Pages",
-      description: "Pull specific pages out to form a new PDF.",
-      href: "/pdf-page-extract",
-      icon: <FileUp size={20} className="text-danger" />,
-    },
-    {
-      name: "Delete Pages",
-      description: "Remove unwanted pages from your PDF file.",
-      href: "/pdf-page-delete",
-      icon: <Trash size={20} className="text-danger" />,
-    },
-    {
-      name: "Watermark PDF",
-      description: "Add a text or image watermark to your PDF pages.",
-      href: "/pdf-watermark",
-      icon: <Droplets size={20} className="text-danger" />,
-    },
-  ];
+  const tools = toolsData.filter(t => t.category === "PDF Tools");
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
@@ -98,7 +45,7 @@ export default function PdfToolsPage() {
                 padding: '0.5rem', borderRadius: '12px', 
                 backgroundColor: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' 
               }}>
-                {tool.icon}
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--danger)' } })}
               </div>
               <h3 style={{ fontSize: "1.125rem", margin: 0 }}>{tool.name}</h3>
             </div>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
-import { Search, Image as ImageIcon, FileText, Music, Wrench } from "lucide-react";
+import { Search } from "lucide-react";
 import { toolsData, ToolItem } from "../lib/tools";
 
 export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
@@ -12,6 +12,7 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
   const router = useRouter();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMac(typeof window !== "undefined" && navigator.platform.toUpperCase().indexOf("MAC") >= 0);
 
     const down = (e: KeyboardEvent) => {
@@ -31,13 +32,6 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
   const runCommand = (command: () => void) => {
     setOpen(false);
     command();
-  };
-
-  const iconMap: Record<string, React.ReactNode> = {
-    'image': <ImageIcon size={20} style={{ color: 'var(--primary)' }} />,
-    'file-text': <FileText size={20} className="text-danger" style={{ color: 'var(--danger, #ef4444)' }} />,
-    'music': <Music size={20} className="text-success" style={{ color: 'var(--success, #22c55e)' }} />,
-    'wrench': <Wrench size={20} className="text-secondary" style={{ color: 'var(--secondary, #8b5cf6)' }} />
   };
 
   // Group tools by category
@@ -197,7 +191,9 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
                         padding: '0.5rem', borderRadius: '12px', 
                         backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid var(--border)' 
                       }}>
-                        {iconMap[tool.iconName] || <Wrench size={20} />}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '20px' }}>
+                          {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--primary)' } })}
+                        </div>
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.125rem' }}>
                         <span style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--foreground)' }}>{tool.name}</span>

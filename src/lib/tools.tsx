@@ -1,3 +1,12 @@
+import React from 'react';
+import { 
+  ImageDown, Maximize, Crop, ArrowRightLeft, FileImage, Images, 
+  Files, Scissors, FileDown, RotateCw, FileX, FileOutput, Stamp,
+  AudioLines, AudioWaveform, Volume2,
+  QrCode, KeyRound, FileText, Braces, Pipette, Binary, Fingerprint, CaseUpper, Clock, Ruler, Percent,
+  Wrench
+} from 'lucide-react';
+
 export type ToolCategory = 'Image Tools' | 'PDF Tools' | 'Audio Tools' | 'Other Utilities';
 
 export interface ToolItem {
@@ -6,7 +15,7 @@ export interface ToolItem {
   category: ToolCategory;
   description: string;
   keywords: string[];
-  iconName: string; // Used to map to Lucide icons dynamically
+  icon: React.ReactNode;
 }
 
 export const toolsData: ToolItem[] = [
@@ -17,7 +26,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Compress JPG, PNG and WebP images",
     keywords: ["compress", "image", "jpg", "png", "webp", "reduce", "size"],
-    iconName: "image"
+    icon: <ImageDown />
   },
   {
     name: "Image Resizer",
@@ -25,7 +34,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Resize images quickly",
     keywords: ["resize", "image", "scale", "dimensions", "width", "height"],
-    iconName: "image"
+    icon: <Maximize />
   },
   {
     name: "Image Cropper",
@@ -33,7 +42,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Crop images to any size",
     keywords: ["crop", "image", "cut", "trim", "aspect", "ratio"],
-    iconName: "image"
+    icon: <Crop />
   },
   {
     name: "JPG to PNG",
@@ -41,7 +50,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Convert JPG to transparent PNG format",
     keywords: ["convert", "jpg", "png", "transparent", "format"],
-    iconName: "image"
+    icon: <ArrowRightLeft />
   },
   {
     name: "PNG to JPG",
@@ -49,7 +58,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Convert PNG to optimized JPG",
     keywords: ["convert", "png", "jpg", "jpeg", "optimize"],
-    iconName: "image"
+    icon: <ArrowRightLeft />
   },
   {
     name: "WebP Converter",
@@ -57,7 +66,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Convert between WebP and other formats",
     keywords: ["convert", "webp", "image", "format"],
-    iconName: "image"
+    icon: <FileImage />
   },
   {
     name: "Image Converter",
@@ -65,7 +74,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Universal image format converter",
     keywords: ["convert", "image", "format", "universal"],
-    iconName: "image"
+    icon: <FileImage />
   },
   {
     name: "Bulk Image Compressor",
@@ -73,7 +82,7 @@ export const toolsData: ToolItem[] = [
     category: "Image Tools",
     description: "Compress multiple images at once",
     keywords: ["compress", "bulk", "batch", "multiple", "images"],
-    iconName: "image"
+    icon: <Images />
   },
 
   // PDF TOOLS
@@ -83,7 +92,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Combine multiple PDF files",
     keywords: ["merge", "pdf", "combine", "join", "files"],
-    iconName: "file-text"
+    icon: <Files />
   },
   {
     name: "Split PDF",
@@ -91,7 +100,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Split PDF pages into separate files",
     keywords: ["split", "pdf", "separate", "extract", "pages"],
-    iconName: "file-text"
+    icon: <Scissors />
   },
   {
     name: "Compress PDF",
@@ -99,7 +108,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Reduce file size of your PDFs",
     keywords: ["compress", "pdf", "reduce", "size", "optimize"],
-    iconName: "file-text"
+    icon: <FileDown />
   },
   {
     name: "Rotate PDF",
@@ -107,7 +116,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Rotate individual PDF pages",
     keywords: ["rotate", "pdf", "turn", "orientation", "pages"],
-    iconName: "file-text"
+    icon: <RotateCw />
   },
   {
     name: "Delete PDF Pages",
@@ -115,7 +124,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Remove unwanted pages from a PDF",
     keywords: ["delete", "remove", "pdf", "pages"],
-    iconName: "file-text"
+    icon: <FileX />
   },
   {
     name: "Extract PDF Pages",
@@ -123,7 +132,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Pull specific pages out of a PDF",
     keywords: ["extract", "pull", "pdf", "pages"],
-    iconName: "file-text"
+    icon: <FileOutput />
   },
   {
     name: "Watermark PDF",
@@ -131,7 +140,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Add a watermark to your PDF",
     keywords: ["watermark", "pdf", "stamp", "brand"],
-    iconName: "file-text"
+    icon: <Stamp />
   },
   {
     name: "Image to PDF",
@@ -139,7 +148,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Convert images to PDF format",
     keywords: ["convert", "image", "pdf", "jpg", "png"],
-    iconName: "file-text"
+    icon: <FileImage />
   },
   {
     name: "PDF to Images",
@@ -147,7 +156,7 @@ export const toolsData: ToolItem[] = [
     category: "PDF Tools",
     description: "Extract PDF pages as images",
     keywords: ["convert", "pdf", "image", "extract", "pages"],
-    iconName: "file-text"
+    icon: <Images />
   },
 
   // AUDIO TOOLS
@@ -157,7 +166,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Convert WAV audio to MP3",
     keywords: ["convert", "wav", "mp3", "audio"],
-    iconName: "music"
+    icon: <AudioLines />
   },
   {
     name: "MP3 to WAV",
@@ -165,7 +174,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Convert MP3 audio to WAV",
     keywords: ["convert", "mp3", "wav", "audio"],
-    iconName: "music"
+    icon: <AudioLines />
   },
   {
     name: "Audio Compressor",
@@ -173,7 +182,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Reduce audio file sizes",
     keywords: ["compress", "audio", "reduce", "size"],
-    iconName: "music"
+    icon: <AudioWaveform />
   },
   {
     name: "Audio Converter",
@@ -181,7 +190,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Convert between common audio formats",
     keywords: ["convert", "audio", "format"],
-    iconName: "music"
+    icon: <ArrowRightLeft />
   },
   {
     name: "Audio Cutter",
@@ -189,7 +198,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Trim and cut audio files",
     keywords: ["cut", "trim", "audio", "clip"],
-    iconName: "music"
+    icon: <Scissors />
   },
   {
     name: "Audio Volume",
@@ -197,7 +206,7 @@ export const toolsData: ToolItem[] = [
     category: "Audio Tools",
     description: "Increase or decrease audio volume",
     keywords: ["volume", "audio", "increase", "decrease", "loudness"],
-    iconName: "music"
+    icon: <Volume2 />
   },
 
   // OTHER UTILITIES
@@ -207,7 +216,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Generate QR codes from text or URLs",
     keywords: ["qr", "code", "generate", "create", "barcode"],
-    iconName: "wrench"
+    icon: <QrCode />
   },
   {
     name: "Password Generator",
@@ -215,7 +224,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Create secure, randomized passwords",
     keywords: ["password", "generate", "secure", "random"],
-    iconName: "wrench"
+    icon: <KeyRound />
   },
   {
     name: "Word Counter",
@@ -223,7 +232,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Count words, characters, and sentences",
     keywords: ["word", "count", "characters", "sentences", "text"],
-    iconName: "wrench"
+    icon: <FileText />
   },
   {
     name: "JSON Formatter",
@@ -231,7 +240,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Format and validate JSON data",
     keywords: ["json", "format", "validate", "beautify"],
-    iconName: "wrench"
+    icon: <Braces />
   },
   {
     name: "Color Picker",
@@ -239,7 +248,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Pick colors and convert HEX, RGB, HSL",
     keywords: ["color", "picker", "hex", "rgb", "hsl", "convert"],
-    iconName: "wrench"
+    icon: <Pipette />
   },
   {
     name: "Base64 Encoder",
@@ -247,7 +256,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Encode and decode text to Base64",
     keywords: ["base64", "encode", "decode", "text"],
-    iconName: "wrench"
+    icon: <Binary />
   },
   {
     name: "UUID Generator",
@@ -255,7 +264,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Generate unique random UUIDs (v4)",
     keywords: ["uuid", "generate", "random", "unique", "guid"],
-    iconName: "wrench"
+    icon: <Fingerprint />
   },
   {
     name: "Text Case Converter",
@@ -263,7 +272,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Convert text to uppercase, lowercase",
     keywords: ["text", "case", "convert", "uppercase", "lowercase", "title"],
-    iconName: "wrench"
+    icon: <CaseUpper />
   },
   {
     name: "Timestamp Converter",
@@ -271,7 +280,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Convert Unix timestamps to dates",
     keywords: ["timestamp", "unix", "convert", "date", "time"],
-    iconName: "wrench"
+    icon: <Clock />
   },
   {
     name: "Unit Converter",
@@ -279,7 +288,7 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Convert between units of measurement",
     keywords: ["unit", "convert", "measurement", "weight", "length", "temperature"],
-    iconName: "wrench"
+    icon: <Ruler />
   },
   {
     name: "Percentage Calculator",
@@ -287,6 +296,6 @@ export const toolsData: ToolItem[] = [
     category: "Other Utilities",
     description: "Calculate percentage increases",
     keywords: ["percentage", "calculate", "math", "increase", "decrease"],
-    iconName: "wrench"
+    icon: <Percent />
   }
 ];

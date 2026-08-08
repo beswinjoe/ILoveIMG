@@ -1,47 +1,24 @@
 import { MetadataRoute } from 'next'
+import { toolsData } from '@/lib/tools'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://fileflow.com'
+  const baseUrl = 'https://filefloww.vercel.app'
 
-  const routes = [
+  const staticRoutes = [
     '',
     '/image-tools',
-    '/image-compressor',
-    '/image-resizer',
-    '/image-converter',
-    '/image-to-pdf',
     '/pdf-tools',
-    '/pdf-merge',
-    '/pdf-split',
-    '/pdf-compress',
-    '/pdf-rotate',
-    '/pdf-page-delete',
-    '/pdf-page-extract',
-    '/pdf-watermark',
     '/audio-tools',
-    '/wav-to-mp3',
-    '/mp3-to-wav',
-    '/audio-compressor',
-    '/audio-converter',
-    '/audio-cutter',
-    '/audio-volume',
     '/tools',
-    '/qr-generator',
-    '/password-generator',
-    '/word-counter',
-    '/json-formatter',
-    '/color-picker',
-    '/base64',
-    '/uuid-generator',
-    '/text-case',
-    '/timestamp',
-    '/unit-converter',
-    '/percentage-calculator',
-    '/pricing',
     '/privacy',
   ]
 
-  return routes.map((route) => ({
+  const toolRoutes = toolsData.map(tool => tool.href)
+
+  // Combine and deduplicate
+  const allRoutes = Array.from(new Set([...staticRoutes, ...toolRoutes]))
+
+  return allRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',

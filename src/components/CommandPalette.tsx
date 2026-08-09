@@ -50,8 +50,8 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem',
           padding: '0 0.875rem', width: isMobile ? '100%' : '260px', height: '44px',
           fontSize: '0.875rem', color: 'var(--muted)',
-          backgroundColor: 'rgba(255,255,255,0.1)',
-          border: '1px solid var(--border)',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
+          border: '1px solid rgba(255, 255, 255, 0.6)',
           borderRadius: '100px', cursor: 'pointer',
           transition: 'all 0.2s ease'
         }}
@@ -64,7 +64,7 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
         <kbd style={{ 
           display: 'flex', alignItems: 'center', gap: '0.125rem',
           padding: '0.2rem 0.4rem', fontSize: '0.7rem', fontWeight: 600,
-          backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid var(--border)', 
+          backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(255, 255, 255, 0.6)', 
           borderRadius: '100px', color: 'var(--muted)'
         }}>
           <span>{isMac ? '⌘' : 'Ctrl'}</span>K
@@ -72,52 +72,50 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
       </button>
 
       {open && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1rem'
-        }}>
+        <>
           {/* Overlay */}
           <div 
-            style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.25)', backdropFilter: 'blur(4px)' }} 
+            className="search-backdrop"
+            style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(235, 238, 248, 0.55)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', zIndex: 9998 }} 
             onClick={() => setOpen(false)}
           />
+          <div 
+            className="search-modal"
+            style={{
+            position: 'fixed',
+            top: isMobile ? '72px' : '90px',
+            left: isMobile ? '12px' : '50%',
+            transform: isMobile ? 'none' : 'translateX(-50%)',
+            zIndex: 9999,
+            width: isMobile ? 'calc(100vw - 24px)' : 'min(680px, calc(100vw - 40px))',
+          }}>
 
           <style dangerouslySetInnerHTML={{__html: `
             .cmdk-container {
-              position: relative;
               width: 100%;
-              max-width: 680px;
               max-height: 70vh;
               display: flex;
               flex-direction: column;
               border-radius: 24px;
-              box-shadow: 0 24px 48px rgba(0,0,0,0.15);
               overflow: hidden;
-              background: rgba(255,255,255,0.70);
-              backdrop-filter: blur(30px) saturate(160%);
-              -webkit-backdrop-filter: blur(30px) saturate(160%);
-              border: 1px solid rgba(255,255,255,0.35);
+              background: rgba(255, 255, 255, 0.92);
+              backdrop-filter: blur(30px) saturate(140%);
+              -webkit-backdrop-filter: blur(30px) saturate(140%);
+              border: 1px solid rgba(255, 255, 255, 0.85);
+              box-shadow: 0 30px 100px rgba(30, 40, 90, 0.20);
               z-index: 10000;
-            }
-            [data-theme='dark'] .cmdk-container {
-              background: rgba(15,23,42,0.78);
-              border: 1px solid rgba(255,255,255,0.15);
             }
             .cmdk-input-wrapper {
               display: flex;
               align-items: center;
-              padding: 0 1.5rem;
+              padding: 0 24px;
               border-bottom: 1px solid var(--border);
+              height: 72px;
             }
             .cmdk-input {
               width: 100%;
-              height: 64px;
-              font-size: 1.125rem;
+              height: 100%;
+              font-size: 22px;
               background: transparent;
               border: none;
               outline: none;
@@ -142,9 +140,10 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
             .cmdk-item {
               display: flex;
               align-items: center;
-              gap: 1.25rem;
-              padding: 1rem 1.25rem;
+              gap: 1rem;
+              padding: 0 16px;
               border-radius: 16px;
+              height: 72px;
               cursor: pointer;
               transition: all 0.15s ease;
             }
@@ -165,7 +164,7 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
               <Command.Input className="cmdk-input" placeholder="Search any tool..." autoFocus />
               <kbd style={{ 
                 padding: '0.25rem 0.5rem', fontSize: '0.75rem', fontWeight: 600,
-                backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid var(--border)', 
+                backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(255, 255, 255, 0.6)', 
                 borderRadius: '8px', color: 'var(--muted)', marginLeft: '1rem'
               }}>
                 Esc
@@ -189,15 +188,15 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
                     >
                       <div style={{ 
                         padding: '0.5rem', borderRadius: '12px', 
-                        backgroundColor: 'rgba(255,255,255,0.1)', border: '1px solid var(--border)' 
+                        backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(255, 255, 255, 0.6)' 
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '20px' }}>
                           {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--primary)' } })}
                         </div>
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.125rem' }}>
-                        <span style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--foreground)' }}>{tool.name}</span>
-                        <span style={{ fontSize: '0.875rem', color: 'var(--muted)' }}>{tool.description}</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <span style={{ fontWeight: 600, fontSize: '18px', color: 'var(--foreground)', lineHeight: '1.2' }}>{tool.name}</span>
+                        <span style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: '1.4' }}>{tool.description}</span>
                       </div>
                     </Command.Item>
                   ))}
@@ -205,7 +204,8 @@ export function CommandPalette({ isMobile = false }: { isMobile?: boolean }) {
               ))}
             </Command.List>
           </Command>
-        </div>
+          </div>
+        </>
       )}
     </>
   );

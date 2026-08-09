@@ -31,8 +31,8 @@ export default function Home() {
         {/* Floating Decorators */}
         <div className="hidden md:flex items-center justify-center" style={{ 
           position: 'absolute', top: '15%', left: '8%', width: '80px', height: '80px', 
-          backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.3)', borderRadius: '24px',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.6)', borderRadius: '24px',
           animation: 'float 6s ease-in-out infinite' 
         }}>
           <FileImage size={32} style={{ color: 'var(--primary)', opacity: 0.9 }} />
@@ -40,8 +40,8 @@ export default function Home() {
         
         <div className="hidden md:flex items-center justify-center" style={{ 
           position: 'absolute', bottom: '20%', right: '10%', width: '90px', height: '90px', 
-          backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.3)', borderRadius: '28px',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.6)', borderRadius: '28px',
           animation: 'float 7s ease-in-out infinite 1s' 
         }}>
           <Music size={36} style={{ color: 'var(--success)', opacity: 0.9 }} />
@@ -49,8 +49,8 @@ export default function Home() {
 
         <div className="hidden md:flex items-center justify-center" style={{ 
           position: 'absolute', top: '25%', right: '15%', width: '70px', height: '70px', 
-          backgroundColor: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.3)', borderRadius: '20px',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.6)', borderRadius: '20px',
           animation: 'float 5s ease-in-out infinite 0.5s' 
         }}>
           <FileText size={28} style={{ color: 'var(--danger)', opacity: 0.9 }} />
@@ -66,10 +66,7 @@ export default function Home() {
             display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; cursor: pointer; text-decoration: none; color: inherit;
           }
           .tool-card .icon-container {
-            padding: 0.6rem; border-radius: 14px; background-color: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
-          }
-          [data-theme='dark'] .tool-card .icon-container {
-             background-color: rgba(255,255,255,0.05);
+            padding: 0.6rem; border-radius: 14px; background-color: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.6);
           }
         `}} />
 
@@ -154,7 +151,7 @@ export default function Home() {
           <p className="text-muted">Tools organized by file type.</p>
         </div>
         
-        <div className="category-grid sm:grid-cols-2 lg:grid-cols-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))' }}>
+        <div className="category-grid">
           <Link href="/image-tools" className="glass-card tool-card">
             <div className="icon-container"><FileImage size={24} style={{ color: 'var(--primary)' }} /></div>
             <h3 style={{ fontSize: '1.25rem', margin: 0 }}>Image Tools</h3>

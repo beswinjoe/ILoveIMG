@@ -3,11 +3,11 @@ import { Layers } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid var(--border)', backgroundColor: 'var(--surface)', marginTop: 'auto', backdropFilter: 'var(--glass-blur)', WebkitBackdropFilter: 'var(--glass-blur)' }}>
+    <footer style={{ borderTop: '1px solid var(--border)', backgroundColor: 'rgba(255, 255, 255, 0.4)', marginTop: 'auto', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
       <div className="container py-16">
-        <div className="flex justify-between flex-wrap gap-12">
+        <div className="footer-grid">
           
-          <div className="max-w-xs">
+          <div className="footer-col" style={{ display: 'flex', flexDirection: 'column' }}>
             <Link href="/" className="flex items-center gap-2 mb-4" style={{ textDecoration: 'none' }}>
               <div className="flex items-center justify-center bg-primary" style={{ width: '32px', height: '32px', borderRadius: '8px', color: 'white', background: 'linear-gradient(135deg, var(--primary), var(--secondary))' }}>
                 <Layers size={18} />
@@ -21,17 +21,16 @@ export default function Footer() {
             </p>
           </div>
           
-          <div className="flex flex-wrap gap-16">
-            <div className="flex flex-col gap-3">
-              <h4 className="font-semibold text-foreground mb-2">Tools</h4>
-              <Link href="/image-tools" className="text-muted hover:text-primary transition-colors text-sm">Image Tools</Link>
-              <Link href="/pdf-tools" className="text-muted hover:text-primary transition-colors text-sm">PDF Tools</Link>
-              <Link href="/documents" className="text-muted hover:text-primary transition-colors text-sm">Document Tools</Link>
-              <Link href="/audio-tools" className="text-muted hover:text-primary transition-colors text-sm">Audio Tools</Link>
-              <Link href="/tools" className="text-muted hover:text-primary transition-colors text-sm">Other Utilities</Link>
-            </div>
-            
-            <div className="flex flex-col gap-3">
+          <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <h4 className="font-semibold text-foreground mb-2">Tools</h4>
+            <Link href="/image-tools" className="text-muted hover:text-primary transition-colors text-sm">Image Tools</Link>
+            <Link href="/pdf-tools" className="text-muted hover:text-primary transition-colors text-sm">PDF Tools</Link>
+            <Link href="/documents" className="text-muted hover:text-primary transition-colors text-sm">Document Tools</Link>
+            <Link href="/audio-tools" className="text-muted hover:text-primary transition-colors text-sm">Audio Tools</Link>
+            <Link href="/tools" className="text-muted hover:text-primary transition-colors text-sm">Other Utilities</Link>
+          </div>
+          
+          <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <h4 className="font-semibold text-foreground mb-2">Company</h4>
               <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">About</Link>
               <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Blog</Link>
@@ -39,11 +38,10 @@ export default function Footer() {
               <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Contact</Link>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <h4 className="font-semibold text-foreground mb-2">Legal</h4>
-              <Link href="/privacy" className="text-muted hover:text-primary transition-colors text-sm">Privacy Policy</Link>
-              <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Terms of Service</Link>
-            </div>
+          <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <h4 className="font-semibold text-foreground mb-2">Legal</h4>
+            <Link href="/privacy" className="text-muted hover:text-primary transition-colors text-sm">Privacy Policy</Link>
+            <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Terms of Service</Link>
           </div>
 
         </div>

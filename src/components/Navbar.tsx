@@ -32,7 +32,6 @@ export default function Navbar() {
         marginBottom: '1rem'
       }}>
         <div 
-          className="navbar-glass"
           style={{ 
             pointerEvents: 'auto', 
             borderRadius: '30px',
@@ -42,7 +41,12 @@ export default function Navbar() {
             display: 'grid',
             gridTemplateColumns: '1fr auto 1fr',
             alignItems: 'center',
-            padding: '0 1.5rem'
+            padding: '0 1.5rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.65)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.5)',
+            boxShadow: '0 4px 24px -6px rgba(0, 0, 0, 0.05)'
           }}
         >
           {/* LEFT: Logo */}
@@ -80,7 +84,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* RIGHT: Search + Theme (Desktop) */}
+          {/* RIGHT: Search (Desktop) */}
           <div className="hidden md:flex items-center gap-3" style={{ justifySelf: 'end' }}>
             <CommandPalette />
           </div>
@@ -109,10 +113,11 @@ export default function Navbar() {
         }}>
           <div style={{ 
             width: '280px', height: '100%', 
-            backgroundColor: 'var(--background)', 
-            borderLeft: '1px solid var(--border)', 
+            backgroundColor: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(20px)',
+            borderLeft: '1px solid rgba(255, 255, 255, 0.5)', 
             padding: '1.5rem', display: 'flex', flexDirection: 'column',
-            boxShadow: '-10px 0 40px rgba(0,0,0,0.1)'
+            boxShadow: '-10px 0 40px rgba(0,0,0,0.05)'
           }}>
             <div className="flex justify-between items-center mb-6">
               <span style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--foreground)' }}>Menu</span>

@@ -153,18 +153,61 @@ export default function CompressorClient() {
       )}
 
       {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mt-8">Advertisement Space</div>
+      <div className="ad-container max-w-4xl mx-auto mt-8 mb-16">Advertisement Space</div>
 
-      <div className="max-w-3xl mx-auto mt-12 p-6" style={{ backgroundColor: "var(--surface)", borderRadius: "var(--radius-lg)" }}>
-        <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>How to compress images for free?</h2>
+      {/* How it works */}
+      <section className="max-w-4xl mx-auto mb-16 p-8 glass-card">
+        <h2 className="mb-6" style={{ fontSize: "1.75rem" }}>How it works</h2>
         <ol style={{ paddingLeft: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }} className="text-muted">
-          <li>Drag and drop your JPG, PNG, or WebP file into the upload box.</li>
-          <li>Adjust the compression quality slider to your preference.</li>
-          <li>Click the "Compress Image" button.</li>
-          <li>Compare the original and compressed sizes.</li>
-          <li>Download the optimized image instantly!</li>
+          <li style={{ fontSize: "1.125rem" }}>Drag and drop your JPG, PNG, or WebP file into the upload box.</li>
+          <li style={{ fontSize: "1.125rem" }}>Adjust the compression quality slider to your preference.</li>
+          <li style={{ fontSize: "1.125rem" }}>Click the "Compress Image" button.</li>
+          <li style={{ fontSize: "1.125rem" }}>Compare the original and compressed sizes.</li>
+          <li style={{ fontSize: "1.125rem" }}>Download the optimized image instantly!</li>
         </ol>
+      </section>
+
+      {/* Supported formats */}
+      <section className="max-w-4xl mx-auto mb-16 p-8 glass-card text-center">
+        <h2 className="mb-4" style={{ fontSize: "1.75rem" }}>Supported Formats</h2>
+        <p className="text-muted" style={{ fontSize: "1.125rem" }}>JPG, JPEG, PNG, WebP</p>
+      </section>
+
+      {/* Privacy Guarantee */}
+      <div className="glass-card max-w-4xl mx-auto mb-16 text-center p-8">
+        <h3 className="mb-2" style={{ fontSize: "1.5rem" }}>Your files stay on your device</h3>
+        <p className="text-muted" style={{ fontSize: "1.125rem" }}>
+          We use advanced browser technologies to process your files locally. 
+          Your data is never uploaded to our servers, guaranteeing 100% privacy and lightning-fast speed.
+        </p>
       </div>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto mb-16">
+        <h2 className="mb-6" style={{ fontSize: "1.75rem" }}>Frequently Asked Questions</h2>
+        <div className="flex flex-col gap-4">
+          <div className="glass-card p-6" style={{ padding: "1.5rem" }}>
+            <h4 className="mb-2" style={{ fontSize: "1.125rem" }}>Is my image uploaded to a server?</h4>
+            <p className="text-muted" style={{ fontSize: "1.125rem" }}>No. Filoza processes your image entirely within your browser for 100% privacy.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Tools */}
+      <section className="max-w-4xl mx-auto mb-16">
+        <h2 className="mb-6" style={{ fontSize: "1.75rem" }}>Related Tools</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(250px, 100%), 1fr))", gap: "1rem" }}>
+          <a href="/image-resizer" className="glass-card flex items-center gap-4 hover:border-primary transition-colors text-inherit no-underline">
+            <span className="font-medium">Image Resizer</span>
+          </a>
+          <a href="/jpg-to-png" className="glass-card flex items-center gap-4 hover:border-primary transition-colors text-inherit no-underline">
+            <span className="font-medium">JPG to PNG</span>
+          </a>
+          <a href="/background-remover" className="glass-card flex items-center gap-4 hover:border-primary transition-colors text-inherit no-underline">
+            <span className="font-medium">Background Remover</span>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

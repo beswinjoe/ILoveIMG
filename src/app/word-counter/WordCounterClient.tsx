@@ -77,6 +77,8 @@ export default function WordCounterClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Word Counter"
       description="Count words, characters, sentences, and paragraphs in your text instantly."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Word Counter", href: "/word-counter" }]}

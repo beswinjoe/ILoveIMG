@@ -80,6 +80,8 @@ export default function BackgroundRemoverClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Background Remover"
       description="Automatically detect the main subject and remove the background from your images with our AI model."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Background Remover", href: "/background-remover" }]}

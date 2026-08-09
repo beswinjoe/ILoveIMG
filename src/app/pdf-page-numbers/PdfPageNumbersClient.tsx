@@ -70,6 +70,8 @@ export default function PdfPageNumbersClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="PDF Page Numbers"
       description="Add page numbers to your PDF documents easily."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "PDF Page Numbers", href: "/pdf-page-numbers" }]}

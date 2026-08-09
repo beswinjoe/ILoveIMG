@@ -62,6 +62,8 @@ export default function UuidGeneratorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="UUID Generator"
       description="Generate random, secure Universally Unique Identifiers (UUID v4)."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "UUID Generator", href: "/uuid-generator" }]}

@@ -2,10 +2,21 @@ import { Metadata } from 'next';
 import TextToPdfClient from './TextToPdfClient';
 
 export const metadata: Metadata = {
-  title: 'Text to PDF | Filoza',
-  description: 'Instantly convert your raw text into a neat PDF document.',
+  title: "Text to PDF Online – Free | Filoza",
+  description: "Convert text to a neat PDF document",
   alternates: {
-    canonical: 'https://fileefloww.vercel.app/text-to-pdf'
+    canonical: "https://filoza.vercel.app/text-to-pdf"
+  },
+  openGraph: {
+    title: "Text to PDF Online – Free | Filoza",
+    description: "Convert text to a neat PDF document",
+    url: "https://filoza.vercel.app/text-to-pdf",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Text to PDF Online – Free | Filoza",
+    description: "Convert text to a neat PDF document",
   }
 };
 

@@ -88,6 +88,8 @@ export default function SpreadsheetToJsonClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Spreadsheet to JSON"
       description="Convert Excel or CSV data into JSON format."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Spreadsheet to JSON", href: "/spreadsheet-to-json" }]}

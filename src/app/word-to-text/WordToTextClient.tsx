@@ -62,6 +62,8 @@ export default function WordToTextClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Word to Text"
       description="Extract raw text from Word documents easily."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Word to Text", href: "/word-to-text" }]}

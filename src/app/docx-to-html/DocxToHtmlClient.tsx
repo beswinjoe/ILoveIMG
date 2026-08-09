@@ -62,6 +62,8 @@ export default function DocxToHtmlClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="DOCX to HTML"
       description="Convert Word documents to clean HTML code."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "DOCX to HTML", href: "/docx-to-html" }]}

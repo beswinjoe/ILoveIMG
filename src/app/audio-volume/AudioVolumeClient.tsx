@@ -89,6 +89,8 @@ export default function AudioVolumeClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your audio file.","Choose your conversion or edit settings.","Process the audio.","Download the resulting file."]}
+      supportedFormats="MP3, WAV, OGG, M4A"
       title="Audio Volume Adjuster"
       description="Increase or decrease the volume of your audio files without losing quality."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Audio Volume", href: "/audio-volume" }]}

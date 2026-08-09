@@ -74,6 +74,8 @@ export default function PdfCompressClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Compress PDF"
       description="Reduce file size of your PDF document securely in your browser."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Compress PDF", href: "/pdf-compress" }]}

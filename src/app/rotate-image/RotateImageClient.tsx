@@ -81,6 +81,8 @@ export default function RotateImageClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Rotate Image"
       description="Rotate your images clockwise or counter-clockwise instantly in your browser."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Rotate Image", href: "/rotate-image" }]}

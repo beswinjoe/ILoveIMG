@@ -73,6 +73,8 @@ export default function BlurImageClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Blur Image"
       description="Apply a gaussian blur effect to your image."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Blur Image", href: "/blur-image" }]}

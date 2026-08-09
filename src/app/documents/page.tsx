@@ -5,8 +5,19 @@ import { ArrowRight, FileText } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Document Tools - Free Browser Document Processing | Filoza",
-  description: "Convert, edit, and manage Word, Excel, Markdown, and text files directly in your browser.",
+  title: "Document Tools – Convert Word, Excel & More | Filoza",
+  description: "Convert Word, Excel, CSV, Markdown, and other document formats easily.",
+  openGraph: {
+    title: "Document Tools – Convert Word, Excel & More | Filoza",
+    description: "Convert Word, Excel, CSV, Markdown, and other document formats easily.",
+    url: "https://filoza.vercel.app/documents",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Document Tools – Convert Word, Excel & More | Filoza",
+    description: "Convert Word, Excel, CSV, Markdown, and other document formats easily.",
+  }
 };
 
 export default function DocumentToolsPage() {

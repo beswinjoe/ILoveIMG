@@ -119,6 +119,8 @@ export default function PdfSplitClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Split PDF"
       description="Separate one page or a whole set for easy conversion into independent PDF files."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Split PDF", href: "/pdf-split" }]}

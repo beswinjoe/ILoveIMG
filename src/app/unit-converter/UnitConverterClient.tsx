@@ -115,6 +115,8 @@ export default function UnitConverterClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Unit Converter"
       description="Quickly convert between units of length, weight, temperature, and digital data."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Unit Converter", href: "/unit-converter" }]}

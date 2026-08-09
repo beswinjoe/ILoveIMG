@@ -91,6 +91,8 @@ export default function AudioConverterClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your audio file.","Choose your conversion or edit settings.","Process the audio.","Download the resulting file."]}
+      supportedFormats="MP3, WAV, OGG, M4A"
       title="Universal Audio Converter"
       description="Convert any audio file into MP3, WAV, AAC, or OGG instantly."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Audio Converter", href: "/audio-converter" }]}

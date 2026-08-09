@@ -75,6 +75,8 @@ export default function TxtToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="TXT to PDF"
       description="Convert plain text files to PDF documents."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "TXT to PDF", href: "/txt-to-pdf" }]}

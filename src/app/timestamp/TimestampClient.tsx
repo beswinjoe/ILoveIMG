@@ -90,6 +90,8 @@ export default function TimestampClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Unix Timestamp Converter"
       description="Convert Unix timestamps to readable dates and vice versa. Supports seconds and milliseconds."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Timestamp Converter", href: "/timestamp" }]}

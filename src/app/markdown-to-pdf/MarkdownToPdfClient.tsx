@@ -89,6 +89,8 @@ export default function MarkdownToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Markdown to PDF"
       description="Convert Markdown documents into beautiful PDF files."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Markdown to PDF", href: "/markdown-to-pdf" }]}

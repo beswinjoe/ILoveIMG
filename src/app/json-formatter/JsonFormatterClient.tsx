@@ -64,6 +64,8 @@ export default function JsonFormatterClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="JSON Formatter & Validator"
       description="Format, validate, and minify your JSON data instantly in your browser."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "JSON Formatter", href: "/json-formatter" }]}

@@ -89,6 +89,8 @@ export default function TextToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Text to PDF"
       description="Instantly convert your raw text into a neat PDF document."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Text to PDF", href: "/text-to-pdf" }]}

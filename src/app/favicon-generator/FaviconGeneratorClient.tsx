@@ -78,6 +78,8 @@ export default function FaviconGeneratorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Favicon Generator"
       description="Generate 32x32 favicons from your images instantly."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Favicon Generator", href: "/favicon-generator" }]}

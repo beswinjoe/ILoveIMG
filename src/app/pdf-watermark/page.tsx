@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import PdfWatermarkClient from "./PdfWatermarkClient";
 
 export const metadata: Metadata = {
-  title: "Watermark PDF Online Free | Filoza",
-  description: "Stamp text over your PDF in seconds to protect your documents. 100% free and secure PDF watermarking directly in your browser.",
+  title: "Watermark PDF Online – Free | Filoza",
+  description: "Add a watermark to your PDF",
+  alternates: {
+    canonical: "https://filoza.vercel.app/pdf-watermark"
+  },
+  openGraph: {
+    title: "Watermark PDF Online – Free | Filoza",
+    description: "Add a watermark to your PDF",
+    url: "https://filoza.vercel.app/pdf-watermark",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Watermark PDF Online – Free | Filoza",
+    description: "Add a watermark to your PDF",
+  }
 };
 
 export default function PdfWatermarkPage() {

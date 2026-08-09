@@ -62,6 +62,8 @@ export default function MarkdownToHtmlClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Markdown to HTML"
       description="Convert Markdown documents to clean HTML code."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Markdown to HTML", href: "/markdown-to-html" }]}

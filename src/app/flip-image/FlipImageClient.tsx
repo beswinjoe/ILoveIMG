@@ -74,6 +74,8 @@ export default function FlipImageClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Flip Image"
       description="Flip your images horizontally or vertically."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Flip Image", href: "/flip-image" }]}

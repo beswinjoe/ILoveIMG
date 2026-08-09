@@ -100,6 +100,8 @@ export default function AudioCompressorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your audio file.","Choose your conversion or edit settings.","Process the audio.","Download the resulting file."]}
+      supportedFormats="MP3, WAV, OGG, M4A"
       title="Audio Compressor"
       description="Compress audio files to reduce file size while maintaining listening quality."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Compress Audio", href: "/audio-compressor" }]}

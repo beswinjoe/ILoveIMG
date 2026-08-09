@@ -76,6 +76,8 @@ export default function PasswordGeneratorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Password Generator"
       description="Generate secure, random passwords directly in your browser. No data is ever sent to our servers."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Password Generator", href: "/password-generator" }]}

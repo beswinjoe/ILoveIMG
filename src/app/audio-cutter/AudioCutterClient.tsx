@@ -92,6 +92,8 @@ export default function AudioCutterClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your audio file.","Choose your conversion or edit settings.","Process the audio.","Download the resulting file."]}
+      supportedFormats="MP3, WAV, OGG, M4A"
       title="Audio Cutter"
       description="Trim and cut audio files. Perfect for creating ringtones or removing silence."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Audio Cutter", href: "/audio-cutter" }]}

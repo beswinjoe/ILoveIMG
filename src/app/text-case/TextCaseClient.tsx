@@ -65,6 +65,8 @@ export default function TextCaseClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Text Case Converter"
       description="Convert text between uppercase, lowercase, title case, camelCase, and more."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Text Case Converter", href: "/text-case" }]}

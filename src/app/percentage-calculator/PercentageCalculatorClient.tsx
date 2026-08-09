@@ -63,6 +63,8 @@ export default function PercentageCalculatorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Percentage Calculator"
       description="Easily calculate percentages, percentage changes, and differences instantly."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Percentage Calculator", href: "/percentage-calculator" }]}

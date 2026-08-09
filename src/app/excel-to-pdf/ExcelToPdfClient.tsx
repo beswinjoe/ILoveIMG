@@ -89,6 +89,8 @@ export default function ExcelToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Excel to PDF"
       description="Convert Excel files (.xlsx) to PDF format."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Excel to PDF", href: "/excel-to-pdf" }]}

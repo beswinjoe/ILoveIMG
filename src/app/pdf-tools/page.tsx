@@ -5,8 +5,19 @@ import { ArrowRight, FileText } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "PDF Tools - Free Browser PDF Processing | Filoza",
+  title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
   description: "Merge, split, compress and manage PDF files directly in your browser.",
+  openGraph: {
+    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
+    description: "Merge, split, compress and manage PDF files directly in your browser.",
+    url: "https://filoza.vercel.app/pdf-tools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
+    description: "Merge, split, compress and manage PDF files directly in your browser.",
+  }
 };
 
 export default function PdfToolsPage() {

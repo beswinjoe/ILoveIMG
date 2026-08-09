@@ -2,10 +2,21 @@ import { Metadata } from 'next';
 import ExifRemoverClient from './ExifRemoverClient';
 
 export const metadata: Metadata = {
-  title: 'EXIF Metadata Remover | Filoza',
-  description: 'Remove GPS location, camera details, and all hidden EXIF metadata from your images for privacy.',
+  title: "EXIF Remover Online – Free | Filoza",
+  description: "Remove hidden metadata from images",
   alternates: {
-    canonical: 'https://fileefloww.vercel.app/exif-remover'
+    canonical: "https://filoza.vercel.app/exif-remover"
+  },
+  openGraph: {
+    title: "EXIF Remover Online – Free | Filoza",
+    description: "Remove hidden metadata from images",
+    url: "https://filoza.vercel.app/exif-remover",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EXIF Remover Online – Free | Filoza",
+    description: "Remove hidden metadata from images",
   }
 };
 

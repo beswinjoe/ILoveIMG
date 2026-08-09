@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import Base64Client from "./Base64Client";
 
 export const metadata: Metadata = {
-  title: "Base64 Encoder & Decoder Online Free | Filoza",
-  description: "Easily encode text to Base64 or decode Base64 back to text instantly. Secure, browser-based tool with full UTF-8 support.",
+  title: "Base64 Encoder Online – Free | Filoza",
+  description: "Encode and decode text to Base64",
+  alternates: {
+    canonical: "https://filoza.vercel.app/base64"
+  },
+  openGraph: {
+    title: "Base64 Encoder Online – Free | Filoza",
+    description: "Encode and decode text to Base64",
+    url: "https://filoza.vercel.app/base64",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Base64 Encoder Online – Free | Filoza",
+    description: "Encode and decode text to Base64",
+  }
 };
 
 export default function Base64Page() {

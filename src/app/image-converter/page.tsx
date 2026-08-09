@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import ConverterClient from "./ConverterClient";
 
 export const metadata: Metadata = {
-  title: "Image Converter - Convert Images Online Free | ImageTools",
-  description: "Convert images between JPG, PNG, and WebP instantly in your browser. Universal image converter completely free and secure.",
+  title: "Image Converter Online – Free | Filoza",
+  description: "Universal image format converter. Reduce file size and process directly in your browser with Filoza's free tools.",
+  alternates: {
+    canonical: "https://filoza.vercel.app/image-converter"
+  },
+  openGraph: {
+    title: "Image Converter Online – Free | Filoza",
+    description: "Universal image format converter. Reduce file size and process directly in your browser with Filoza's free tools.",
+    url: "https://filoza.vercel.app/image-converter",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Converter Online – Free | Filoza",
+    description: "Universal image format converter. Reduce file size and process directly in your browser with Filoza's free tools.",
+  }
 };
 
 export default function ImageConverterPage() {

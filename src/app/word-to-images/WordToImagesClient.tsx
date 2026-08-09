@@ -102,6 +102,8 @@ export default function WordToImagesClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Word to Images"
       description="Convert a Word document into high-quality images (PNG)."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Word to Images", href: "/word-to-images" }]}

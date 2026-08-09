@@ -2,10 +2,21 @@ import { Metadata } from 'next';
 import PdfMetadataClient from './PdfMetadataClient';
 
 export const metadata: Metadata = {
-  title: 'PDF Metadata Viewer | Filoza',
-  description: 'View or remove metadata from your PDF files.',
+  title: "PDF Metadata Online – Free | Filoza",
+  description: "View or remove metadata from PDFs",
   alternates: {
-    canonical: 'https://fileefloww.vercel.app/pdf-metadata'
+    canonical: "https://filoza.vercel.app/pdf-metadata"
+  },
+  openGraph: {
+    title: "PDF Metadata Online – Free | Filoza",
+    description: "View or remove metadata from PDFs",
+    url: "https://filoza.vercel.app/pdf-metadata",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF Metadata Online – Free | Filoza",
+    description: "View or remove metadata from PDFs",
   }
 };
 

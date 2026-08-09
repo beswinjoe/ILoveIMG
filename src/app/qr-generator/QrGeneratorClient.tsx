@@ -51,6 +51,8 @@ export default function QrGeneratorClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="QR Code Generator"
       description="Create custom QR codes for URLs, text, Wi-Fi passwords, and more instantly."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "QR Generator", href: "/qr-generator" }]}

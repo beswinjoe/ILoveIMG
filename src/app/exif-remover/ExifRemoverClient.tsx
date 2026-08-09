@@ -74,6 +74,8 @@ export default function ExifRemoverClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="EXIF Metadata Remover"
       description="Remove GPS location, camera details, and all hidden EXIF metadata from your images for privacy."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "EXIF Metadata Remover", href: "/exif-remover" }]}

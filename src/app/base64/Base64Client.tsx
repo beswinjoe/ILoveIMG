@@ -64,6 +64,8 @@ export default function Base64Client() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Base64 Encoder/Decoder"
       description="Easily encode text to Base64 or decode Base64 back to text instantly."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Base64", href: "/base64" }]}

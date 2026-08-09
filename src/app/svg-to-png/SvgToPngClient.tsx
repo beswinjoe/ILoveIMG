@@ -76,6 +76,8 @@ export default function SvgToPngClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="SVG to PNG"
       description="Convert scalable vector graphics (SVG) into standard PNG images."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "SVG to PNG", href: "/svg-to-png" }]}

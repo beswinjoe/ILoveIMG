@@ -5,8 +5,19 @@ import { ArrowRight, FileImage } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Image Tools - Free Browser Image Processing | Filoza",
+  title: "Image Tools – Compress, Resize & Convert Images | Filoza",
   description: "Compress, resize, crop, and convert images quickly and privately in your browser.",
+  openGraph: {
+    title: "Image Tools – Compress, Resize & Convert Images | Filoza",
+    description: "Compress, resize, crop, and convert images quickly and privately in your browser.",
+    url: "https://filoza.vercel.app/image-tools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Tools – Compress, Resize & Convert Images | Filoza",
+    description: "Compress, resize, crop, and convert images quickly and privately in your browser.",
+  }
 };
 
 export default function ImageToolsPage() {

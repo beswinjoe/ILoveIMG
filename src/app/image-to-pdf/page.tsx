@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import ImageToPdfClient from "./ImageToPdfClient";
 
 export const metadata: Metadata = {
-  title: "Image to PDF Converter - Convert JPG, PNG to PDF | Filoza",
-  description: "Convert images to a PDF document online for free. Support for JPG, PNG, WebP to PDF conversion directly in your browser.",
+  title: "Image to PDF Online – Free | Filoza",
+  description: "Convert images to PDF format",
+  alternates: {
+    canonical: "https://filoza.vercel.app/image-to-pdf"
+  },
+  openGraph: {
+    title: "Image to PDF Online – Free | Filoza",
+    description: "Convert images to PDF format",
+    url: "https://filoza.vercel.app/image-to-pdf",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image to PDF Online – Free | Filoza",
+    description: "Convert images to PDF format",
+  }
 };
 
 export default function ImageToPdfPage() {

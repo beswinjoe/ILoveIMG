@@ -79,6 +79,8 @@ export default function PdfMergeClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Merge PDF"
       description="Combine multiple PDF files into one single document. Fast and easy."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Merge PDF", href: "/pdf-merge" }]}

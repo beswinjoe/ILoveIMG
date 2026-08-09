@@ -109,6 +109,8 @@ export default function PdfPageDeleteClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Delete PDF Pages"
       description="Remove unwanted pages from your PDF document easily and securely."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Delete Pages", href: "/pdf-page-delete" }]}

@@ -66,6 +66,8 @@ export default function ExcelToCsvClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Excel to CSV"
       description="Convert Excel files (.xlsx) to CSV format easily."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Excel to CSV", href: "/excel-to-csv" }]}

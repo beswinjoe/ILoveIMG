@@ -81,6 +81,8 @@ export default function WordToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Word to PDF"
       description="Convert Word documents (DOCX) to PDF format instantly in your browser."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "Word to PDF", href: "/word-to-pdf" }]}

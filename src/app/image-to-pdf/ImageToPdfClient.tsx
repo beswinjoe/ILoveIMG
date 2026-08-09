@@ -88,6 +88,8 @@ export default function ImageToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Image to PDF"
       description="Convert JPG, PNG, and WebP images to a single PDF document instantly."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Image to PDF", href: "/image-to-pdf" }]}

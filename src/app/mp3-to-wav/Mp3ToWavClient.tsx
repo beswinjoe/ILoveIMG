@@ -85,6 +85,8 @@ export default function Mp3ToWavClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your audio file.","Choose your conversion or edit settings.","Process the audio.","Download the resulting file."]}
+      supportedFormats="MP3, WAV, OGG, M4A"
       title="MP3 to WAV"
       description="Convert compressed MP3 audio into uncompressed high-quality WAV format."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "MP3 to WAV", href: "/mp3-to-wav" }]}

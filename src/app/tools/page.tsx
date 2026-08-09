@@ -5,8 +5,19 @@ import { ArrowRight, Wrench } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Other Utilities - Free Browser Tools | Filoza",
-  description: "Useful everyday tools for text, data, calculations and more.",
+  title: "Utilities – Free Online Developer & File Tools | Filoza",
+  description: "Free utilities including QR code generator, password generator, JSON formatter and more.",
+  openGraph: {
+    title: "Utilities – Free Online Developer & File Tools | Filoza",
+    description: "Free utilities including QR code generator, password generator, JSON formatter and more.",
+    url: "https://filoza.vercel.app/tools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Utilities – Free Online Developer & File Tools | Filoza",
+    description: "Free utilities including QR code generator, password generator, JSON formatter and more.",
+  }
 };
 
 export default function UtilitiesPage() {

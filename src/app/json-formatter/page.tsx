@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import JsonFormatterClient from "./JsonFormatterClient";
 
 export const metadata: Metadata = {
-  title: "JSON Formatter & Validator Online Free | Filoza",
-  description: "Format, validate, and minify your JSON data instantly and securely in your browser. No data is sent to our servers.",
+  title: "JSON Formatter Online – Free | Filoza",
+  description: "Format and validate JSON data",
+  alternates: {
+    canonical: "https://filoza.vercel.app/json-formatter"
+  },
+  openGraph: {
+    title: "JSON Formatter Online – Free | Filoza",
+    description: "Format and validate JSON data",
+    url: "https://filoza.vercel.app/json-formatter",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JSON Formatter Online – Free | Filoza",
+    description: "Format and validate JSON data",
+  }
 };
 
 export default function JsonFormatterPage() {

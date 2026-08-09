@@ -5,8 +5,19 @@ import { ArrowRight, Music } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Audio Tools - Free Browser Audio Processing | Filoza",
+  title: "Audio Tools – Convert & Edit Audio Online | Filoza",
   description: "Convert, trim, compress and edit audio files directly in your browser.",
+  openGraph: {
+    title: "Audio Tools – Convert & Edit Audio Online | Filoza",
+    description: "Convert, trim, compress and edit audio files directly in your browser.",
+    url: "https://filoza.vercel.app/audio-tools",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Audio Tools – Convert & Edit Audio Online | Filoza",
+    description: "Convert, trim, compress and edit audio files directly in your browser.",
+  }
 };
 
 export default function AudioToolsPage() {

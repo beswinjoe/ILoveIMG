@@ -73,6 +73,8 @@ export default function GrayscaleImageClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Grayscale Image"
       description="Convert your images to black and white instantly."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Grayscale Image", href: "/grayscale-image" }]}

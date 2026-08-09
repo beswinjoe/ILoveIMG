@@ -2,10 +2,21 @@ import { Metadata } from 'next';
 import JsonToCsvClient from './JsonToCsvClient';
 
 export const metadata: Metadata = {
-  title: 'JSON to CSV Converter - Free Online | Filoza',
-  description: 'Convert JSON data into CSV format.',
+  title: "JSON to CSV Online – Free | Filoza",
+  description: "Convert JSON data into CSV format.",
   alternates: {
-    canonical: 'https://fileefloww.vercel.app/json-to-csv'
+    canonical: "https://filoza.vercel.app/json-to-csv"
+  },
+  openGraph: {
+    title: "JSON to CSV Online – Free | Filoza",
+    description: "Convert JSON data into CSV format.",
+    url: "https://filoza.vercel.app/json-to-csv",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JSON to CSV Online – Free | Filoza",
+    description: "Convert JSON data into CSV format.",
   }
 };
 

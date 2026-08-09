@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import CropperClient from "./CropperClient";
 
 export const metadata: Metadata = {
-  title: "Image Cropper - Crop Images Online Free | ImageTools",
-  description: "Crop pictures online for free. Adjust aspect ratios easily in your browser without uploading your photos.",
+  title: "Image Cropper Online – Free | Filoza",
+  description: "Crop images to any size. Reduce file size and process directly in your browser with Filoza's free tools.",
+  alternates: {
+    canonical: "https://filoza.vercel.app/image-cropper"
+  },
+  openGraph: {
+    title: "Image Cropper Online – Free | Filoza",
+    description: "Crop images to any size. Reduce file size and process directly in your browser with Filoza's free tools.",
+    url: "https://filoza.vercel.app/image-cropper",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Cropper Online – Free | Filoza",
+    description: "Crop images to any size. Reduce file size and process directly in your browser with Filoza's free tools.",
+  }
 };
 
 export default function ImageCropperPage() {

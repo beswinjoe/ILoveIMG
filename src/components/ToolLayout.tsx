@@ -7,11 +7,13 @@ interface ToolLayoutProps {
   description: string;
   breadcrumbs: { label: string; href: string }[];
   children: React.ReactNode;
+  howItWorks?: string[];
+  supportedFormats?: string;
   faq?: { question: string; answer: string }[];
   relatedTools?: { name: string; href: string; icon: React.ReactNode }[];
 }
 
-export default function ToolLayout({ title, description, breadcrumbs, children, faq, relatedTools }: ToolLayoutProps) {
+export default function ToolLayout({ title, description, breadcrumbs, children, howItWorks, supportedFormats, faq, relatedTools }: ToolLayoutProps) {
   return (
     <div className="container py-8">
       {/* Breadcrumbs */}
@@ -42,12 +44,32 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
       </div>
 
       {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto">Advertisement Space</div>
+      <div className="ad-container max-w-4xl mx-auto mb-16">Advertisement Space</div>
+
+      {/* How it works */}
+      {howItWorks && howItWorks.length > 0 && (
+        <section className="max-w-4xl mx-auto mb-16 p-8 glass-card">
+          <h2 className="mb-6" style={{ fontSize: "1.75rem" }}>How it works</h2>
+          <ol style={{ paddingLeft: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }} className="text-muted">
+            {howItWorks.map((step, idx) => (
+              <li key={idx} style={{ fontSize: "1.125rem" }}>{step}</li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {/* Supported formats */}
+      {supportedFormats && (
+        <section className="max-w-4xl mx-auto mb-16 p-8 glass-card text-center">
+          <h2 className="mb-4" style={{ fontSize: "1.75rem" }}>Supported Formats</h2>
+          <p className="text-muted" style={{ fontSize: "1.125rem" }}>{supportedFormats}</p>
+        </section>
+      )}
 
       {/* Privacy Guarantee */}
-      <div className="glass-card max-w-4xl mx-auto mb-16 text-center">
-        <h3 className="mb-2">Your files stay on your device</h3>
-        <p className="text-muted">
+      <div className="glass-card max-w-4xl mx-auto mb-16 text-center p-8">
+        <h3 className="mb-2" style={{ fontSize: "1.5rem" }}>Your files stay on your device</h3>
+        <p className="text-muted" style={{ fontSize: "1.125rem" }}>
           We use advanced browser technologies to process your files locally. 
           Your data is never uploaded to our servers, guaranteeing 100% privacy and lightning-fast speed.
         </p>
@@ -61,7 +83,7 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
             {faq.map((item, idx) => (
               <div key={idx} className="glass-card p-6" style={{ padding: "1.5rem" }}>
                 <h4 className="mb-2" style={{ fontSize: "1.125rem" }}>{item.question}</h4>
-                <p className="text-muted">{item.answer}</p>
+                <p className="text-muted" style={{ fontSize: "1.125rem" }}>{item.answer}</p>
               </div>
             ))}
           </div>

@@ -61,6 +61,8 @@ export default function PdfRotateClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Rotate PDF"
       description="Rotate your PDFs the way you need them. Apply rotation to all pages instantly."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Rotate PDF", href: "/pdf-rotate" }]}

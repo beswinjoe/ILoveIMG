@@ -85,6 +85,8 @@ export default function ImageWatermarkClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your image file.","Select your preferred settings.","Click the process button.","Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
       title="Image Watermark"
       description="Add a text watermark to your images to protect your copyright."
       breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "Image Watermark", href: "/image-watermark" }]}

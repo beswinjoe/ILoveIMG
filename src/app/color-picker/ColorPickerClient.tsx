@@ -109,6 +109,8 @@ export default function ColorPickerClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="Color Picker"
       description="Extract colors from images or use the color wheel to get HEX and RGB values."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Color Picker", href: "/color-picker" }]}

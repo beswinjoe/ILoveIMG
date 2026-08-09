@@ -107,6 +107,8 @@ export default function PdfPageExtractClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="Extract PDF Pages"
       description="Extract specific pages from your PDF and save them as a new document."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Extract Pages", href: "/pdf-page-extract" }]}

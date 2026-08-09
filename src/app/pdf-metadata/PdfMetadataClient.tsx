@@ -76,6 +76,8 @@ export default function PdfMetadataClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Select or drag and drop your PDF file.","Apply your desired PDF modifications.","Click process.","Download your new PDF document."]}
+      supportedFormats="PDF"
       title="PDF Metadata Viewer"
       description="View or remove metadata from your PDF files."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "PDF Metadata Viewer", href: "/pdf-metadata" }]}

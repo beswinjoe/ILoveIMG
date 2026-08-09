@@ -2,8 +2,22 @@ import { Metadata } from "next";
 import PdfToImagesClient from "./PdfToImagesClient";
 
 export const metadata: Metadata = {
-  title: "PDF to Images - Extract PDF pages as JPG/PNG | Filoza",
-  description: "Convert every page of a PDF document into high-quality JPG or PNG images instantly in your browser.",
+  title: "PDF to Images Online – Free | Filoza",
+  description: "Extract PDF pages as images",
+  alternates: {
+    canonical: "https://filoza.vercel.app/pdf-to-images"
+  },
+  openGraph: {
+    title: "PDF to Images Online – Free | Filoza",
+    description: "Extract PDF pages as images",
+    url: "https://filoza.vercel.app/pdf-to-images",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF to Images Online – Free | Filoza",
+    description: "Extract PDF pages as images",
+  }
 };
 
 export default function PdfToImagesPage() {

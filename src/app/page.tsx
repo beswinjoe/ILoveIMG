@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { 
   FileImage, 
   FileText,
@@ -11,10 +12,37 @@ import {
 } from 'lucide-react';
 import { toolsData } from '@/lib/tools';
 
+export const metadata: Metadata = {
+  title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
+  description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio. Fast, private and easy to use with no signup.",
+  openGraph: {
+    title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
+    description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio.",
+    url: "https://filoza.vercel.app/",
+    type: "website",
+    siteName: "Filoza",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
+    description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio.",
+  }
+};
+
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Filoza",
+    "url": "https://filoza.vercel.app/"
+  };
+
   return (
     <div style={{ overflowX: 'hidden' }}>
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* 
         ========================================
         HERO SECTION
@@ -83,12 +111,11 @@ export default function Home() {
           </div>
           
           <h1 style={{ margin: '0 auto 1.5rem', fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', letterSpacing: '-0.03em', lineHeight: 1.1, fontWeight: 800 }}>
-            All Your Tools.<br />
-            <span style={{ color: 'var(--primary)' }}>One Smart Platform.</span>
+            Free Online <span style={{ color: 'var(--primary)' }}>File Tools</span>
           </h1>
           
           <p style={{ margin: '0 auto 2.5rem', maxWidth: '600px', fontSize: '1.125rem', color: 'var(--muted)', lineHeight: 1.6 }}>
-            Image, PDF, audio and more tools to boost your productivity. Fast, private and works right in your browser.
+            Images, PDFs, documents, audio and more. Fast, private and works right in your browser.
           </p>
           
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>

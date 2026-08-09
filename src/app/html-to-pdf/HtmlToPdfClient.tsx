@@ -73,6 +73,8 @@ export default function HtmlToPdfClient() {
 
   return (
     <ToolLayout
+      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
+      supportedFormats="Various formats supported depending on the tool."
       title="HTML to PDF"
       description="Convert HTML files to PDF format."
       breadcrumbs={[{ label: "Documents", href: "/documents" }, { label: "HTML to PDF", href: "/html-to-pdf" }]}

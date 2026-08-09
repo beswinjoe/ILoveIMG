@@ -76,7 +76,7 @@ export default function ImageToPdfClient() {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
       setPdfUrl(URL.createObjectURL(blob));
     } catch (error) {
       console.error(error);
@@ -150,7 +150,7 @@ export default function ImageToPdfClient() {
               <button className="btn btn-secondary" onClick={() => { setFiles([]); setPdfUrl(null); }}>
                 Convert More
               </button>
-              <a href={pdfUrl} download="FileFlow_Images.pdf" className="btn btn-primary" style={{ textDecoration: 'none' }}>
+              <a href={pdfUrl} download="Filoza_Images.pdf" className="btn btn-primary" style={{ textDecoration: 'none' }}>
                 <Download size={18} /> Download PDF
               </a>
             </div>

@@ -99,7 +99,7 @@ export default function PdfSplitClient() {
         copiedPages.forEach(page => newPdf.addPage(page));
         
         const pdfBytes = await newPdf.save();
-        const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+        const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
         saveAs(blob, `${file.name.replace(".pdf", "")}_split.pdf`);
         setIsProcessing(false);
         return; // Early exit since we don't need ZIP for a single file

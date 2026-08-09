@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --background: #f7f8fc;
+  --background: #f8fafc;
   --foreground: #0f172a;
   
-  --surface: rgba(255, 255, 255, 0.28);
-  --surface-hover: rgba(255, 255, 255, 0.40);
-  --border: rgba(255, 255, 255, 0.55);
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-hover: rgba(255, 255, 255, 0.9);
+  --border: rgba(0, 0, 0, 0.1);
   
   --primary: #4f46e5;
   --primary-hover: #4338ca;
@@ -45,7 +45,7 @@
   
   --surface: rgba(15, 23, 42, 0.45);
   --surface-hover: rgba(30, 41, 59, 0.55);
-  --border: rgba(255, 255, 255, 0.18);
+  --border: rgba(255, 255, 255, 0.1);
   
   --primary: #6366f1;
   --primary-hover: #4f46e5;
@@ -330,12 +330,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.6rem 0.875rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--surface);
   color: var(--foreground);
   font-family: inherit;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  backdrop-filter: blur(4px);
+  backdrop-filter: var(--glass-blur);
 }
 .input:focus {
   outline: none;

@@ -3,15 +3,15 @@ import { CheckCircle2, Zap, Shield, Infinity as InfinityIcon } from "lucide-reac
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Premium - FileFlow",
-  description: "Upgrade to FileFlow Premium for unlimited, faster, and ad-free access to all our tools.",
+  title: "Premium - Filoza",
+  description: "Upgrade to Filoza Premium for unlimited, faster, and ad-free access to all our tools.",
 };
 
 export default function PricingPage() {
   return (
     <div className="container py-16 max-w-5xl">
       <div className="text-center mb-16">
-        <h1 className="mb-4" style={{ fontSize: "3rem" }}>Upgrade to FileFlow Premium</h1>
+        <h1 className="mb-4" style={{ fontSize: "3rem" }}>Upgrade to Filoza Premium</h1>
         <p className="text-muted max-w-2xl mx-auto" style={{ fontSize: "1.25rem" }}>
           Get the most out of your files with faster processing, ad-free experience, and unlimited access to all features.
         </p>
@@ -65,7 +65,7 @@ export default function PricingPage() {
       <div className="text-center max-w-2xl mx-auto">
         <h3 className="mb-4">Questions about Premium?</h3>
         <p className="text-muted mb-6">
-          FileFlow is committed to keeping the core tools free for everyone. Our premium plan helps support development and server costs while providing power users with the features they need.
+          Filoza is committed to keeping the core tools free for everyone. Our premium plan helps support development and server costs while providing power users with the features they need.
         </p>
         <Link href="/contact" className="text-primary hover:underline">Contact our support team</Link>
       </div>

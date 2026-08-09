@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/pdf-tools',
     '/audio-tools',
     '/tools',
+    '/documents',
     '/privacy',
   ]
 

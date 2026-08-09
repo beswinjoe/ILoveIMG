@@ -5,7 +5,7 @@ import { ArrowRight, Wrench } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Other Utilities - Free Browser Tools | FileFlow",
+  title: "Other Utilities - Free Browser Tools | Filoza",
   description: "Useful everyday tools for text, data, calculations and more.",
 };
 

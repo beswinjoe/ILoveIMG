@@ -4,10 +4,10 @@ import {
   Files, Scissors, FileDown, RotateCw, FileX, FileOutput, Stamp,
   AudioLines, AudioWaveform, Volume2,
   QrCode, KeyRound, FileText, Braces, Pipette, Binary, Fingerprint, CaseUpper, Clock, Ruler, Percent,
-  Wrench
-} from 'lucide-react';
+  Wrench, FlipHorizontal, Palette, Droplets, Box, Shield, Hash, Info
+, Wand2, FileSpreadsheet, Code, FileEdit, AlignLeft } from "lucide-react";
 
-export type ToolCategory = 'Image Tools' | 'PDF Tools' | 'Audio Tools' | 'Other Utilities';
+export type ToolCategory = 'Image Tools' | 'PDF Tools' | 'Audio Tools' | 'Other Utilities' | 'Documents';
 
 export interface ToolItem {
   name: string;
@@ -84,6 +84,46 @@ export const toolsData: ToolItem[] = [
     keywords: ["compress", "bulk", "batch", "multiple", "images"],
     icon: <Images />
   },
+  {
+    name: "Rotate Image",
+    href: "/rotate-image",
+    category: "Image Tools",
+    description: "Rotate your images instantly",
+    keywords: ["rotate", "image", "turn", "orientation"],
+    icon: <RotateCw />
+  },
+  {
+    name: "Flip Image",
+    href: "/flip-image",
+    category: "Image Tools",
+    description: "Flip images horizontally or vertically",
+    keywords: ["flip", "image", "mirror", "reverse"],
+    icon: <FlipHorizontal />
+  },
+  {
+    name: "Grayscale Image",
+    href: "/grayscale-image",
+    category: "Image Tools",
+    description: "Convert images to black and white",
+    keywords: ["grayscale", "black", "white", "monochrome", "image"],
+    icon: <Palette />
+  },
+  {
+    name: "Blur Image",
+    href: "/blur-image",
+    category: "Image Tools",
+    description: "Apply a gaussian blur effect",
+    keywords: ["blur", "image", "gaussian", "effect", "soften"],
+    icon: <Droplets />
+  },
+  {
+    name: "Favicon Generator",
+    href: "/favicon-generator",
+    category: "Image Tools",
+    description: "Generate 32x32 favicons from images",
+    keywords: ["favicon", "generate", "icon", "website"],
+    icon: <Box />
+  },
 
   // PDF TOOLS
   {
@@ -158,6 +198,30 @@ export const toolsData: ToolItem[] = [
     keywords: ["convert", "pdf", "image", "extract", "pages"],
     icon: <Images />
   },
+  {
+    name: "Text to PDF",
+    href: "/text-to-pdf",
+    category: "PDF Tools",
+    description: "Convert text to a neat PDF document",
+    keywords: ["text", "pdf", "convert", "document"],
+    icon: <FileText />
+  },
+  {
+    name: "PDF Page Numbers",
+    href: "/pdf-page-numbers",
+    category: "PDF Tools",
+    description: "Add page numbers to your PDFs",
+    keywords: ["pdf", "page", "numbers", "add"],
+    icon: <Hash />
+  },
+  {
+    name: "PDF Metadata",
+    href: "/pdf-metadata",
+    category: "PDF Tools",
+    description: "View or remove metadata from PDFs",
+    keywords: ["pdf", "metadata", "remove", "clean"],
+    icon: <Info />
+  },
 
   // AUDIO TOOLS
   {
@@ -210,6 +274,14 @@ export const toolsData: ToolItem[] = [
   },
 
   // OTHER UTILITIES
+  {
+    name: "EXIF Remover",
+    href: "/exif-remover",
+    category: "Other Utilities",
+    description: "Remove hidden metadata from images",
+    keywords: ["exif", "metadata", "remove", "strip", "privacy"],
+    icon: <Shield />
+  },
   {
     name: "QR Code Generator",
     href: "/qr-generator",
@@ -297,5 +369,160 @@ export const toolsData: ToolItem[] = [
     description: "Calculate percentage increases",
     keywords: ["percentage", "calculate", "math", "increase", "decrease"],
     icon: <Percent />
+  },
+  // DOCUMENTS
+  {
+    name: "Word to PDF",
+    href: "/word-to-pdf",
+    category: "Documents",
+    description: "Convert Word documents (DOCX) to PDF format instantly.",
+    keywords: ["word", "pdf", "docx", "convert", "document"],
+    icon: <FileText />
+  },
+  {
+    name: "Word to Text",
+    href: "/word-to-text",
+    category: "Documents",
+    description: "Extract raw text from Word documents easily.",
+    keywords: ["word", "text", "docx", "txt", "extract"],
+    icon: <AlignLeft />
+  },
+  {
+    name: "DOCX to HTML",
+    href: "/docx-to-html",
+    category: "Documents",
+    description: "Convert Word documents to clean HTML code.",
+    keywords: ["docx", "html", "word", "convert", "web"],
+    icon: <Code />
+  },
+  {
+    name: "Word to Images",
+    href: "/word-to-images",
+    category: "Documents",
+    description: "Convert a Word document into high-quality images.",
+    keywords: ["word", "image", "docx", "png", "convert"],
+    icon: <Images />
+  },
+  {
+    name: "PDF to Word",
+    href: "/pdf-to-word",
+    category: "Documents",
+    description: "Convert PDF documents into editable Word (DOCX) files.",
+    keywords: ["pdf", "word", "docx", "convert", "extract"],
+    icon: <FileEdit />
+  },
+  {
+    name: "Excel to CSV",
+    href: "/excel-to-csv",
+    category: "Documents",
+    description: "Convert Excel files (.xlsx) to CSV format easily.",
+    keywords: ["excel", "csv", "xlsx", "convert", "spreadsheet"],
+    icon: <FileSpreadsheet />
+  },
+  {
+    name: "CSV to Excel",
+    href: "/csv-to-excel",
+    category: "Documents",
+    description: "Convert CSV files to Excel (.xlsx) format.",
+    keywords: ["csv", "excel", "xlsx", "convert", "spreadsheet"],
+    icon: <FileSpreadsheet />
+  },
+  {
+    name: "Spreadsheet to JSON",
+    href: "/spreadsheet-to-json",
+    category: "Documents",
+    description: "Convert Excel or CSV data into JSON format.",
+    keywords: ["excel", "csv", "json", "convert", "spreadsheet"],
+    icon: <Braces />
+  },
+  {
+    name: "JSON to CSV",
+    href: "/json-to-csv",
+    category: "Documents",
+    description: "Convert JSON data into CSV format.",
+    keywords: ["json", "csv", "convert", "data"],
+    icon: <FileSpreadsheet />
+  },
+  {
+    name: "Excel to PDF",
+    href: "/excel-to-pdf",
+    category: "Documents",
+    description: "Convert Excel files (.xlsx) to PDF format.",
+    keywords: ["excel", "pdf", "xlsx", "convert", "spreadsheet"],
+    icon: <FileText />
+  },
+  {
+    name: "CSV to PDF",
+    href: "/csv-to-pdf",
+    category: "Documents",
+    description: "Convert CSV files to PDF format.",
+    keywords: ["csv", "pdf", "convert", "spreadsheet"],
+    icon: <FileText />
+  },
+  {
+    name: "Markdown to HTML",
+    href: "/markdown-to-html",
+    category: "Documents",
+    description: "Convert Markdown documents to clean HTML code.",
+    keywords: ["markdown", "html", "convert", "md"],
+    icon: <Code />
+  },
+  {
+    name: "Markdown to PDF",
+    href: "/markdown-to-pdf",
+    category: "Documents",
+    description: "Convert Markdown documents into beautiful PDF files.",
+    keywords: ["markdown", "pdf", "convert", "md"],
+    icon: <FileText />
+  },
+  {
+    name: "HTML to PDF",
+    href: "/html-to-pdf",
+    category: "Documents",
+    description: "Convert HTML files to PDF format.",
+    keywords: ["html", "pdf", "convert", "web"],
+    icon: <FileText />
+  },
+  {
+    name: "TXT to PDF",
+    href: "/txt-to-pdf",
+    category: "Documents",
+    description: "Convert plain text files to PDF documents.",
+    keywords: ["txt", "pdf", "text", "convert"],
+    icon: <FileText />
+  },
+  {
+    name: "TXT to DOCX",
+    href: "/txt-to-docx",
+    category: "Documents",
+    description: "Convert plain text files into editable Word documents.",
+    keywords: ["txt", "docx", "word", "convert", "text"],
+    icon: <FileEdit />
+  },
+  
+  // NEW IMAGE TOOLS
+  {
+    name: "Background Remover",
+    href: "/background-remover",
+    category: "Image Tools",
+    description: "Automatically remove the background from any image.",
+    keywords: ["background", "remove", "transparent", "png", "ai"],
+    icon: <Wand2 />
+  },
+  {
+    name: "SVG to PNG",
+    href: "/svg-to-png",
+    category: "Image Tools",
+    description: "Convert scalable vector graphics (SVG) into PNG.",
+    keywords: ["svg", "png", "image", "convert", "vector"],
+    icon: <ImageDown />
+  },
+  {
+    name: "Image Watermark",
+    href: "/image-watermark",
+    category: "Image Tools",
+    description: "Add a text watermark to protect your copyright.",
+    keywords: ["watermark", "image", "protect", "stamp", "copyright"],
+    icon: <Stamp />
   }
 ];

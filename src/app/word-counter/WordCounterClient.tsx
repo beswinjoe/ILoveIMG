@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Type, Copy, Trash2, CheckCircle2, AlignLeft, BarChart2 } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
 
@@ -16,11 +16,9 @@ export default function WordCounterClient() {
   });
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    calculateStats(text);
-  }, [text]);
+  
 
-  const calculateStats = (str: string) => {
+  const calculateStats = useCallback((str: string) => {
     const trimmed = str.trim();
     
     // Words
@@ -53,7 +51,11 @@ export default function WordCounterClient() {
       paragraphs,
       readingTime: readingTimeSeconds
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    calculateStats(text);
+  }, [text, calculateStats]);
 
   const copyToClipboard = () => {
     if (!text) return;

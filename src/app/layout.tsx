@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FileFlow - All your files. One smart platform.",
+  title: "Filoza - All your files. One smart platform.",
   description: "Fast, private and easy-to-use tools for images, PDFs, audio and more — directly in your browser.",
   verification: {
     google: "FXZ7Os4TlkZpxzbGOn0x0pHB14RSju3qOgEyg7bL1xg",

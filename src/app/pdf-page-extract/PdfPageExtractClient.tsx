@@ -95,7 +95,7 @@ export default function PdfPageExtractClient() {
       copiedPages.forEach(page => newPdf.addPage(page));
       
       const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
       setPdfUrl(URL.createObjectURL(blob));
     } catch (error) {
       console.error(error);

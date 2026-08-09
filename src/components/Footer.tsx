@@ -13,7 +13,7 @@ export default function Footer() {
                 <Layers size={18} />
               </div>
               <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--foreground)' }}>
-                FileFlow
+                Filoza
               </span>
             </Link>
             <p className="text-muted text-sm leading-relaxed mb-6">
@@ -26,6 +26,7 @@ export default function Footer() {
               <h4 className="font-semibold text-foreground mb-2">Tools</h4>
               <Link href="/image-tools" className="text-muted hover:text-primary transition-colors text-sm">Image Tools</Link>
               <Link href="/pdf-tools" className="text-muted hover:text-primary transition-colors text-sm">PDF Tools</Link>
+              <Link href="/documents" className="text-muted hover:text-primary transition-colors text-sm">Document Tools</Link>
               <Link href="/audio-tools" className="text-muted hover:text-primary transition-colors text-sm">Audio Tools</Link>
               <Link href="/tools" className="text-muted hover:text-primary transition-colors text-sm">Other Utilities</Link>
             </div>
@@ -48,7 +49,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-16 pt-8 text-center text-sm text-muted" style={{ borderTop: '1px solid var(--border)' }}>
-          &copy; {new Date().getFullYear()} FileFlow. All rights reserved.
+          &copy; {new Date().getFullYear()} Filoza. All rights reserved.
         </div>
       </div>
     </footer>

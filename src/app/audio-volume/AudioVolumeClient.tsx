@@ -1,42 +1,29 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { fetchFile } from "@ffmpeg/util";
 import { UploadCloud, Download, CheckCircle2, Volume2, Loader2, Settings } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
+import { ffmpegService } from "@/lib/ffmpeg";
 
 export default function AudioVolumeClient() {
   const [file, setFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isReady, setIsReady] = useState(false);
+  const [engineLoading, setEngineLoading] = useState(false);
   
   const [volume, setVolume] = useState(1.5); // Default to 150%
   
-  const ffmpegRef = useRef<FFmpeg | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    load();
-  }, []);
-
-  const load = async () => {
-    if (!ffmpegRef.current) {
-      ffmpegRef.current = new FFmpeg();
-    }
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
-    const ffmpeg = ffmpegRef.current!;
-    ffmpeg.on("progress", ({ progress }) => {
-      setProgress(Math.round(progress * 100));
-    });
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-    });
-    setIsReady(true);
-  };
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+      }
+    };
+  }, [audioUrl]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -64,12 +51,18 @@ export default function AudioVolumeClient() {
   };
 
   const adjustVolume = async () => {
-    if (!file || !isReady) return;
+    if (!file) return;
     setIsProcessing(true);
+    setEngineLoading(true);
     setProgress(0);
 
     try {
-      const ffmpeg = ffmpegRef.current!;
+      const ffmpeg = await ffmpegService.load((p) => {
+        setProgress(Math.round(p * 100));
+      });
+      
+      setEngineLoading(false);
+
       await ffmpeg.writeFile(file.name, await fetchFile(file));
       
       const extension = file.name.split('.').pop() || 'mp3';
@@ -80,14 +73,18 @@ export default function AudioVolumeClient() {
       
       const data = await ffmpeg.readFile(outputName);
       
-      const blob = new Blob([data as any], { type: file.type || "audio/mpeg" });
+      const blob = new Blob([data as BlobPart], { type: file.type || "audio/mpeg" });
       setAudioUrl(URL.createObjectURL(blob));
+
+      await ffmpeg.deleteFile(file.name);
+      await ffmpeg.deleteFile(outputName);
     } catch (error) {
       console.error(error);
-      alert("An error occurred during volume adjustment.");
+      alert("An error occurred during volume adjustment. Please try again.");
     }
 
     setIsProcessing(false);
+    setEngineLoading(false);
   };
 
   return (
@@ -97,7 +94,7 @@ export default function AudioVolumeClient() {
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Audio Volume", href: "/audio-volume" }]}
       faq={[
         { question: "Will it distort my audio?", answer: "Increasing the volume significantly (e.g. above 200%) can cause clipping and distortion if the original audio was already loud. We recommend moderate adjustments." },
-        { question: "Is my audio uploaded?", answer: "No. FileFlow uses WebAssembly to run a real audio editor inside your browser. Your files never leave your device." }
+        { question: "Is my audio uploaded?", answer: "No. Filoza uses WebAssembly to run a real audio editor inside your browser. Your files never leave your device." }
       ]}
       relatedTools={[
         { name: "Audio Compressor", href: "/audio-compressor", icon: <CheckCircle2 /> },
@@ -105,15 +102,7 @@ export default function AudioVolumeClient() {
       ]}
     >
       <div className="max-w-3xl mx-auto">
-        {!isReady ? (
-          <div className="glass-card text-center py-12 flex flex-col items-center">
-            <Loader2 size={48} className="text-primary animate-spin mb-4" />
-            <h3 className="mb-2">Loading Audio Engine...</h3>
-            <p className="text-muted text-sm max-w-md mx-auto">
-              We're loading our secure browser-side audio engine (FFmpeg WebAssembly). This only takes a moment and ensures your files never need to be uploaded to a server.
-            </p>
-          </div>
-        ) : !audioUrl ? (
+        {!audioUrl ? (
           <>
             <div 
               className="dropzone mb-8" 
@@ -169,11 +158,15 @@ export default function AudioVolumeClient() {
                 {isProcessing && (
                   <div className="mb-6 max-w-md mx-auto">
                     <div className="flex justify-between text-sm mb-2">
-                      <span>Adjusting volume...</span>
-                      <span className="font-medium">{progress}%</span>
+                      <span>{engineLoading ? "Downloading audio engine..." : "Adjusting volume..."}</span>
+                      {!engineLoading && <span className="font-medium">{progress}%</span>}
                     </div>
-                    <div className="w-full bg-border rounded-full h-2.5">
-                      <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                    <div className="w-full bg-border rounded-full h-2.5 overflow-hidden">
+                      {engineLoading ? (
+                        <div className="bg-primary h-2.5 w-full animate-pulse"></div>
+                      ) : (
+                        <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -201,7 +194,11 @@ export default function AudioVolumeClient() {
             <audio controls src={audioUrl} className="mb-8 w-full max-w-md" />
 
             <div className="flex gap-4">
-              <button className="btn btn-secondary" onClick={() => { setFile(null); setAudioUrl(null); }}>
+              <button className="btn btn-secondary" onClick={() => { 
+                if (audioUrl) URL.revokeObjectURL(audioUrl);
+                setFile(null); 
+                setAudioUrl(null); 
+              }}>
                 Adjust More
               </button>
               <a href={audioUrl} download={`volume_${file?.name}`} className="btn btn-primary" style={{ textDecoration: 'none' }}>

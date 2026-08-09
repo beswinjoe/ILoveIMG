@@ -5,7 +5,7 @@ import { ArrowRight, Music } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Audio Tools - Free Browser Audio Processing | FileFlow",
+  title: "Audio Tools - Free Browser Audio Processing | Filoza",
   description: "Convert, trim, compress and edit audio files directly in your browser.",
 };
 

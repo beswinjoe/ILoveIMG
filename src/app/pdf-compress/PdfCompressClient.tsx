@@ -54,7 +54,7 @@ export default function PdfCompressClient() {
       
       setCompressedSize(pdfBytes.byteLength);
       
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
       setPdfUrl(URL.createObjectURL(blob));
     } catch (error) {
       console.error(error);
@@ -78,7 +78,7 @@ export default function PdfCompressClient() {
       description="Reduce file size of your PDF document securely in your browser."
       breadcrumbs={[{ label: "PDF Tools", href: "/pdf-tools" }, { label: "Compress PDF", href: "/pdf-compress" }]}
       faq={[
-        { question: "Why didn't my file size change much?", answer: "FileFlow processes your PDFs entirely on your device for absolute privacy. Because we don't upload your files to a server, we can't run heavy image-downsampling algorithms. Our tool optimizes the internal structure of the PDF, which works great for some files, but won't compress large embedded images as aggressively as server-based tools." },
+        { question: "Why didn't my file size change much?", answer: "Filoza processes your PDFs entirely on your device for absolute privacy. Because we don't upload your files to a server, we can't run heavy image-downsampling algorithms. Our tool optimizes the internal structure of the PDF, which works great for some files, but won't compress large embedded images as aggressively as server-based tools." },
         { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. Your PDFs never leave your device." }
       ]}
       relatedTools={[

@@ -5,7 +5,7 @@ import { ArrowRight, FileImage } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Image Tools - Free Browser Image Processing | FileFlow",
+  title: "Image Tools - Free Browser Image Processing | Filoza",
   description: "Compress, resize, crop, and convert images quickly and privately in your browser.",
 };
 

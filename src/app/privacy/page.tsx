@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - FileFlow",
-  description: "Learn how FileFlow protects your privacy and data.",
+  title: "Privacy Policy - Filoza",
+  description: "Learn how Filoza protects your privacy and data.",
 };
 
 export default function PrivacyPage() {
@@ -18,10 +18,10 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-semibold text-foreground mb-4">1. Introduction</h2>
           <p>
-            At FileFlow, we take your privacy very seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+            At Filoza, we take your privacy very seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
           </p>
           <p>
-            The core philosophy of FileFlow is <strong>local processing</strong>. For the vast majority of our tools, your files are processed directly within your web browser and are <strong>never</strong> uploaded to our servers.
+            The core philosophy of Filoza is <strong>local processing</strong>. For the vast majority of our tools, your files are processed directly within your web browser and are <strong>never</strong> uploaded to our servers.
           </p>
         </section>
 
@@ -49,14 +49,14 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-semibold text-foreground mb-4">4. Third-Party Services and Advertising</h2>
           <p>
-            To keep FileFlow free, we display advertisements provided by third-party networks (such as Google AdSense). These third parties may use cookies and web beacons to collect information about your activities on this and other websites to provide you targeted advertising based upon your interests.
+            To keep Filoza free, we display advertisements provided by third-party networks (such as Google AdSense). These third parties may use cookies and web beacons to collect information about your activities on this and other websites to provide you targeted advertising based upon your interests.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold text-foreground mb-4">5. Contact Us</h2>
           <p>
-            If you have questions or comments about this Privacy Policy, please contact us at: <a href="mailto:privacy@fileflow.com" className="text-primary hover:underline">privacy@fileflow.com</a>.
+            If you have questions or comments about this Privacy Policy, please contact us at: <a href="mailto:privacy@filoza.com" className="text-primary hover:underline">privacy@filoza.com</a>.
           </p>
         </section>
         

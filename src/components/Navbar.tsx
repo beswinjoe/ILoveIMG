@@ -14,6 +14,7 @@ export default function Navbar() {
   const links = [
     { label: "Images", href: "/image-tools" },
     { label: "PDFs", href: "/pdf-tools" },
+    { label: "Documents", href: "/documents" },
     { label: "Audio", href: "/audio-tools" },
     { label: "Utilities", href: "/tools" }
   ];
@@ -55,7 +56,7 @@ export default function Navbar() {
                 <Layers size={18} />
               </div>
               <span style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--foreground)' }}>
-                FileFlow
+                Filoza
               </span>
             </Link>
           </div>

@@ -1,44 +1,31 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { fetchFile } from "@ffmpeg/util";
 import { UploadCloud, Download, CheckCircle2, Shrink, Loader2, Settings } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
+import { ffmpegService } from "@/lib/ffmpeg";
 
 export default function AudioCompressorClient() {
   const [file, setFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isReady, setIsReady] = useState(false);
+  const [engineLoading, setEngineLoading] = useState(false);
   
   const [bitrate, setBitrate] = useState("64k");
   const [originalSize, setOriginalSize] = useState(0);
   const [compressedSize, setCompressedSize] = useState(0);
   
-  const ffmpegRef = useRef<FFmpeg | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    load();
-  }, []);
-
-  const load = async () => {
-    if (!ffmpegRef.current) {
-      ffmpegRef.current = new FFmpeg();
-    }
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
-    const ffmpeg = ffmpegRef.current!;
-    ffmpeg.on("progress", ({ progress }) => {
-      setProgress(Math.round(progress * 100));
-    });
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-    });
-    setIsReady(true);
-  };
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+      }
+    };
+  }, [audioUrl]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -68,12 +55,18 @@ export default function AudioCompressorClient() {
   };
 
   const compressAudio = async () => {
-    if (!file || !isReady) return;
+    if (!file) return;
     setIsProcessing(true);
+    setEngineLoading(true);
     setProgress(0);
 
     try {
-      const ffmpeg = ffmpegRef.current!;
+      const ffmpeg = await ffmpegService.load((p) => {
+        setProgress(Math.round(p * 100));
+      });
+      
+      setEngineLoading(false);
+
       await ffmpeg.writeFile(file.name, await fetchFile(file));
       
       const outputName = `compressed_${file.name.replace(/\.[^/.]+$/, "")}.mp3`;
@@ -82,15 +75,19 @@ export default function AudioCompressorClient() {
       await ffmpeg.exec(["-i", file.name, "-b:a", bitrate, outputName]);
       
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as any], { type: "audio/mp3" });
+      const blob = new Blob([data as BlobPart], { type: "audio/mp3" });
       setCompressedSize(blob.size);
       setAudioUrl(URL.createObjectURL(blob));
+
+      await ffmpeg.deleteFile(file.name);
+      await ffmpeg.deleteFile(outputName);
     } catch (error) {
       console.error(error);
-      alert("An error occurred during audio compression.");
+      alert("An error occurred during audio compression. Please try again.");
     }
 
     setIsProcessing(false);
+    setEngineLoading(false);
   };
 
   const formatBytes = (bytes: number) => {
@@ -107,7 +104,7 @@ export default function AudioCompressorClient() {
       description="Compress audio files to reduce file size while maintaining listening quality."
       breadcrumbs={[{ label: "Audio Tools", href: "/audio-tools" }, { label: "Compress Audio", href: "/audio-compressor" }]}
       faq={[
-        { question: "Is my audio uploaded?", answer: "No. FileFlow uses WebAssembly to run a real audio compressor inside your browser. Your files never leave your device." },
+        { question: "Is my audio uploaded?", answer: "No. Filoza uses WebAssembly to run a real audio compressor inside your browser. Your files never leave your device." },
         { question: "Will I lose quality?", answer: "Compression always involves some loss of data, but we allow you to choose the bitrate. 128kbps is near-CD quality, while 64kbps is great for spoken word (like podcasts) and yields much smaller files." }
       ]}
       relatedTools={[
@@ -116,15 +113,7 @@ export default function AudioCompressorClient() {
       ]}
     >
       <div className="max-w-3xl mx-auto">
-        {!isReady ? (
-          <div className="glass-card text-center py-12 flex flex-col items-center">
-            <Loader2 size={48} className="text-primary animate-spin mb-4" />
-            <h3 className="mb-2">Loading Audio Engine...</h3>
-            <p className="text-muted text-sm max-w-md mx-auto">
-              We're loading our secure browser-side audio engine (FFmpeg WebAssembly). This only takes a moment and ensures your files never need to be uploaded to a server.
-            </p>
-          </div>
-        ) : !audioUrl ? (
+        {!audioUrl ? (
           <>
             <div 
               className="dropzone mb-8" 
@@ -190,11 +179,15 @@ export default function AudioCompressorClient() {
                 {isProcessing && (
                   <div className="mb-6 max-w-md mx-auto">
                     <div className="flex justify-between text-sm mb-2">
-                      <span>Compressing audio...</span>
-                      <span className="font-medium">{progress}%</span>
+                      <span>{engineLoading ? "Downloading audio engine..." : "Compressing audio..."}</span>
+                      {!engineLoading && <span className="font-medium">{progress}%</span>}
                     </div>
-                    <div className="w-full bg-border rounded-full h-2.5">
-                      <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                    <div className="w-full bg-border rounded-full h-2.5 overflow-hidden">
+                      {engineLoading ? (
+                        <div className="bg-primary h-2.5 w-full animate-pulse"></div>
+                      ) : (
+                        <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -233,8 +226,12 @@ export default function AudioCompressorClient() {
             <audio controls src={audioUrl} className="mb-8 w-full max-w-md" />
 
             <div className="flex gap-4">
-              <button className="btn btn-secondary" onClick={() => { setFile(null); setAudioUrl(null); }}>
-                Compress More
+              <button className="btn btn-secondary" onClick={() => { 
+                if (audioUrl) URL.revokeObjectURL(audioUrl);
+                setFile(null); 
+                setAudioUrl(null); 
+              }}>
+                Compress Another
               </button>
               <a href={audioUrl} download={`compressed_${file?.name.replace(/\.[^/.]+$/, "")}.mp3`} className="btn btn-primary" style={{ textDecoration: 'none' }}>
                 <Download size={18} /> Download Audio

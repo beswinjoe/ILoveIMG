@@ -5,7 +5,7 @@ import { ArrowRight, FileText } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "PDF Tools - Free Browser PDF Processing | FileFlow",
+  title: "PDF Tools - Free Browser PDF Processing | Filoza",
   description: "Merge, split, compress and manage PDF files directly in your browser.",
 };
 

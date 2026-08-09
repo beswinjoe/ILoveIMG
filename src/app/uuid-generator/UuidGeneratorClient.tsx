@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Hash, Copy, CheckCircle2, RefreshCw, Settings, Trash2 } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
 
@@ -13,9 +13,7 @@ export default function UuidGeneratorClient() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
 
-  useEffect(() => {
-    generateUuids();
-  }, [count, uppercase, hyphens]);
+  
 
   const generateV4 = () => {
     // Generate UUID v4 using crypto API
@@ -26,7 +24,7 @@ export default function UuidGeneratorClient() {
     });
   };
 
-  const generateUuids = () => {
+  const generateUuids = useCallback(() => {
     const newUuids = [];
     const validCount = Math.min(Math.max(1, count), 100);
     
@@ -45,7 +43,11 @@ export default function UuidGeneratorClient() {
     }
     
     setUuids(newUuids);
-  };
+  }, [count, uppercase, hyphens]);
+
+  useEffect(() => {
+    generateUuids();
+  }, [count, uppercase, hyphens, generateUuids]);
 
   const copyToClipboard = (text: string, index: number | null = null) => {
     navigator.clipboard.writeText(text);

@@ -49,7 +49,7 @@ export default function PdfRotateClient() {
       });
       
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
       setPdfUrl(URL.createObjectURL(blob));
     } catch (error) {
       console.error(error);

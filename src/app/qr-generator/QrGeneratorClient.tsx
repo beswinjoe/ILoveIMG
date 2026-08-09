@@ -9,7 +9,7 @@ type QrType = "url" | "text" | "wifi" | "email" | "phone";
 
 export default function QrGeneratorClient() {
   const [qrType, setQrType] = useState<QrType>("url");
-  const [qrValue, setQrValue] = useState("https://fileflow.com");
+  const [qrValue, setQrValue] = useState("https://filoza.com");
   
   // Specific states for different types to build the qrValue
   const [url, setUrl] = useState("https://");

@@ -113,7 +113,7 @@ export default function ColorPickerClient() {
       description="Extract colors from images or use the color wheel to get HEX and RGB values."
       breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Color Picker", href: "/color-picker" }]}
       faq={[
-        { question: "Is my image uploaded?", answer: "No. FileFlow processes your images securely inside your browser. They never leave your device." },
+        { question: "Is my image uploaded?", answer: "No. Filoza processes your images securely inside your browser. They never leave your device." },
         { question: "How do I extract a color from an image?", answer: "Upload an image, then hover over it to see the color under your cursor. Click to select and save the color." }
       ]}
       relatedTools={[

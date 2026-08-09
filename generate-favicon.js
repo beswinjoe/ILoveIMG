@@ -1,0 +1,202 @@
+const fs = require('fs');
+const path = require('path');
+
+const tool = {
+  dir: 'favicon-generator',
+  name: 'FaviconGenerator',
+  title: 'Favicon Generator',
+  desc: 'Generate 32x32 favicons from your images instantly.',
+  icon: 'Box',
+  ui: `
+                <div className="flex flex-col gap-4 mb-8 p-6 bg-background rounded-lg border border-border text-left">
+                  <p className="text-sm text-muted">Your image will be automatically resized to a standard 32x32 pixel square suitable for website favicons.</p>
+                </div>
+  `,
+  state: '',
+  processLogic: `
+      const canvas = document.createElement('canvas');
+      canvas.width = 32;
+      canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error("Canvas not supported");
+
+      // Draw image to fit 32x32
+      const size = Math.min(img.width, img.height);
+      const x = (img.width - size) / 2;
+      const y = (img.height - size) / 2;
+      
+      // Crop to square first, then draw
+      ctx.drawImage(img, x, y, size, size, 0, 0, 32, 32);
+  `
+};
+
+const dirPath = path.join('./src/app', tool.dir);
+if (!fs.existsSync(dirPath)) {
+  fs.mkdirSync(dirPath, { recursive: true });
+}
+
+// page.tsx
+const pageContent = `import { Metadata } from 'next';
+import ${tool.name}Client from './${tool.name}Client';
+
+export const metadata: Metadata = {
+  title: '${tool.title} | Filoza',
+  description: '${tool.desc}',
+  alternates: {
+    canonical: 'https://fileefloww.vercel.app/${tool.dir}'
+  }
+};
+
+export default function Page() {
+  return <${tool.name}Client />;
+}
+`;
+fs.writeFileSync(path.join(dirPath, 'page.tsx'), pageContent);
+
+// Client.tsx
+const clientContent = `"use client";
+
+import React, { useState, useRef } from "react";
+import { UploadCloud, Download, CheckCircle2, Image as ImageIcon, ${tool.icon} } from "lucide-react";
+import ToolLayout from "@/components/ToolLayout";
+
+export default function ${tool.name}Client() {
+  const [file, setFile] = useState<File | null>(null);
+  const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  ${tool.state}
+  
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  };
+
+  const handleFile = (selectedFile: File) => {
+    if (selectedFile.type.startsWith("image/")) {
+      setFile(selectedFile);
+      setOutputUrl(null);
+    } else {
+      alert("Please upload a valid image file.");
+    }
+  };
+
+  const processImage = async () => {
+    if (!file) return;
+    setIsProcessing(true);
+
+    try {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      ${tool.processLogic}
+
+      const blob = await new Promise<Blob>((resolve) => {
+        canvas.toBlob((b) => resolve(b!), "image/png");
+      });
+
+      setOutputUrl(URL.createObjectURL(blob));
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred during image processing.");
+    }
+
+    setIsProcessing(false);
+  };
+
+  return (
+    <ToolLayout
+      title="${tool.title}"
+      description="${tool.desc}"
+      breadcrumbs={[{ label: "Image Tools", href: "/image-tools" }, { label: "${tool.title}", href: "/${tool.dir}" }]}
+      faq={[
+        { question: "Is my image uploaded?", answer: "No. Filoza processes your image entirely within your browser for 100% privacy." },
+        { question: "What size is the favicon?", answer: "We generate a standard 32x32 pixel PNG file that you can use on any website." }
+      ]}
+    >
+      <div className="max-w-3xl mx-auto">
+        {!outputUrl ? (
+          <>
+            <div 
+              className="dropzone mb-8" 
+              onDrop={handleDrop} 
+              onDragOver={(e) => e.preventDefault()}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <UploadCloud className="dropzone-icon" />
+              <h3>Drag & Drop your image here</h3>
+              <p className="text-muted">Supports JPG, PNG, WebP</p>
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                className="hidden" 
+                accept="image/*" 
+                onChange={handleFileChange} 
+              />
+            </div>
+
+            {file && (
+              <div className="glass-card text-center">
+                <h3 className="mb-4 truncate" title={file.name}>{file.name}</h3>
+                
+                <div className="mb-6 flex justify-center bg-black/10 rounded-lg p-2 max-h-64 overflow-hidden">
+                  <img src={URL.createObjectURL(file)} alt="Preview" className="max-h-full object-contain" />
+                </div>
+
+                ${tool.ui}
+
+                <div className="flex justify-center gap-4">
+                  <button className="btn btn-secondary" onClick={() => setFile(null)} disabled={isProcessing}>
+                    Upload Another
+                  </button>
+                  <button className="btn btn-primary" onClick={processImage} disabled={isProcessing}>
+                    {isProcessing ? "Processing..." : (
+                      <>
+                        <${tool.icon} size={18} /> Generate Favicon
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="glass-card text-center py-12 flex flex-col items-center">
+            <CheckCircle2 size={64} className="text-success mb-6" />
+            <h2 className="mb-4">Favicon Ready!</h2>
+            
+            <div className="mb-6 flex justify-center bg-black/10 rounded-lg p-8">
+               <img src={outputUrl} alt="Output Preview" className="w-8 h-8 object-contain shadow-sm bg-white" />
+            </div>
+
+            <div className="flex gap-4">
+              <button className="btn btn-secondary" onClick={() => { setFile(null); setOutputUrl(null); }}>
+                Process More
+              </button>
+              <a href={outputUrl} download="favicon.png" className="btn btn-primary" style={{ textDecoration: 'none' }}>
+                <Download size={18} /> Download Favicon
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </ToolLayout>
+  );
+}
+`;
+fs.writeFileSync(path.join(dirPath, `${tool.name}Client.tsx`), clientContent);
+console.log(`Generated ${tool.title}`);

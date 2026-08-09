@@ -67,7 +67,7 @@ export default function PdfMergeClient() {
       }
 
       const pdfBytes = await mergedPdf.save();
-      const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
+      const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
       setPdfUrl(URL.createObjectURL(blob));
     } catch (error) {
       console.error(error);
@@ -179,7 +179,7 @@ export default function PdfMergeClient() {
               <button className="btn btn-secondary" onClick={() => { setFiles([]); setPdfUrl(null); }}>
                 Merge More
               </button>
-              <a href={pdfUrl} download="FileFlow_Merged.pdf" className="btn btn-primary" style={{ textDecoration: 'none' }}>
+              <a href={pdfUrl} download="Filoza_Merged.pdf" className="btn btn-primary" style={{ textDecoration: 'none' }}>
                 <Download size={18} /> Download Merged PDF
               </a>
             </div>

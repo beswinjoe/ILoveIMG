@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,11 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
-          <Navbar />
-          <main style={{ flex: 1 }}>{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <Navbar />
+        <main style={{ flex: 1 }}>{children}</main>
+        <Footer />
       </body>
     </html>
   );

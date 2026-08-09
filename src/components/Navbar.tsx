@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Layers, Menu, X } from 'lucide-react';
 import { CommandPalette } from './CommandPalette';
-import { ThemeToggle } from './ThemeToggle';
 import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
@@ -84,12 +83,10 @@ export default function Navbar() {
           {/* RIGHT: Search + Theme (Desktop) */}
           <div className="hidden md:flex items-center gap-3" style={{ justifySelf: 'end' }}>
             <CommandPalette />
-            <ThemeToggle />
           </div>
 
           {/* Mobile Right Side */}
           <div className="flex md:hidden items-center gap-2" style={{ justifySelf: 'end' }}>
-            <ThemeToggle />
             <button 
               className="flex items-center justify-center mobile-menu-btn"
               style={{ padding: '0.5rem', color: 'var(--foreground)', background: 'transparent', border: 'none', cursor: 'pointer', borderRadius: '50%' }}

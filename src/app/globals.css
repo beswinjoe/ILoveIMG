@@ -39,26 +39,6 @@
   --glass-blur: blur(12px);
 }
 
-[data-theme='dark'] {
-  --background: #090a10;
-  --foreground: #f8fafc;
-  
-  --surface: rgba(15, 23, 42, 0.45);
-  --surface-hover: rgba(30, 41, 59, 0.55);
-  --border: rgba(255, 255, 255, 0.1);
-  
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  
-  --secondary: #38bdf8;
-  --secondary-hover: #0ea5e9;
-
-  --muted: #94a3b8;
-  --muted-foreground: #cbd5e1;
-  
-  --shadow-glass: 0 20px 60px -10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
 :root {
   --glass-blur: blur(24px) saturate(160%);
 }
@@ -101,11 +81,7 @@ body::before {
   transition: background-image 0.3s ease;
 }
 
-[data-theme='dark'] body::before {
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.04) 0%, transparent 45%);
-}
+
 
 * {
   box-sizing: border-box;
@@ -468,18 +444,4 @@ h1, h2, h3, h4, h5, h6 {
   padding: 2rem;
   text-align: center;
   color: var(--muted);
-}
-
-/* =======================================================================
-   DARK MODE TOOL CARD ALIGNMENT FIX
-   Ensures consistent geometry and internal alignment specifically for dark mode.
-   ======================================================================= */
-[data-theme='dark'] .category-grid .glass-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-[data-theme='dark'] .category-grid .glass-card > p {
-  flex-grow: 1;
 }

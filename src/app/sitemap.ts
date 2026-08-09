@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { toolsData } from '@/lib/tools'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://fileefloww.vercel.app'
+  const baseUrl = 'https://filoza.vercel.app'
 
   const staticRoutes = [
     '',

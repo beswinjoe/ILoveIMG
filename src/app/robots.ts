@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: 'https://fileefloww.vercel.app/sitemap.xml',
+    sitemap: 'https://filoza.vercel.app/sitemap.xml',
   }
 }

@@ -52,10 +52,10 @@ export async function decryptFile(encryptedBuffer: ArrayBuffer, key: CryptoKey, 
   return await window.crypto.subtle.decrypt(
     {
       name: "AES-GCM",
-      iv: iv
+      iv: iv as BufferSource
     },
     key,
-    encryptedBuffer
+    encryptedBuffer as BufferSource
   );
 }
 
@@ -77,8 +77,8 @@ export async function deriveKeyFromPassword(password: string, salt: Uint8Array):
   return await window.crypto.subtle.deriveKey(
     {
       name: "PBKDF2",
-      salt: salt,
-      iterations: 100000,
+      salt: salt as BufferSource,
+      iterations: 600000,
       hash: "SHA-256"
     },
     keyMaterial,
@@ -102,7 +102,7 @@ export async function encryptFileKeyWithKEK(fileKeyBase64: string, KEK: CryptoKe
   
   return {
     encryptedKeyBase64: bufferToBase64(encrypted),
-    keyIvBase64: bufferToBase64(iv)
+    keyIvBase64: bufferToBase64(iv.buffer)
   };
 }
 

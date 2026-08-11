@@ -216,7 +216,7 @@ export default function DownloadClient({ paramsPromise }: DownloadClientProps) {
                   <div key={idx} className="flex justify-between items-center p-3 rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.4)", border: "1px solid var(--border)" }}>
                     <div className="flex items-center gap-3 overflow-hidden">
                       <FileIcon size={16} className="text-muted flex-shrink-0" />
-                      <span className="truncate text-sm font-medium">{file.name}</span>
+                      <span className="truncate text-sm font-medium block max-w-[150px] sm:max-w-[300px] overflow-hidden whitespace-nowrap">{file.name}</span>
                     </div>
                     <div className="flex items-center gap-4 flex-shrink-0">
                       <span className="text-xs text-muted">{formatBytes(file.size)}</span>

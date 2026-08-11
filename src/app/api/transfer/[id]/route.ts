@@ -5,6 +5,9 @@ import crypto from 'crypto';
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase configuration missing.' }, { status: 500 });
+    }
     const { id } = await params;
     
     const { data, error } = await supabase
@@ -43,6 +46,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase configuration missing.' }, { status: 500 });
+    }
     const { id } = await params;
     
     // Safety check for empty body

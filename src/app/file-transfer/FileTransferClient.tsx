@@ -201,7 +201,7 @@ export default function FileTransferClient() {
       ]}
       faq={[
         { question: "Are my files secure?", answer: "Yes. Files are transferred securely, stored in a private bucket, and automatically deleted after they expire." },
-        { question: "What is the size limit?", answer: "The maximum total transfer size depends on our current free tier limits (typically 1GB)." }
+        { question: "What is the size limit?", answer: "Maximum transfer size: 50 MB (total)." }
       ]}
       relatedTools={[
         { name: "ZIP Creator", href: "/zip-creator", icon: <FileIcon /> },
@@ -248,7 +248,7 @@ export default function FileTransferClient() {
                 <div className="max-h-[200px] overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-2">
                   {files.map((file, idx) => (
                     <div key={idx} className="flex justify-between items-center p-3 rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.4)", border: "1px solid var(--border)" }}>
-                      <span className="truncate text-sm font-medium pr-4">{file.name}</span>
+                      <span className="truncate text-sm font-medium pr-4 block max-w-[200px] sm:max-w-full overflow-hidden whitespace-nowrap">{file.name}</span>
                       <div className="flex items-center gap-3 flex-shrink-0">
                         <span className="text-xs text-muted">{formatBytes(file.size)}</span>
                         {!isUploading && (
@@ -326,10 +326,10 @@ export default function FileTransferClient() {
           <h2 className="text-2xl font-bold mb-2">Transfer Ready!</h2>
           <p className="text-muted mb-8">Your files have been securely uploaded. Share the link or QR code below.</p>
           
-          <div className="bg-secondary p-4 rounded-xl mb-8 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 overflow-hidden text-left flex-1">
+          <div className="bg-secondary p-4 rounded-xl mb-8 flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 overflow-hidden text-left flex-1">
               <LinkIcon size={20} className="text-primary flex-shrink-0" />
-              <span className="truncate font-medium">{shareUrl}</span>
+              <span className="truncate font-medium block max-w-[200px] sm:max-w-full overflow-hidden whitespace-nowrap">{shareUrl}</span>
             </div>
             <button className="btn btn-primary btn-sm flex items-center gap-2 flex-shrink-0" onClick={copyLink}>
               {copied ? <CheckCircle size={16} /> : <Copy size={16} />}

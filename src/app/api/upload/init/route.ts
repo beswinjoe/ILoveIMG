@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     
     const supabase = getSupabaseAdmin();
     if (!supabase) {
-      return NextResponse.json({ error: 'Supabase is not configured. File transfer is disabled. Please set up your .env.local file.' }, { status: 400 });
+      return NextResponse.json({ error: 'Supabase configuration missing.' }, { status: 500 });
     }
     const shareId = crypto.randomUUID();
     
@@ -41,25 +41,28 @@ export async function POST(req: Request) {
       });
       
     if (dbError) {
-      console.error("DB Error Message:", dbError.message);
-      console.error("DB Error Code:", dbError.code);
-      console.error("DB Error Details:", dbError.details);
-      console.error("DB Error Hint:", dbError.hint);
-      return NextResponse.json({ error: 'Database error. Ensure Supabase tables are created.' }, { status: 500 });
+      console.error("DB Error creating transfer:", dbError.message);
+      return NextResponse.json({ error: 'Transfer database is not configured or unavailable.' }, { status: 500 });
     }
     
     // Generate Signed Upload URLs for each file
     const uploadUrls = await Promise.all(files.map(async (file: any) => {
-      const filePath = `${shareId}/${file.name}`;
+      // Sanitize file name to prevent path traversal
+      const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+      const filePath = `${shareId}/${safeName}`;
       const { data, error } = await supabase.storage.from('transfers').createSignedUploadUrl(filePath);
       
       if (error) {
-        console.error("Signed URL Error:", error);
-        throw new Error(`Could not generate upload URL for ${file.name}`);
+        console.error("Signed URL Error:", error.message);
+        if (error.message && error.message.toLowerCase().includes('bucket not found')) {
+           throw new Error("Transfer storage is not configured.");
+        }
+        throw new Error("Unable to prepare secure upload.");
       }
       
       return {
         name: file.name,
+        safeName,
         uploadUrl: data.signedUrl
       };
     }));
@@ -67,7 +70,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ shareId, uploadUrls });
     
   } catch (err: any) {
-    console.error(err);
+    console.error("API Error:", err);
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 });
   }
 }

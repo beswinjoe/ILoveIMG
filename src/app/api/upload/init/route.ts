@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     }
     
     const totalSize = files.reduce((acc: number, f: any) => acc + (f.size || 0), 0);
-    const maxSizeMB = parseInt(process.env.NEXT_PUBLIC_MAX_FILE_SIZE_MB || '50'); // 50MB MVP Limit
+    const maxSizeMB = parseInt(process.env.NEXT_PUBLIC_MAX_FILE_SIZE_MB || '300'); // 300MB MVP Limit
     
     if (totalSize > maxSizeMB * 1024 * 1024) {
       return NextResponse.json({ error: `Total size exceeds maximum of ${maxSizeMB}MB` }, { status: 400 });

@@ -13,6 +13,7 @@ export default function FileTransferClient() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [memoryWarning, setMemoryWarning] = useState(false);
   
   const [shareId, setShareId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -37,9 +38,15 @@ export default function FileTransferClient() {
     const totalNewSize = newFiles.reduce((acc, f) => acc + f.size, 0);
     const currentTotalSize = files.reduce((acc, f) => acc + f.size, 0);
     
-    if (totalNewSize + currentTotalSize > 50 * 1024 * 1024) {
-      setUploadError("This file is too large (>50MB) to encrypt safely in the browser. Please select a smaller file.");
+    const maxSizeMB = parseInt(process.env.NEXT_PUBLIC_MAX_FILE_SIZE_MB || '300');
+    
+    if (totalNewSize + currentTotalSize > maxSizeMB * 1024 * 1024) {
+      setUploadError(`Maximum transfer size is ${maxSizeMB} MB.`);
       return;
+    }
+    
+    if (totalNewSize > 100 * 1024 * 1024) {
+      setMemoryWarning(true);
     }
 
     setFiles((prev) => [...prev, ...newFiles]);
@@ -131,15 +138,21 @@ export default function FileTransferClient() {
         if (!urlObj) throw new Error(`Missing upload URL for ${file.name}`);
 
         // Read and encrypt
-        const arrayBuffer = await file.arrayBuffer();
-        const { encrypted, iv } = await encryptFile(arrayBuffer, fileKey);
+        let arrayBuffer: ArrayBuffer | null = await file.arrayBuffer();
+        let { encrypted, iv }: any = await encryptFile(arrayBuffer, fileKey);
         
         // Combine IV (12 bytes) + Encrypted Data
-        const finalBuffer = new Uint8Array(12 + encrypted.byteLength);
+        let finalBuffer: Uint8Array | null = new Uint8Array(12 + encrypted.byteLength);
         finalBuffer.set(iv, 0);
         finalBuffer.set(new Uint8Array(encrypted), 12);
         
-        const blob = new Blob([finalBuffer], { type: "application/octet-stream" });
+        let blob: Blob | null = new Blob([finalBuffer], { type: "application/octet-stream" });
+
+        // Free up memory immediately after blob creation
+        arrayBuffer = null;
+        encrypted = null;
+        iv = null;
+        finalBuffer = null;
 
         let fileLoaded = 0;
         await uploadFileXHR(blob, urlObj.uploadUrl, (loaded) => {
@@ -148,6 +161,9 @@ export default function FileTransferClient() {
           totalLoaded += delta;
           setUploadProgress(Math.round((totalLoaded / totalSize) * 100));
         });
+        
+        // Free the blob
+        blob = null;
       }
       
       // Store the share ID and include the key in the hash if no password
@@ -175,6 +191,7 @@ export default function FileTransferClient() {
     setPassword("");
     setShareId(null);
     setUploadProgress(0);
+    setMemoryWarning(false);
   };
 
   const formatBytes = (bytes: number) => {
@@ -201,7 +218,7 @@ export default function FileTransferClient() {
       ]}
       faq={[
         { question: "Are my files secure?", answer: "Yes. Files are transferred securely, stored in a private bucket, and automatically deleted after they expire." },
-        { question: "What is the size limit?", answer: "Maximum transfer size: 50 MB (total)." }
+        { question: "What is the size limit?", answer: "Maximum transfer size: 300 MB (total)." }
       ]}
       relatedTools={[
         { name: "ZIP Creator", href: "/zip-creator", icon: <FileIcon /> },
@@ -212,6 +229,12 @@ export default function FileTransferClient() {
           {uploadError && (
             <div className="bg-danger bg-opacity-10 text-danger p-4 rounded-lg mb-6">
               {uploadError}
+            </div>
+          )}
+          
+          {memoryWarning && !isUploading && (
+            <div className="bg-warning bg-opacity-10 text-warning p-4 rounded-lg mb-6 text-sm">
+              <strong>Note:</strong> Very large files require extra browser memory to securely encrypt before uploading. Please ensure your device has sufficient resources.
             </div>
           )}
 

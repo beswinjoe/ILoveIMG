@@ -26,7 +26,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     
     // Fetch actual file list from storage
     const { data: filesData, error: filesError } = await supabase.storage.from('transfers').list(id);
-    let files = [];
+    let files: { name: string, size: number }[] = [];
     if (!filesError && filesData) {
       files = filesData.filter(f => f.name !== '.emptyFolderPlaceholder').map(f => ({ name: f.name, size: f.metadata?.size || 0 }));
     }

@@ -146,7 +146,7 @@ export default function FileTransferClient() {
         finalBuffer.set(iv, 0);
         finalBuffer.set(new Uint8Array(encrypted), 12);
         
-        let blob: Blob | null = new Blob([finalBuffer], { type: "application/octet-stream" });
+        let blob: Blob | null = new Blob([finalBuffer as unknown as BlobPart], { type: "application/octet-stream" });
 
         // Free up memory immediately after blob creation
         arrayBuffer = null;

@@ -41,7 +41,11 @@ export async function POST(req: Request) {
       });
       
     if (dbError) {
-      console.error("DB Error creating transfer:", dbError.message);
+      console.error("DB Error creating transfer:");
+      console.error("Message:", dbError.message);
+      console.error("Code:", dbError.code);
+      console.error("Details:", dbError.details);
+      console.error("Hint:", dbError.hint);
       return NextResponse.json({ error: 'Transfer database is not configured or unavailable.' }, { status: 500 });
     }
     

@@ -1,0 +1,36 @@
+
+> filoza@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.12:3000
+- Environments: .env.local
+✓ Ready in 323ms
+✓ Running next.config.ts took 26ms
+
+ POST /api/upload/init 200 in 664ms (next.js: 171ms, application-code: 493ms)
+ POST /api/upload/file 200 in 609ms (next.js: 112ms, application-code: 497ms)
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+ GET /file-transfer 200 in 299ms (next.js: 94ms, application-code: 205ms)
+ POST /api/upload/init 200 in 347ms (next.js: 4ms, application-code: 344ms)
+[browser] TypeError: Failed to fetch
+    at uploadFile (src/app/file-transfer/FileTransferClient.tsx:50:23)
+    at startUpload (src/app/file-transfer/FileTransferClient.tsx:86:15)
+  48 |     formData.append("shareId", shareIdVal);
+  49 |
+> 50 |     const res = await fetch("/api/upload/file", {
+     |                       ^
+  51 |       method: "POST",
+  52 |       body: formData,
+  53 |     }); (src/app/file-transfer/FileTransferClient.tsx:92:15)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.12:3000
+- Environments: .env.local
+✓ Ready in 354ms
+✓ Running next.config.ts took 26ms
+
+ GET /file-transfer 200 in 344ms (next.js: 157ms, application-code: 187ms)
+[?25h

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import ImagePreview from "@/components/ImagePreview";
 import { UploadCloud, Download, Image as ImageIcon, Crop as CropIcon } from "lucide-react";
 
 export default function CropperClient() {
@@ -144,19 +145,20 @@ export default function CropperClient() {
               <button className={`btn ${aspect === 9/16 ? "btn-primary" : "btn-secondary"}`} onClick={() => handleAspectChange(9/16)}>9:16</button>
             </div>
 
-            <div style={{ maxHeight: "60vh", overflow: "auto", display: "flex", justifyContent: "center", width: "100%", backgroundColor: "var(--background)", padding: "1rem", borderRadius: "var(--radius-sm)" }}>
+            <div className="relative flex justify-center items-center overflow-hidden w-full bg-[var(--background)] rounded-[var(--radius-sm)] border border-[var(--border)]" style={{ minHeight: "200px", maxHeight: "55vh" }}>
               {previewUrl && (
                 <ReactCrop 
                   crop={crop} 
                   onChange={(c) => setCrop(c)} 
                   aspect={aspect}
+                  style={{ maxWidth: "100%", maxHeight: "55vh" }}
                 >
                   <img 
                     ref={imgRef} 
                     src={previewUrl} 
                     alt="Crop preview" 
                     onLoad={onImageLoad}
-                    style={{ maxHeight: "50vh", width: "auto" }}
+                    style={{ maxWidth: "100%", maxHeight: "55vh", display: "block", margin: "0 auto" }}
                   />
                 </ReactCrop>
               )}
@@ -175,7 +177,10 @@ export default function CropperClient() {
       ) : (
         <div className="card max-w-2xl mx-auto mt-8 text-center">
           <h3 className="mb-4">Cropped Image</h3>
-          <img src={croppedUrl} alt="Cropped" style={{ maxWidth: "100%", maxHeight: "50vh", margin: "0 auto", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }} />
+          
+          <div className="mb-6 w-full mx-auto">
+             <ImagePreview originalSrc={previewUrl!} resultSrc={croppedUrl} transparent={true} />
+          </div>
           
           <div className="flex gap-4 justify-center mt-6">
             <button className="btn btn-secondary" onClick={() => setCroppedUrl(null)}>

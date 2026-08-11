@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { UploadCloud, Download, Image as ImageIcon, ArrowRight } from "lucide-react";
+import { UploadCloud, Download, Image as ImageIcon, ArrowRight, Settings2 } from "lucide-react";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function ConverterClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -110,27 +111,13 @@ export default function ConverterClient() {
         </div>
       ) : (
         <div className="card max-w-4xl mx-auto mt-8">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 40px 1fr", alignItems: "center", gap: "1rem" }}>
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} /> Original {getFormatLabel(file.type)}</h3>
-              {previewUrl && <img src={previewUrl} alt="Original" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "250px", objectFit: "contain", backgroundColor: "var(--background)" }} />}
-            </div>
-            
-            <div className="flex justify-center mt-8">
-              <ArrowRight className="text-muted" size={32} />
-            </div>
-
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} className="text-primary" /> Target {getFormatLabel(targetFormat)}</h3>
-              {convertedUrl ? (
-                <img src={convertedUrl} alt="Converted" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "250px", objectFit: "contain", backgroundColor: targetFormat === 'image/jpeg' ? "var(--background)" : "transparent", backgroundImage: targetFormat !== 'image/jpeg' ? "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\"><rect width=\"10\" height=\"10\" fill=\"%23ddd\"/><rect x=\"10\" width=\"10\" height=\"10\" fill=\"%23eee\"/><rect y=\"10\" width=\"10\" height=\"10\" fill=\"%23eee\"/><rect x=\"10\" y=\"10\" width=\"10\" height=\"10\" fill=\"%23ddd\"/></svg>')" : "none" }} />
-              ) : (
-                <div style={{ height: "250px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--background)", borderRadius: "var(--radius-sm)", border: "1px dashed var(--border)" }}>
-                  <p className="text-muted">Ready to convert</p>
-                </div>
-              )}
-            </div>
-          </div>
+          <ImagePreview 
+            originalSrc={previewUrl!} 
+            resultSrc={convertedUrl} 
+            originalLabel={`Original ${getFormatLabel(file.type)}`}
+            resultLabel={`Converted ${getFormatLabel(targetFormat)}`}
+            transparent={file.type !== "image/jpeg" || targetFormat !== "image/jpeg"}
+          />
 
           <div className="mt-8 pt-6 flex flex-col gap-6" style={{ borderTop: "1px solid var(--border)" }}>
             <div className="flex gap-8 justify-center flex-wrap max-w-2xl mx-auto items-end">

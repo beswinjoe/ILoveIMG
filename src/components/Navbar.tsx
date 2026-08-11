@@ -15,6 +15,8 @@ export default function Navbar() {
     { label: "PDFs", href: "/pdf-tools" },
     { label: "Documents", href: "/documents" },
     { label: "Audio", href: "/audio-tools" },
+    { label: "Archive", href: "/archive" },
+    { label: "Transfer", href: "/file-transfer" },
     { label: "Utilities", href: "/tools" }
   ];
 

@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { UploadCloud, Download, CheckCircle2, Wand2, Loader2 } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function BackgroundRemoverClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -62,10 +63,36 @@ export default function BackgroundRemoverClient() {
           }
           
           setProgress(percentage);
+        },
+        output: {
+          format: 'image/png'
         }
       };
 
-      const imageBlob = await imglyRemoveBackground(file, config);
+      let processableInput: Blob | File = file;
+      
+      if (file.type !== "image/jpeg" && file.type !== "image/png") {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+        
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
+          if (blob) {
+            processableInput = blob;
+          }
+        }
+      }
+
+      const imageBlob = await imglyRemoveBackground(processableInput, config);
       const url = URL.createObjectURL(imageBlob);
       setOutputUrl(url);
       setStatus("Done");
@@ -115,9 +142,8 @@ export default function BackgroundRemoverClient() {
               <div className="glass-card text-center">
                 <h3 className="mb-4 truncate" title={file.name}>{file.name}</h3>
                 
-                <div className="mb-6 flex justify-center bg-black/5 rounded-lg p-2 max-h-80 overflow-hidden relative" 
-                     style={{ backgroundImage: 'linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px' }}>
-                  <img src={originalUrl!} alt="Original Preview" className="max-h-full object-contain relative z-10" />
+                <div className="mb-6">
+                  <ImagePreview originalSrc={originalUrl!} transparent={true} />
                 </div>
 
                 {isProcessing && (
@@ -156,9 +182,8 @@ export default function BackgroundRemoverClient() {
             <CheckCircle2 size={64} className="text-success mb-6" />
             <h2 className="mb-4">Background Removed!</h2>
             
-            <div className="mb-8 w-full max-w-2xl bg-white rounded-lg p-2 overflow-hidden shadow-sm"
-                 style={{ backgroundImage: 'linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px' }}>
-              <img src={outputUrl} alt="Output Preview" className="w-full h-auto max-h-96 object-contain" />
+            <div className="mb-8 w-full max-w-2xl mx-auto">
+              <ImagePreview originalSrc={originalUrl!} resultSrc={outputUrl} transparent={true} />
             </div>
 
             <div className="flex gap-4">

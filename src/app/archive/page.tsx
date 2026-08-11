@@ -1,27 +1,27 @@
 import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, Archive } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-  description: "Merge, split, compress and manage PDF files directly in your browser.",
+  title: "Archive Tools – Free Online ZIP & RAR Extractors | Filoza",
+  description: "Free online archive tools to create and extract ZIP, RAR, and 7Z files completely securely in your browser.",
   openGraph: {
-    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-    description: "Merge, split, compress and manage PDF files directly in your browser.",
-    url: "https://filoza.vercel.app/pdf-tools",
+    title: "Archive Tools – Free Online ZIP & RAR Extractors | Filoza",
+    description: "Free online archive tools to create and extract ZIP, RAR, and 7Z files completely securely in your browser.",
+    url: "https://filoza.vercel.app/archive",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-    description: "Merge, split, compress and manage PDF files directly in your browser.",
+    title: "Archive Tools – Free Online ZIP & RAR Extractors | Filoza",
+    description: "Free online archive tools to create and extract ZIP, RAR, and 7Z files completely securely in your browser.",
   }
 };
 
-export default function PdfToolsPage() {
-  const tools = toolsData.filter(t => t.category === "PDF Tools");
+export default function ArchivePage() {
+  const tools = toolsData.filter(t => t.category === "Archive");
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
@@ -32,22 +32,18 @@ export default function PdfToolsPage() {
           display: 'inline-flex', alignItems: 'center', justifyItems: 'center', 
           padding: '0.75rem', borderRadius: '16px', 
           backgroundColor: 'var(--surface)', border: '1px solid var(--border)',
-          color: 'var(--danger)', marginBottom: '1.5rem',
+          color: 'var(--primary)', marginBottom: '1.5rem',
           boxShadow: 'var(--shadow-sm)'
         }}>
-          <FileText size={28} />
+          <Archive size={28} />
         </div>
-        <h1 style={{ fontSize: "clamp(3rem, 5vw, 4rem)", marginBottom: "1rem", letterSpacing: '-0.02em', fontWeight: 800 }}>PDF Tools</h1>
+        <h1 style={{ fontSize: "clamp(3rem, 5vw, 4rem)", marginBottom: "1rem", letterSpacing: '-0.02em', fontWeight: 800 }}>Archive Tools</h1>
         <p className="text-muted" style={{ fontSize: "1.125rem", lineHeight: 1.6 }}>
-          Merge, split, compress and manage PDF files directly in your browser.
+          Create and extract ZIP, RAR, and 7Z files locally in your browser.
         </p>
       </div>
 
       {/* Tools Grid */}
-      <div style={{ marginBottom: "2rem" }}>
-        <h2 style={{ fontSize: "1.75rem", marginBottom: "1.5rem" }}>Popular PDF Tools</h2>
-      </div>
-
       <div className="category-grid sm:grid-cols-2 lg:grid-cols-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', marginBottom: '4rem' }}>
         {tools.map((tool, idx) => (
           <Link prefetch={false} href={tool.href} key={idx} className="glass-card flex flex-col gap-3" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
@@ -56,7 +52,7 @@ export default function PdfToolsPage() {
                 padding: '0.5rem', borderRadius: '12px', 
                 backgroundColor: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' 
               }}>
-                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--danger)' } })}
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20, style: { color: 'var(--primary)' } })}
               </div>
               <h3 style={{ fontSize: "1.125rem", margin: 0 }}>{tool.name}</h3>
             </div>
@@ -66,11 +62,6 @@ export default function PdfToolsPage() {
             </div>
           </Link>
         ))}
-      </div>
-
-      {/* Ad Container */}
-      <div className="ad-container" style={{ border: '1px dashed var(--border)', backgroundColor: 'var(--surface)', borderRadius: '16px', maxWidth: '800px', margin: '0 auto' }}>
-        Advertisement Space
       </div>
     </div>
   );

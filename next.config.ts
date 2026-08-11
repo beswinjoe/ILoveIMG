@@ -4,7 +4,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        // COEP/COOP are needed ONLY for audio tools (ffmpeg/SharedArrayBuffer).
+        // They must NOT be applied to API routes or file-transfer.
+        source: "/:path((?!api|file-transfer|download).*)",
         headers: [
           {
             key: "Cross-Origin-Embedder-Policy",
@@ -17,9 +19,6 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,

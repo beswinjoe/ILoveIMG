@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { UploadCloud, Download, Image as ImageIcon, Lock, Unlock } from "lucide-react";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function ResizerClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -111,26 +112,24 @@ export default function ResizerClient() {
         </div>
       ) : (
         <div className="card max-w-4xl mx-auto mt-8">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+          <ImagePreview 
+            originalSrc={previewUrl!} 
+            resultSrc={resizedUrl} 
+            originalLabel="Original Image"
+            resultLabel="Resized Preview"
+          />
+          
+          <div className="flex justify-center gap-8 mt-6 text-center">
             <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} /> Original</h3>
-              {previewUrl && <img src={previewUrl} alt="Original" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain", backgroundColor: "var(--background)" }} />}
-              <p className="mt-2 font-medium text-muted">{originalWidth} × {originalHeight} px</p>
+              <p className="text-muted text-sm uppercase tracking-wider mb-1">Original Size</p>
+              <p className="font-medium text-lg text-muted">{originalWidth} × {originalHeight} px</p>
             </div>
-            
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} className="text-primary" /> Preview</h3>
-              {resizedUrl ? (
-                <>
-                  <img src={resizedUrl} alt="Resized" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain", backgroundColor: "var(--background)" }} />
-                  <p className="mt-2 font-medium text-primary">{width} × {height} px</p>
-                </>
-              ) : (
-                <div style={{ height: "300px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--background)", borderRadius: "var(--radius-sm)", border: "1px dashed var(--border)" }}>
-                  <p className="text-muted">Click Resize to preview</p>
-                </div>
-              )}
-            </div>
+            {resizedUrl && (
+              <div>
+                <p className="text-primary text-sm uppercase tracking-wider mb-1">Resized Size</p>
+                <p className="font-medium text-lg text-primary">{width} × {height} px</p>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 pt-6 flex flex-col gap-6" style={{ borderTop: "1px solid var(--border)" }}>

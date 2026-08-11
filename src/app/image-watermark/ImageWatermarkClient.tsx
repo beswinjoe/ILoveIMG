@@ -3,9 +3,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { UploadCloud, Download, CheckCircle2, ImageDown, Stamp, Loader2 } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function ImageWatermarkClient() {
   const [file, setFile] = useState<File | null>(null);
+  const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState<string>("output");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -17,8 +19,9 @@ export default function ImageWatermarkClient() {
   useEffect(() => {
     return () => {
       if (outputUrl) URL.revokeObjectURL(outputUrl);
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
     };
-  }, [outputUrl]);
+  }, [outputUrl, originalUrl]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -35,6 +38,7 @@ export default function ImageWatermarkClient() {
 
   const handleFile = (selectedFile: File) => {
     setFile(selectedFile);
+    setOriginalUrl(URL.createObjectURL(selectedFile));
     setOutputUrl(null);
   };
 
@@ -119,6 +123,9 @@ export default function ImageWatermarkClient() {
               <div className="glass-card text-center">
                 <h3 className="mb-6 truncate" title={file.name}>{file.name}</h3>
                 
+                <div className="mb-6 w-full max-w-2xl mx-auto">
+                  <ImagePreview originalSrc={originalUrl!} />
+                </div>
                 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Watermark Text</label>
@@ -153,6 +160,10 @@ export default function ImageWatermarkClient() {
           <div className="glass-card text-center py-12 flex flex-col items-center">
             <CheckCircle2 size={64} className="text-success mb-6" />
             <h2 className="mb-4">Processing Successful!</h2>
+            
+            <div className="mb-8 w-full max-w-2xl mx-auto">
+              <ImagePreview originalSrc={originalUrl!} resultSrc={outputUrl} />
+            </div>
             
             <div className="flex gap-4 mt-8">
               <button className="btn btn-secondary" onClick={() => { setFile(null); setOutputUrl(null); }}>

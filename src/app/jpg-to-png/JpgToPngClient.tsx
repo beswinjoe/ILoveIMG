@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { UploadCloud, Download, Image as ImageIcon } from "lucide-react";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function JpgToPngClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -78,8 +79,13 @@ export default function JpgToPngClient() {
       ) : (
         <div className="card max-w-3xl mx-auto mt-8">
           <div className="flex flex-col items-center gap-6">
-            <h3 className="flex items-center gap-2"><ImageIcon size={20} /> Original JPG</h3>
-            {previewUrl && <img src={previewUrl} alt="Original" style={{ width: "100%", maxWidth: "400px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--background)" }} />}
+            <ImagePreview 
+              originalSrc={previewUrl!} 
+              resultSrc={convertedUrl} 
+              originalLabel="Original JPG"
+              resultLabel="Converted PNG"
+              transparent={true}
+            />
             
             <div className="flex gap-4 justify-center mt-4 w-full" style={{ borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
               <button className="btn btn-secondary" onClick={() => { setFile(null); setConvertedUrl(null); }}>

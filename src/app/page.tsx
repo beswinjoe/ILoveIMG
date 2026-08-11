@@ -7,8 +7,9 @@ import {
   Music,
   Wrench,
   ShieldCheck,
-  Zap,
   ArrowRight,
+  Archive,
+  Send
 } from 'lucide-react';
 import { toolsData } from '@/lib/tools';
 
@@ -134,33 +135,37 @@ export default function Home() {
         POPULAR TOOLS
         ======================================== 
       */}
-      <section id="popular" className="container py-12">
+      <section className="container py-12" id="popular">
         <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '0.25rem' }}>Popular Tools</h2>
-          <p className="text-muted">The essential utilities you need every day.</p>
+          <h2 style={{ fontSize: '2rem', marginBottom: '0.25rem', fontWeight: 800 }}>Popular Tools</h2>
+          <p className="text-muted" style={{ fontSize: '1rem' }}>The essential utilities you need every day.</p>
         </div>
 
-        <div className="category-grid">
-          {["/image-compressor", "/image-resizer", "/jpg-to-png", "/pdf-merge", "/pdf-compress", "/wav-to-mp3"].map((route) => {
-            const tool = toolsData.find(t => t.href === route);
-            if (!tool) return null;
-            return (
-              <Link key={tool.href} href={tool.href} className="glass-card tool-card">
-                <div className="icon-container" style={{ color: tool.category === 'PDF Tools' ? 'var(--danger)' : tool.category === 'Audio Tools' ? 'var(--success)' : 'var(--primary)' }}>
-                  {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 20 })}
-                </div>
-                <h3 style={{ fontSize: '1.125rem', margin: 0 }}>{tool.name}</h3>
-                <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>{tool.description}</p>
-                <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Open Tool <ArrowRight size={14} /></div>
-              </Link>
-            );
-          })}
+        <div className="category-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+          {toolsData
+            .filter(t => ['Image Compressor', 'Image Resizer', 'JPG to PNG', 'Merge PDF', 'Compress PDF', 'WAV to MP3'].includes(t.name))
+            .map((tool) => (
+            <Link prefetch={false} key={tool.href} href={tool.href} className="glass-card tool-card" style={{ height: '100%' }}>
+              <div className="icon-container" style={{ 
+                color: tool.category === 'PDF Tools' ? 'var(--danger)' : 
+                       tool.category === 'Audio Tools' ? 'var(--success)' : 
+                       'var(--primary)' 
+              }}>
+                {React.cloneElement(tool.icon as React.ReactElement<{ size?: number; style?: React.CSSProperties }>, { size: 24 })}
+              </div>
+              <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0' }}>{tool.name}</h3>
+              <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>{tool.description}</p>
+              <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+                Open Tool <ArrowRight size={14} />
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* 
         ========================================
-        ADVERTISEMENT 1
+        ADVERTISEMENT
         ======================================== 
       */}
       <div className="container py-8">
@@ -169,40 +174,100 @@ export default function Home() {
 
       {/* 
         ========================================
-        CATEGORIES
+        ALL CATEGORIES
         ======================================== 
       */}
       <section className="container py-12">
         <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '0.25rem' }}>All Categories</h2>
-          <p className="text-muted">Tools organized by file type.</p>
+          <h2 style={{ fontSize: '2rem', marginBottom: '0.25rem', fontWeight: 800 }}>All Categories</h2>
+          <p className="text-muted" style={{ fontSize: '1rem' }}>Tools organized by file type.</p>
         </div>
-        
-        <div className="category-grid">
-          <Link href="/image-tools" className="glass-card tool-card">
-            <div className="icon-container"><FileImage size={24} style={{ color: 'var(--primary)' }} /></div>
-            <h3 style={{ fontSize: '1.25rem', margin: 0 }}>Image Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Compress, resize, crop, and convert.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto' }}>View Image Tools <ArrowRight size={14} /></div>
+
+        <div className="category-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+          {/* Image Tools */}
+          <Link prefetch={false} href="/image-tools" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--primary)' }}>
+              <FileImage size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Image Tools</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Compress, resize, crop, and convert.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Image Tools <ArrowRight size={14} />
+            </div>
           </Link>
-          <Link href="/pdf-tools" className="glass-card tool-card">
-            <div className="icon-container"><FileText size={24} style={{ color: 'var(--danger)' }} /></div>
-            <h3 style={{ fontSize: '1.25rem', margin: 0 }}>PDF Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Merge, split, rotate, and extract.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto' }}>View PDF Tools <ArrowRight size={14} /></div>
+
+          {/* PDF Tools */}
+          <Link prefetch={false} href="/pdf-tools" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--danger)' }}>
+              <FileText size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>PDF Tools</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Merge, split, rotate, and extract.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View PDF Tools <ArrowRight size={14} />
+            </div>
           </Link>
-          <Link href="/audio-tools" className="glass-card tool-card">
-            <div className="icon-container"><Music size={24} style={{ color: 'var(--success)' }} /></div>
-            <h3 style={{ fontSize: '1.25rem', margin: 0 }}>Audio Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>Convert, cut, and adjust volume.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto' }}>View Audio Tools <ArrowRight size={14} /></div>
+
+          {/* Audio Tools */}
+          <Link prefetch={false} href="/audio-tools" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--success)' }}>
+              <Music size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Audio Tools</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Convert, cut, and adjust volume.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Audio Tools <ArrowRight size={14} />
+            </div>
           </Link>
-          <Link href="/tools" className="glass-card tool-card">
-            <div className="icon-container"><Wrench size={24} style={{ color: 'var(--secondary)' }} /></div>
-            <h3 style={{ fontSize: '1.25rem', margin: 0 }}>Other Utilities</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0 }}>QR codes, passwords, JSON formatting.</p>
-            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto' }}>View Utilities <ArrowRight size={14} /></div>
+
+          {/* Documents */}
+          <Link prefetch={false} href="/documents" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--secondary)' }}>
+              <FileText size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Documents</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Word, Excel, CSV, and Markdown converters.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Documents <ArrowRight size={14} />
+            </div>
           </Link>
+
+          {/* Other Utilities */}
+          <Link prefetch={false} href="/tools" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--primary)' }}>
+              <Wrench size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Other Utilities</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>QR codes, passwords, JSON formatting.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Utilities <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          {/* Archive */}
+          <Link prefetch={false} href="/archive" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--primary)' }}>
+              <Archive size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Archive Tools</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Create and extract ZIP & RAR files.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Archive Tools <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          {/* File Transfer */}
+          <Link prefetch={false} href="/file-transfer" className="glass-card tool-card" style={{ height: '100%' }}>
+            <div className="icon-container" style={{ color: 'var(--success)' }}>
+              <Send size={24} />
+            </div>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>File Transfer</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Send large files with secure links.</p>
+            <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
+              View Transfer <ArrowRight size={14} />
+            </div>
+          </Link>
+
         </div>
       </section>
 

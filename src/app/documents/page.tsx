@@ -50,7 +50,7 @@ export default function DocumentToolsPage() {
 
       <div className="category-grid sm:grid-cols-2 lg:grid-cols-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', marginBottom: '4rem' }}>
         {tools.map((tool, idx) => (
-          <Link href={tool.href} key={idx} className="glass-card flex flex-col gap-3" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
+          <Link prefetch={false} href={tool.href} key={idx} className="glass-card flex flex-col gap-3" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
             <div className="flex items-center gap-3 mb-1">
               <div style={{ 
                 padding: '0.5rem', borderRadius: '12px', 

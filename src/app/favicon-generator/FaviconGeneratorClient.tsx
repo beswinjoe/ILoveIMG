@@ -3,9 +3,11 @@
 import React, { useState, useRef } from "react";
 import { UploadCloud, Download, CheckCircle2, Image as ImageIcon, Box } from "lucide-react";
 import ToolLayout from "@/components/ToolLayout";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function FaviconGeneratorClient() {
   const [file, setFile] = useState<File | null>(null);
+  const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   
@@ -29,6 +31,7 @@ export default function FaviconGeneratorClient() {
   const handleFile = (selectedFile: File) => {
     if (selectedFile.type.startsWith("image/")) {
       setFile(selectedFile);
+      setOriginalUrl(URL.createObjectURL(selectedFile));
       setOutputUrl(null);
     } else {
       alert("Please upload a valid image file.");
@@ -113,8 +116,8 @@ export default function FaviconGeneratorClient() {
               <div className="glass-card text-center">
                 <h3 className="mb-4 truncate" title={file.name}>{file.name}</h3>
                 
-                <div className="mb-6 flex justify-center bg-black/10 rounded-lg p-2 max-h-64 overflow-hidden">
-                  <img src={URL.createObjectURL(file)} alt="Preview" className="max-h-full object-contain" />
+                <div className="mb-6 w-full max-w-2xl mx-auto">
+                  <ImagePreview originalSrc={originalUrl!} transparent={true} />
                 </div>
 
                 
@@ -143,8 +146,8 @@ export default function FaviconGeneratorClient() {
             <CheckCircle2 size={64} className="text-success mb-6" />
             <h2 className="mb-4">Favicon Ready!</h2>
             
-            <div className="mb-6 flex justify-center bg-black/10 rounded-lg p-8">
-               <img src={outputUrl} alt="Output Preview" className="w-8 h-8 object-contain shadow-sm bg-white" />
+            <div className="mb-8 w-full max-w-2xl mx-auto">
+               <ImagePreview originalSrc={originalUrl!} resultSrc={outputUrl} transparent={true} />
             </div>
 
             <div className="flex gap-4">

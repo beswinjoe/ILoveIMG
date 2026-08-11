@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import imageCompression from "browser-image-compression";
 import { UploadCloud, Download, Image as ImageIcon } from "lucide-react";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function CompressorClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -93,26 +94,27 @@ export default function CompressorClient() {
         </div>
       ) : (
         <div className="card max-w-4xl mx-auto mt-8">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+          <ImagePreview 
+            originalSrc={previewUrl!} 
+            resultSrc={compressedUrl} 
+            originalLabel="Original Image"
+            resultLabel="Compressed Image"
+          />
+          
+          <div className="flex justify-center gap-8 mt-6 text-center">
             <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} /> Original Image</h3>
-              {previewUrl && <img src={previewUrl} alt="Original" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain", backgroundColor: "var(--background)" }} />}
-              <p className="mt-2 font-medium">Size: {formatBytes(file.size)}</p>
+              <p className="text-muted text-sm uppercase tracking-wider mb-1">Original Size</p>
+              <p className="font-medium text-lg">{formatBytes(file.size)}</p>
             </div>
-            
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} className="text-success" /> Compressed Image</h3>
-              {compressedUrl ? (
-                <>
-                  <img src={compressedUrl} alt="Compressed" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain", backgroundColor: "var(--background)" }} />
-                  <p className="mt-2 font-medium text-success">Size: {formatBytes(compressedFile!.size)} ({(100 - (compressedFile!.size / file.size) * 100).toFixed(1)}% reduction)</p>
-                </>
-              ) : (
-                <div style={{ height: "300px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--background)", borderRadius: "var(--radius-sm)", border: "1px dashed var(--border)" }}>
-                  <p className="text-muted">Ready to compress</p>
-                </div>
-              )}
-            </div>
+            {compressedUrl && compressedFile && (
+              <div>
+                <p className="text-success text-sm uppercase tracking-wider mb-1">Compressed Size</p>
+                <p className="font-medium text-lg text-success">
+                  {formatBytes(compressedFile.size)} 
+                  <span className="ml-2 text-sm">(-{(100 - (compressedFile.size / file.size) * 100).toFixed(1)}%)</span>
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--border)" }}>

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { UploadCloud, Download, Image as ImageIcon } from "lucide-react";
+import ImagePreview from "@/components/ImagePreview";
 
 export default function PngToJpgClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -84,23 +85,13 @@ export default function PngToJpgClient() {
         </div>
       ) : (
         <div className="card max-w-4xl mx-auto mt-8">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} /> Original PNG</h3>
-              {previewUrl && <img src={previewUrl} alt="Original" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain", backgroundImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\"><rect width=\"10\" height=\"10\" fill=\"%23ddd\"/><rect x=\"10\" width=\"10\" height=\"10\" fill=\"%23eee\"/><rect y=\"10\" width=\"10\" height=\"10\" fill=\"%23eee\"/><rect x=\"10\" y=\"10\" width=\"10\" height=\"10\" fill=\"%23ddd\"/></svg>')" }} />}
-            </div>
-            
-            <div>
-              <h3 className="mb-4 flex items-center gap-2"><ImageIcon size={20} className="text-primary" /> Converted JPG</h3>
-              {convertedUrl ? (
-                <img src={convertedUrl} alt="Converted" style={{ width: "100%", borderRadius: "var(--radius-sm)", maxHeight: "300px", objectFit: "contain" }} />
-              ) : (
-                <div style={{ height: "300px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--background)", borderRadius: "var(--radius-sm)", border: "1px dashed var(--border)" }}>
-                  <p className="text-muted">Preview will appear here</p>
-                </div>
-              )}
-            </div>
-          </div>
+          <ImagePreview 
+            originalSrc={previewUrl!} 
+            resultSrc={convertedUrl} 
+            originalLabel="Original PNG"
+            resultLabel="Converted JPG"
+            transparent={true}
+          />
 
           <div className="mt-8 pt-6 flex flex-col gap-6" style={{ borderTop: "1px solid var(--border)" }}>
             <div className="flex gap-8 justify-center flex-wrap max-w-xl mx-auto">

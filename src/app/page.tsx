@@ -14,36 +14,67 @@ import {
 import { toolsData } from '@/lib/tools';
 
 export const metadata: Metadata = {
-  title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
-  description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio. Fast, private and easy to use with no signup.",
+  title: "Free Online File Tools \u2013 Image, PDF, Audio & More | Filoza",
+  description: "70+ free online tools to compress, convert, resize, and edit images, PDFs, documents, and audio. Fast, private, and works in your browser with no signup.",
+  alternates: {
+    canonical: "https://filoza.vercel.app",
+  },
   openGraph: {
-    title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
-    description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio.",
+    title: "Free Online File Tools \u2013 Image, PDF, Audio & More | Filoza",
+    description: "70+ free online tools to compress, convert, resize, and edit images, PDFs, documents, and audio. Fast, private, and works in your browser.",
     url: "https://filoza.vercel.app/",
     type: "website",
     siteName: "Filoza",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
-    description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio.",
+    title: "Free Online File Tools \u2013 Image, PDF, Audio & More | Filoza",
+    description: "70+ free online tools to compress, convert, resize, and edit images, PDFs, documents, and audio. Fast, private, and works in your browser.",
   }
 };
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Filoza",
-    "url": "https://filoza.vercel.app/"
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Filoza",
+      "url": "https://filoza.vercel.app/",
+      "description": "70+ free online tools for images, PDFs, documents, audio, and more.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://filoza.vercel.app/tools?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Filoza",
+      "url": "https://filoza.vercel.app/",
+      "description": "Free online file tools for images, PDFs, documents, audio, and archives.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ];
 
   return (
     <div style={{ overflowX: 'hidden' }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLd.map((schema, idx) => (
+        <script
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       {/* 
         ========================================
         HERO SECTION
@@ -116,7 +147,7 @@ export default function Home() {
           </h1>
           
           <p style={{ margin: '0 auto 2.5rem', maxWidth: '600px', fontSize: '1.125rem', color: 'var(--muted)', lineHeight: 1.6 }}>
-            Images, PDFs, documents, audio and more. Fast, private and works right in your browser.
+            70+ tools for images, PDFs, documents, audio, and archives. Fast, private, and works right in your browser.
           </p>
           
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
@@ -190,7 +221,7 @@ export default function Home() {
               <FileImage size={24} />
             </div>
             <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Image Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Compress, resize, crop, and convert.</p>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Compress, resize, crop, convert, and edit JPG, PNG, and WebP images.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View Image Tools <ArrowRight size={14} />
             </div>
@@ -202,7 +233,7 @@ export default function Home() {
               <FileText size={24} />
             </div>
             <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>PDF Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Merge, split, rotate, and extract.</p>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Merge, split, compress, rotate, and convert PDF files.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View PDF Tools <ArrowRight size={14} />
             </div>
@@ -214,7 +245,7 @@ export default function Home() {
               <Music size={24} />
             </div>
             <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Audio Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Convert, cut, and adjust volume.</p>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Convert, compress, trim, and adjust MP3, WAV, and OGG audio files.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View Audio Tools <ArrowRight size={14} />
             </div>
@@ -225,10 +256,10 @@ export default function Home() {
             <div className="icon-container" style={{ color: 'var(--secondary)' }}>
               <FileText size={24} />
             </div>
-            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Documents</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Word, Excel, CSV, and Markdown converters.</p>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Document Tools</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Convert between Word, PDF, Excel, CSV, Markdown, and HTML formats.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
-              View Documents <ArrowRight size={14} />
+              View Document Tools <ArrowRight size={14} />
             </div>
           </Link>
 
@@ -237,8 +268,8 @@ export default function Home() {
             <div className="icon-container" style={{ color: 'var(--primary)' }}>
               <Wrench size={24} />
             </div>
-            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Other Utilities</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>QR codes, passwords, JSON formatting.</p>
+            <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Utilities</h3>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>QR code generator, password generator, JSON formatter, and more.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View Utilities <ArrowRight size={14} />
             </div>
@@ -250,7 +281,7 @@ export default function Home() {
               <Archive size={24} />
             </div>
             <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>Archive Tools</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Create and extract ZIP & RAR files.</p>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Create and extract ZIP and RAR archive files.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View Archive Tools <ArrowRight size={14} />
             </div>
@@ -262,12 +293,28 @@ export default function Home() {
               <Send size={24} />
             </div>
             <h3 style={{ fontSize: '1.125rem', margin: '0.5rem 0 0 0', fontWeight: 700 }}>File Transfer</h3>
-            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Send large files with secure links.</p>
+            <p className="text-muted text-sm" style={{ flexGrow: 1, margin: 0, lineHeight: 1.5 }}>Send large files with encrypted, self-destructing download links.</p>
             <div style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: 'auto', paddingTop: '1rem' }}>
               View Transfer <ArrowRight size={14} />
             </div>
           </Link>
 
+        </div>
+      </section>
+
+      {/* 
+        ========================================
+        WHAT IS FILOZA
+        ======================================== 
+      */}
+      <section className="container py-12">
+        <div className="glass-card max-w-4xl mx-auto p-8" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontWeight: 800 }}>What is Filoza?</h2>
+          <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '700px', margin: '0 auto' }}>
+            Filoza is a collection of 70+ free online file tools. Compress images, merge PDFs, convert documents, 
+            extract archives, trim audio, and transfer files — all from your browser. Most tools process files 
+            locally on your device, so your data stays private.
+          </p>
         </div>
       </section>
 

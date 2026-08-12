@@ -2,21 +2,21 @@ import { Metadata } from "next";
 import RarExtractorClient from "./RarExtractorClient";
 
 export const metadata: Metadata = {
-  title: "RAR Extractor Online – Extract RAR Files Free | Filoza",
-  description: "Extract and view contents of RAR archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+  title: "RAR Extractor - Extract RAR Files Online | Filoza",
+  description: "Extract files from RAR archives online. Browse and download contents without installing software. Processed locally in your browser.",
   alternates: {
     canonical: "https://filoza.vercel.app/rar-extractor"
   },
   openGraph: {
-    title: "RAR Extractor Online – Extract RAR Files Free | Filoza",
-    description: "Extract and view contents of RAR archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+    title: "RAR Extractor - Extract RAR Files Online | Filoza",
+    description: "Extract files from RAR archives online. Browse and download contents without installing software. Processed locally in your browser.",
     url: "https://filoza.vercel.app/rar-extractor",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RAR Extractor Online – Extract RAR Files Free | Filoza",
-    description: "Extract and view contents of RAR archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+    title: "RAR Extractor - Extract RAR Files Online | Filoza",
+    description: "Extract files from RAR archives online. Browse and download contents without installing software. Processed locally in your browser.",
   }
 };
 

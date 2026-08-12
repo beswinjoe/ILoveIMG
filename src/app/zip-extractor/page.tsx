@@ -2,21 +2,21 @@ import { Metadata } from "next";
 import ZipExtractorClient from "./ZipExtractorClient";
 
 export const metadata: Metadata = {
-  title: "ZIP Extractor Online – Extract ZIP Files Free | Filoza",
-  description: "Extract and view contents of ZIP archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+  title: "ZIP Extractor - Extract ZIP Files Online | Filoza",
+  description: "Extract and browse the contents of ZIP archives online. View files and download individually or all at once. Processed locally in your browser.",
   alternates: {
     canonical: "https://filoza.vercel.app/zip-extractor"
   },
   openGraph: {
-    title: "ZIP Extractor Online – Extract ZIP Files Free | Filoza",
-    description: "Extract and view contents of ZIP archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+    title: "ZIP Extractor - Extract ZIP Files Online | Filoza",
+    description: "Extract and browse the contents of ZIP archives online. View files and download individually or all at once. Processed locally in your browser.",
     url: "https://filoza.vercel.app/zip-extractor",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZIP Extractor Online – Extract ZIP Files Free | Filoza",
-    description: "Extract and view contents of ZIP archives directly in your browser. 100% private, secure, and fast with no file uploads.",
+    title: "ZIP Extractor - Extract ZIP Files Online | Filoza",
+    description: "Extract and browse the contents of ZIP archives online. View files and download individually or all at once. Processed locally in your browser.",
   }
 };
 

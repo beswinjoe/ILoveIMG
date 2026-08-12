@@ -11,13 +11,15 @@ interface ToolLayoutProps {
   supportedFormats?: string;
   faq?: { question: string; answer: string }[];
   relatedTools?: { name: string; href: string; icon: React.ReactNode }[];
+  /** Controls the privacy section text. Defaults to 'local'. */
+  privacyMode?: 'local' | 'upload';
 }
 
-export default function ToolLayout({ title, description, breadcrumbs, children, howItWorks, supportedFormats, faq, relatedTools }: ToolLayoutProps) {
+export default function ToolLayout({ title, description, breadcrumbs, children, howItWorks, supportedFormats, faq, relatedTools, privacyMode = 'local' }: ToolLayoutProps) {
   return (
     <div className="container py-8">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-sm text-muted mb-8 overflow-x-auto whitespace-nowrap">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted mb-8 overflow-x-auto whitespace-nowrap">
         <Link href="/" className="hover:text-primary transition-colors">Home</Link>
         {breadcrumbs.map((crumb, idx) => (
           <React.Fragment key={idx}>
@@ -25,6 +27,7 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
             <Link 
               href={crumb.href} 
               className={idx === breadcrumbs.length - 1 ? "text-foreground font-medium pointer-events-none" : "hover:text-primary transition-colors"}
+              aria-current={idx === breadcrumbs.length - 1 ? "page" : undefined}
             >
               {crumb.label}
             </Link>
@@ -66,13 +69,25 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
         </section>
       )}
 
-      {/* Privacy Guarantee */}
+      {/* Privacy / Security */}
       <div className="glass-card max-w-4xl mx-auto mb-16 text-center p-8">
-        <h3 className="mb-2" style={{ fontSize: "1.5rem" }}>Your files stay on your device</h3>
-        <p className="text-muted" style={{ fontSize: "1.125rem" }}>
-          We use advanced browser technologies to process your files locally. 
-          Your data is never uploaded to our servers, guaranteeing 100% privacy and lightning-fast speed.
-        </p>
+        {privacyMode === 'local' ? (
+          <>
+            <h3 className="mb-2" style={{ fontSize: "1.5rem" }}>Processed in your browser</h3>
+            <p className="text-muted" style={{ fontSize: "1.125rem" }}>
+              This tool uses browser technologies to process your files locally on your device. 
+              Your files are not uploaded to any server.
+            </p>
+          </>
+        ) : (
+          <>
+            <h3 className="mb-2" style={{ fontSize: "1.5rem" }}>Encrypted file transfer</h3>
+            <p className="text-muted" style={{ fontSize: "1.125rem" }}>
+              Files are encrypted in your browser before being uploaded to our secure storage. 
+              Download links are time-limited and automatically expire. You can also set a password for additional protection.
+            </p>
+          </>
+        )}
       </div>
 
       {/* FAQ */}

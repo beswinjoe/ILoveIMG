@@ -2,21 +2,21 @@ import { Metadata } from "next";
 import PngToJpgClient from "./PngToJpgClient";
 
 export const metadata: Metadata = {
-  title: "PNG to JPG Online – Free | Filoza",
-  description: "Convert PNG to optimized JPG. Reduce file size and process directly in your browser with Filoza's free tools.",
+  title: "PNG to JPG Converter - Convert PNG to JPEG Online | Filoza",
+  description: "Convert PNG images to JPG format online. Reduce file size while maintaining quality. Free and processed in your browser with no uploads.",
   alternates: {
     canonical: "https://filoza.vercel.app/png-to-jpg"
   },
   openGraph: {
-    title: "PNG to JPG Online – Free | Filoza",
-    description: "Convert PNG to optimized JPG. Reduce file size and process directly in your browser with Filoza's free tools.",
+    title: "PNG to JPG Converter - Convert PNG to JPEG Online | Filoza",
+    description: "Convert PNG images to JPG format online. Reduce file size while maintaining quality. Free and processed in your browser with no uploads.",
     url: "https://filoza.vercel.app/png-to-jpg",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PNG to JPG Online – Free | Filoza",
-    description: "Convert PNG to optimized JPG. Reduce file size and process directly in your browser with Filoza's free tools.",
+    title: "PNG to JPG Converter - Convert PNG to JPEG Online | Filoza",
+    description: "Convert PNG images to JPG format online. Reduce file size while maintaining quality. Free and processed in your browser with no uploads.",
   }
 };
 

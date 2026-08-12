@@ -17,31 +17,35 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-muted text-sm leading-relaxed mb-6">
-              All your files. One smart platform. Fast, private and easy-to-use tools for images, PDFs, audio and more — directly in your browser.
+              70+ free online tools for images, PDFs, documents, audio, and more — all in one place. Fast, private, and works right in your browser.
             </p>
           </div>
           
           <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <h4 className="font-semibold text-foreground mb-2">Tools</h4>
+            <h4 className="font-semibold text-foreground mb-2">Categories</h4>
             <Link href="/image-tools" className="text-muted hover:text-primary transition-colors text-sm">Image Tools</Link>
             <Link href="/pdf-tools" className="text-muted hover:text-primary transition-colors text-sm">PDF Tools</Link>
             <Link href="/documents" className="text-muted hover:text-primary transition-colors text-sm">Document Tools</Link>
             <Link href="/audio-tools" className="text-muted hover:text-primary transition-colors text-sm">Audio Tools</Link>
-            <Link href="/tools" className="text-muted hover:text-primary transition-colors text-sm">Other Utilities</Link>
+            <Link href="/archive" className="text-muted hover:text-primary transition-colors text-sm">Archive Tools</Link>
+            <Link href="/file-transfer" className="text-muted hover:text-primary transition-colors text-sm">File Transfer</Link>
+            <Link href="/tools" className="text-muted hover:text-primary transition-colors text-sm">Utilities</Link>
           </div>
           
           <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <h4 className="font-semibold text-foreground mb-2">Company</h4>
-              <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">About</Link>
-              <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Blog</Link>
-              <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">FAQ</Link>
-              <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Contact</Link>
-            </div>
+            <h4 className="font-semibold text-foreground mb-2">Popular Tools</h4>
+            <Link href="/image-compressor" className="text-muted hover:text-primary transition-colors text-sm">Image Compressor</Link>
+            <Link href="/image-converter" className="text-muted hover:text-primary transition-colors text-sm">Image Converter</Link>
+            <Link href="/pdf-merge" className="text-muted hover:text-primary transition-colors text-sm">Merge PDF</Link>
+            <Link href="/pdf-compress" className="text-muted hover:text-primary transition-colors text-sm">Compress PDF</Link>
+            <Link href="/word-to-pdf" className="text-muted hover:text-primary transition-colors text-sm">Word to PDF</Link>
+            <Link href="/zip-extractor" className="text-muted hover:text-primary transition-colors text-sm">ZIP Extractor</Link>
+            <Link href="/background-remover" className="text-muted hover:text-primary transition-colors text-sm">Background Remover</Link>
+          </div>
 
           <div className="footer-col" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <h4 className="font-semibold text-foreground mb-2">Legal</h4>
             <Link href="/privacy" className="text-muted hover:text-primary transition-colors text-sm">Privacy Policy</Link>
-            <Link href="/" className="text-muted hover:text-primary transition-colors text-sm">Terms of Service</Link>
           </div>
 
         </div>

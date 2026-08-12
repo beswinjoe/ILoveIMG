@@ -3,30 +3,38 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { ArrowRight, FileText } from "lucide-react";
 import { toolsData } from "@/lib/tools";
+import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-  description: "Merge, split, compress and manage PDF files directly in your browser.",
+  title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+  description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
+  alternates: {
+    canonical: "https://filoza.vercel.app/pdf-tools"
+  },
   openGraph: {
-    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-    description: "Merge, split, compress and manage PDF files directly in your browser.",
+    title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+    description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
     url: "https://filoza.vercel.app/pdf-tools",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF Tools – Merge, Compress & Convert PDFs | Filoza",
-    description: "Merge, split, compress and manage PDF files directly in your browser.",
+    title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+    description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
   }
 };
 
 export default function PdfToolsPage() {
   const tools = toolsData.filter(t => t.category === "PDF Tools");
+  const seo = categorySeo['pdf-tools'];
+  const jsonLd = generateCategoryJsonLd('pdf-tools', 'PDF Tools', tools.map(t => ({ name: t.name, href: t.href })));
 
   return (
     <div className="container" style={{ paddingBottom: '4rem' }}>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
       
-      {/* Category Hero */}
       <div style={{ paddingTop: '80px', paddingBottom: '40px', textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
         <div style={{ 
           display: 'inline-flex', alignItems: 'center', justifyItems: 'center', 
@@ -39,13 +47,12 @@ export default function PdfToolsPage() {
         </div>
         <h1 style={{ fontSize: "clamp(3rem, 5vw, 4rem)", marginBottom: "1rem", letterSpacing: '-0.02em', fontWeight: 800 }}>PDF Tools</h1>
         <p className="text-muted" style={{ fontSize: "1.125rem", lineHeight: 1.6 }}>
-          Merge, split, compress and manage PDF files directly in your browser.
+          Merge, split, compress, rotate, watermark, and convert PDF files — all processed locally in your browser.
         </p>
       </div>
 
-      {/* Tools Grid */}
       <div style={{ marginBottom: "2rem" }}>
-        <h2 style={{ fontSize: "1.75rem", marginBottom: "1.5rem" }}>Popular PDF Tools</h2>
+        <h2 style={{ fontSize: "1.75rem", marginBottom: "1.5rem" }}>All PDF Tools</h2>
       </div>
 
       <div className="category-grid sm:grid-cols-2 lg:grid-cols-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', marginBottom: '4rem' }}>
@@ -68,7 +75,20 @@ export default function PdfToolsPage() {
         ))}
       </div>
 
-      {/* Ad Container */}
+      {seo && (
+        <section style={{ marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Related Categories</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            {seo.relatedCategories.map((cat, idx) => (
+              <Link key={idx} href={cat.href} className="glass-card flex items-center gap-2" style={{ padding: '0.75rem 1.25rem', textDecoration: 'none', color: 'inherit' }}>
+                <span className="font-medium">{cat.label}</span>
+                <ArrowRight size={14} className="text-primary" />
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="ad-container" style={{ border: '1px dashed var(--border)', backgroundColor: 'var(--surface)', borderRadius: '16px', maxWidth: '800px', margin: '0 auto' }}>
         Advertisement Space
       </div>

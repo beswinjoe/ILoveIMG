@@ -7,9 +7,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://filoza.vercel.app'),
   title: {
     default: "Free Online File Tools – Image, PDF, Audio & More | Filoza",
-    template: "%s | Filoza",
+    template: "%s",
   },
-  description: "Free online tools to compress, convert, resize and edit images, PDFs, documents and audio. Fast, private and easy to use with no signup.",
+  description: "70+ free online tools to compress, convert, resize, and edit images, PDFs, documents, and audio. Fast, private, and works in your browser with no signup.",
+  alternates: {
+    canonical: 'https://filoza.vercel.app',
+  },
   openGraph: {
     type: 'website',
     siteName: 'Filoza',

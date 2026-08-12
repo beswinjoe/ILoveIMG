@@ -210,20 +210,23 @@ export default function FileTransferClient() {
       title="Large File Transfer"
       description="Send large files securely with password protection and self-destructing links."
       breadcrumbs={[{ label: "File Transfer", href: "/#file-transfer" }, { label: "Send Files", href: "/file-transfer" }]}
+      privacyMode="upload"
       howItWorks={[
         "Add one or more files to the upload box.",
         "Set an optional password and expiration date for your transfer.",
-        "Click Send. We securely upload your files directly to our private storage.",
+        "Click Send. Files are encrypted in your browser, then uploaded to our private storage.",
         "Share the generated link or QR code with your recipient."
       ]}
       faq={[
-        { question: "Are my files secure?", answer: "Yes. Files are transferred securely, stored in a private bucket, and automatically deleted after they expire." },
-        { question: "What is the size limit?", answer: "Maximum transfer size: 300 MB (total)." }
+        { question: "Are my files secure?", answer: "Yes. Files are encrypted in your browser before upload, stored in a private bucket, and automatically deleted after they expire." },
+        { question: "What is the size limit?", answer: "Maximum transfer size is 300 MB total across all files." },
+        { question: "Can I password-protect the transfer?", answer: "Yes. You can set an optional password that recipients must enter to download the files." }
       ]}
       relatedTools={[
         { name: "ZIP Creator", href: "/zip-creator", icon: <FileIcon /> },
       ]}
     >
+
       {!shareId ? (
         <div className="card max-w-3xl mx-auto p-6 glass-card">
           {uploadError && (

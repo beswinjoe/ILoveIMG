@@ -796,7 +796,7 @@ export const toolSeo: Record<string, ToolSeoData> = {
 /**
  * Generate JSON-LD structured data for a tool page.
  */
-export function generateToolJsonLd(slug: string, toolName: string) {
+export function generateToolJsonLd(slug: string, toolName: string, faq: { question: string; answer: string }[] = []) {
   const seo = toolSeo[slug];
   if (!seo) return [];
 
@@ -905,11 +905,11 @@ export function generateToolJsonLd(slug: string, toolName: string) {
   }
 
   // FAQPage schema (only if there are 2+ FAQs)
-  if (seo.faq.length >= 2) {
+  if (faq.length >= 2) {
     schemas.push({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      'mainEntity': seo.faq.map(f => ({
+      'mainEntity': faq.map(f => ({
         '@type': 'Question',
         'name': f.question,
         'acceptedAnswer': {

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import GrayscaleImageClient from './GrayscaleImageClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <GrayscaleImageClient />;
+export default function GrayscaleImagePage() {
+  const faq = [
+        { question: "Is my image uploaded?", answer: "No. Filoza processes your image entirely within your browser for 100% privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('grayscale-image', 'Grayscale Image', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <GrayscaleImageClient />
+    </>
+  );
 }

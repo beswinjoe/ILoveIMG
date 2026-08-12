@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import AudioConverterClient from "./AudioConverterClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function AudioConverterPage() {
-  return <AudioConverterClient />;
+  const faq = [
+        { question: "What formats are supported?", answer: "You can upload almost any audio file format and convert it into MP3, WAV, AAC, or OGG." },
+        { question: "Is my audio uploaded?", answer: "No. Filoza uses WebAssembly to run a real audio converter inside your browser. Your files never leave your device." }
+      ];
+  const jsonLd = generateToolJsonLd('audio-converter', 'Audio Converter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <AudioConverterClient />
+    </>
+  );
 }

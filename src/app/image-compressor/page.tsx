@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import CompressorClient from "./CompressorClient";
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function ImageCompressorPage() {
-  return <CompressorClient />;
+export default function CompressorPage() {
+  const faq = [];
+  const jsonLd = generateToolJsonLd('image-compressor', 'Image Compressor', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <CompressorClient />
+    </>
+  );
 }

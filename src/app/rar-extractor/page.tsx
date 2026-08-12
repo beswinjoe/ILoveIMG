@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import RarExtractorClient from "./RarExtractorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function RarExtractorPage() {
-  return <RarExtractorClient />;
+  const faq = [
+        { question: "Is my file uploaded to a server?", answer: "No. The entire extraction process happens securely within your browser using WebAssembly." },
+        { question: "Can I extract password-protected RARs?", answer: "Currently, this browser-based extractor does not support encrypted archives." }
+      ];
+  const jsonLd = generateToolJsonLd('rar-extractor', 'Extract RAR File', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <RarExtractorClient />
+    </>
+  );
 }

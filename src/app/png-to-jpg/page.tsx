@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PngToJpgClient from "./PngToJpgClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,15 @@ export const metadata: Metadata = {
 };
 
 export default function PngToJpgPage() {
-  return <PngToJpgClient />;
+  const faq = [];
+  const jsonLd = generateToolJsonLd('png-to-jpg', 'PNG to JPG', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PngToJpgClient />
+    </>
+  );
 }

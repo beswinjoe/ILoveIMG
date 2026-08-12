@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import FaviconGeneratorClient from './FaviconGeneratorClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,19 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <FaviconGeneratorClient />;
+export default function FaviconGeneratorPage() {
+  const faq = [
+        { question: "Is my image uploaded?", answer: "No. Filoza processes your image entirely within your browser for 100% privacy." },
+        { question: "What size is the favicon?", answer: "We generate a standard 32x32 pixel PNG file that you can use on any website." }
+      ];
+  const jsonLd = generateToolJsonLd('favicon-generator', 'Favicon Generator', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <FaviconGeneratorClient />
+    </>
+  );
 }

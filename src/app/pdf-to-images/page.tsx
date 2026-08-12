@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfToImagesClient from "./PdfToImagesClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PdfToImagesPage() {
-  return <PdfToImagesClient />;
+  const faq = [
+        { question: "Are my PDFs uploaded?", answer: "No. The entire conversion happens securely inside your browser using advanced WebAssembly technologies." },
+        { question: "How do I download the images?", answer: "Once processing is complete, all images will be automatically packaged into a single ZIP file for you to download." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-to-images', 'PDF to Images', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfToImagesClient />
+    </>
+  );
 }

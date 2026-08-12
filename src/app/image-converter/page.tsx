@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import ConverterClient from "./ConverterClient";
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function ImageConverterPage() {
-  return <ConverterClient />;
+export default function ConverterPage() {
+  const faq = [];
+  const jsonLd = generateToolJsonLd('image-converter', 'Image Converter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ConverterClient />
+    </>
+  );
 }

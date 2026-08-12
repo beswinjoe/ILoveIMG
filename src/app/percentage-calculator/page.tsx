@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PercentageCalculatorClient from "./PercentageCalculatorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PercentageCalculatorPage() {
-  return <PercentageCalculatorClient />;
+  const faq = [
+        { question: "Are my numbers saved?", answer: "No, this calculator runs entirely in your browser and your data is not stored or transmitted." },
+        { question: "Can it handle decimals and negatives?", answer: "Yes, you can input decimal numbers and negative values into any of the fields." }
+      ];
+  const jsonLd = generateToolJsonLd('percentage-calculator', 'Percentage Calculator', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PercentageCalculatorClient />
+    </>
+  );
 }

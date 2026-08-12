@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import WebpClient from "./WebpClient";
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function WebpConverterPage() {
-  return <WebpClient />;
+export default function WebpPage() {
+  const faq = [];
+  const jsonLd = generateToolJsonLd('webp-converter', 'WebP Converter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <WebpClient />
+    </>
+  );
 }

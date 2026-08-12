@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import QrGeneratorClient from "./QrGeneratorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function QrGeneratorPage() {
-  return <QrGeneratorClient />;
+  const faq = [
+        { question: "Do these QR codes expire?", answer: "No. The QR codes generated here are static, meaning they encode the information directly into the image pattern. They will never expire." },
+        { question: "Is my data sent to a server?", answer: "No. The QR codes are generated entirely within your browser for complete privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('qr-generator', 'QR Code Generator', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <QrGeneratorClient />
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import ExcelToPdfClient from './ExcelToPdfClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <ExcelToPdfClient />;
+export default function ExcelToPdfPage() {
+  const faq = [
+        { question: "Is my file uploaded anywhere?", answer: "No. Filoza processes your files entirely within your browser for 100% privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('excel-to-pdf', 'Excel to PDF', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ExcelToPdfClient />
+    </>
+  );
 }

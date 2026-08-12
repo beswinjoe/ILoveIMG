@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import JsonFormatterClient from "./JsonFormatterClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function JsonFormatterPage() {
-  return <JsonFormatterClient />;
+  const faq = [
+        { question: "Is my JSON data safe?", answer: "Yes! All processing happens securely in your web browser. We never send your data to any server." },
+        { question: "How does the validator work?", answer: "We parse your JSON strictly using the browser's native JSON parser. If there is a syntax error, we display the exact error message." }
+      ];
+  const jsonLd = generateToolJsonLd('json-formatter', 'JSON Formatter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <JsonFormatterClient />
+    </>
+  );
 }

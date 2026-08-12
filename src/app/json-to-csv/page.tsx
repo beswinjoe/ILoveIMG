@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import JsonToCsvClient from './JsonToCsvClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <JsonToCsvClient />;
+export default function JsonToCsvPage() {
+  const faq = [
+        { question: "Is my file uploaded anywhere?", answer: "No. Filoza processes your files entirely within your browser for 100% privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('json-to-csv', 'JSON to CSV', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <JsonToCsvClient />
+    </>
+  );
 }

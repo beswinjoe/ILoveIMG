@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfPageExtractClient from "./PdfPageExtractClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PdfPageExtractPage() {
-  return <PdfPageExtractClient />;
+  const faq = [
+        { question: "How do I specify which pages to extract?", answer: "Enter the page numbers separated by commas (e.g., '1, 4, 7') or use dashes for ranges (e.g., '1-3')." },
+        { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. Your PDFs never leave your device." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-page-extract', 'Extract PDF Pages', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfPageExtractClient />
+    </>
+  );
 }

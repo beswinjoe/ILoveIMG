@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import ColorPickerClient from "./ColorPickerClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function ColorPickerPage() {
-  return <ColorPickerClient />;
+  const faq = [
+        { question: "Is my image uploaded?", answer: "No. Filoza processes your images securely inside your browser. They never leave your device." },
+        { question: "How do I extract a color from an image?", answer: "Upload an image, then hover over it to see the color under your cursor. Click to select and save the color." }
+      ];
+  const jsonLd = generateToolJsonLd('color-picker', 'Color Picker', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ColorPickerClient />
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import UuidGeneratorClient from "./UuidGeneratorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function UuidGeneratorPage() {
-  return <UuidGeneratorClient />;
+  const faq = [
+        { question: "What is a UUID?", answer: "A Universally Unique Identifier (UUID) is a 128-bit number used to identify information in computer systems. The probability of generating a duplicate UUID is close enough to zero to be negligible." },
+        { question: "Are these UUIDs secure?", answer: "Yes. They are generated using your browser's crypto API which provides cryptographically strong random values." }
+      ];
+  const jsonLd = generateToolJsonLd('uuid-generator', 'UUID Generator', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <UuidGeneratorClient />
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import ZipExtractorClient from "./ZipExtractorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function ZipExtractorPage() {
-  return <ZipExtractorClient />;
+  const faq = [
+        { question: "Is my ZIP file uploaded to a server?", answer: "No. The entire extraction process happens securely within your browser using JavaScript." },
+        { question: "Can I extract password-protected ZIPs?", answer: "Currently, this browser-based extractor does not support AES encrypted ZIP files." }
+      ];
+  const jsonLd = generateToolJsonLd('zip-extractor', 'Extract ZIP File', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ZipExtractorClient />
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import ImageToPdfClient from "./ImageToPdfClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function ImageToPdfPage() {
-  return <ImageToPdfClient />;
+  const faq = [
+        { question: "Are my images uploaded anywhere?", answer: "No. The PDF generation happens entirely in your browser using local processing power." },
+        { question: "Can I upload multiple images?", answer: "Yes! You can select multiple images, and each image will become a new page in the final PDF." }
+      ];
+  const jsonLd = generateToolJsonLd('image-to-pdf', 'Image to PDF', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ImageToPdfClient />
+    </>
+  );
 }

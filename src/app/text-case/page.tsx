@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import TextCaseClient from "./TextCaseClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,17 @@ export const metadata: Metadata = {
 };
 
 export default function TextCasePage() {
-  return <TextCaseClient />;
+  const faq = [
+        { question: "Is my text saved?", answer: "No. The text you enter is processed entirely in your browser and is never sent to our servers." }
+      ];
+  const jsonLd = generateToolJsonLd('text-case', 'Text Case Converter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <TextCaseClient />
+    </>
+  );
 }

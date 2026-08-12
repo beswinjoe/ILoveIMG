@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import AudioCutterClient from "./AudioCutterClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function AudioCutterPage() {
-  return <AudioCutterClient />;
+  const faq = [
+        { question: "How do I format the time?", answer: "Use the HH:MM:SS format. For example, to start at 1 minute and 30 seconds, enter 00:01:30." },
+        { question: "Is my audio uploaded?", answer: "No. Filoza uses WebAssembly to run a real audio editor inside your browser. Your files never leave your device." }
+      ];
+  const jsonLd = generateToolJsonLd('audio-cutter', 'Trim Audio', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <AudioCutterClient />
+    </>
+  );
 }

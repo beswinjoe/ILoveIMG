@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import ZipCreatorClient from "./ZipCreatorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function ZipCreatorPage() {
-  return <ZipCreatorClient />;
+  const faq = [
+        { question: "Is it safe to zip my files here?", answer: "Yes! All zipping is done completely in your web browser. Your files never leave your device." },
+        { question: "Is there a file size limit?", answer: "The only limit is your device's memory. Extremely large files might cause your browser to crash, but typical usage is perfectly fine." }
+      ];
+  const jsonLd = generateToolJsonLd('zip-creator', 'Create ZIP File', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ZipCreatorClient />
+    </>
+  );
 }

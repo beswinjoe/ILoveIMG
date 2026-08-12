@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfPageNumbersClient from './PdfPageNumbersClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <PdfPageNumbersClient />;
+export default function PdfPageNumbersPage() {
+  const faq = [
+        { question: "Are my files uploaded anywhere?", answer: "No. Filoza processes your files entirely within your browser for 100% privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-page-numbers', 'Add PDF Page Numbers', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfPageNumbersClient />
+    </>
+  );
 }

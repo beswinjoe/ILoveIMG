@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import Mp3ToWavClient from "./Mp3ToWavClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,17 @@ export const metadata: Metadata = {
 };
 
 export default function Mp3ToWavPage() {
-  return <Mp3ToWavClient />;
+  const faq = [
+        { question: "Is my audio uploaded?", answer: "No. Filoza uses WebAssembly to run a real audio converter inside your browser. Your files never leave your device." }
+      ];
+  const jsonLd = generateToolJsonLd('mp3-to-wav', 'MP3 to WAV', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <Mp3ToWavClient />
+    </>
+  );
 }

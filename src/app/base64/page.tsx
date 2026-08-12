@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import Base64Client from "./Base64Client";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function Base64Page() {
-  return <Base64Client />;
+  const faq = [
+        { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. We never send your text to any server." },
+        { question: "Does it support UTF-8?", answer: "Yes, this tool correctly handles UTF-8 characters (like emojis and special accents) during encoding and decoding." }
+      ];
+  const jsonLd = generateToolJsonLd('base64', 'Base64 Encoder/Decoder', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <Base64Client />
+    </>
+  );
 }

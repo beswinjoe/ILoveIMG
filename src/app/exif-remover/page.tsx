@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { generateToolJsonLd } from "@/lib/seo";
 import ExifRemoverClient from './ExifRemoverClient';
 
 export const metadata: Metadata = {
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
-  return <ExifRemoverClient />;
+export default function ExifRemoverPage() {
+  const faq = [
+        { question: "Are my images uploaded anywhere?", answer: "No. Filoza strips the metadata entirely within your browser for 100% privacy." }
+      ];
+  const jsonLd = generateToolJsonLd('exif-remover', 'EXIF Remover', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <ExifRemoverClient />
+    </>
+  );
 }

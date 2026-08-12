@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfCompressClient from "./PdfCompressClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PdfCompressPage() {
-  return <PdfCompressClient />;
+  const faq = [
+        { question: "Why didn't my file size change much?", answer: "Filoza processes your PDFs entirely on your device for absolute privacy. Because we don't upload your files to a server, we can't run heavy image-downsampling algorithms. Our tool optimizes the internal structure of the PDF, which works great for some files, but won't compress large embedded images as aggressively as server-based tools." },
+        { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. Your PDFs never leave your device." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-compress', 'Compress PDF', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfCompressClient />
+    </>
+  );
 }

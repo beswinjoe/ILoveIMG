@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PasswordGeneratorClient from "./PasswordGeneratorClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PasswordGeneratorPage() {
-  return <PasswordGeneratorClient />;
+  const faq = [
+        { question: "Is this secure?", answer: "Yes. The passwords are generated locally on your device using your browser's crypto API. Nothing is sent over the internet." },
+        { question: "What makes a strong password?", answer: "A strong password is long (16+ characters) and includes a mix of uppercase, lowercase, numbers, and symbols to maximize entropy." }
+      ];
+  const jsonLd = generateToolJsonLd('password-generator', 'Password Generator', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PasswordGeneratorClient />
+    </>
+  );
 }

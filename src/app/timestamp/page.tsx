@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import TimestampClient from "./TimestampClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function TimestampPage() {
-  return <TimestampClient />;
+  const faq = [
+        { question: "What is a Unix timestamp?", answer: "A Unix timestamp is a way to track time as a running total of seconds. This count starts at the Unix Epoch on January 1st, 1970 at UTC." },
+        { question: "Does it support milliseconds?", answer: "Yes. If you input a large timestamp, it is automatically detected as milliseconds and converted appropriately." }
+      ];
+  const jsonLd = generateToolJsonLd('timestamp', 'Timestamp Converter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <TimestampClient />
+    </>
+  );
 }

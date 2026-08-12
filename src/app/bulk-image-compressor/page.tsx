@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import BulkCompressorClient from "./BulkCompressorClient";
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function BulkImageCompressorPage() {
-  return <BulkCompressorClient />;
+export default function BulkCompressorPage() {
+  const faq = [];
+  const jsonLd = generateToolJsonLd('bulk-image-compressor', 'Bulk Image Compressor', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <BulkCompressorClient />
+    </>
+  );
 }

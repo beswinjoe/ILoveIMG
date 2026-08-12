@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import WordCounterClient from "./WordCounterClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function WordCounterPage() {
-  return <WordCounterClient />;
+  const faq = [
+        { question: "Is my text saved?", answer: "No. The text you enter is processed entirely in your browser and is never sent to our servers." },
+        { question: "How is reading time calculated?", answer: "Reading time is based on an average reading speed of 200 words per minute." }
+      ];
+  const jsonLd = generateToolJsonLd('word-counter', 'Word Counter', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <WordCounterClient />
+    </>
+  );
 }

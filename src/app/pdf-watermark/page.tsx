@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfWatermarkClient from "./PdfWatermarkClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PdfWatermarkPage() {
-  return <PdfWatermarkClient />;
+  const faq = [
+        { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. Your PDFs never leave your device." },
+        { question: "Can I adjust the opacity?", answer: "Yes, you can adjust the opacity slider to make the watermark more or less transparent." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-watermark', 'Watermark PDF', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfWatermarkClient />
+    </>
+  );
 }

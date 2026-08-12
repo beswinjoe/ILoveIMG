@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import CropperClient from "./CropperClient";
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function ImageCropperPage() {
-  return <CropperClient />;
+export default function CropperPage() {
+  const faq = [];
+  const jsonLd = generateToolJsonLd('image-cropper', 'Image Cropper', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <CropperClient />
+    </>
+  );
 }

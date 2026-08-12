@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolJsonLd } from "@/lib/seo";
 import PdfMergeClient from "./PdfMergeClient";
 
 export const metadata: Metadata = {
@@ -21,5 +22,18 @@ export const metadata: Metadata = {
 };
 
 export default function PdfMergePage() {
-  return <PdfMergeClient />;
+  const faq = [
+        { question: "Is my data secure?", answer: "Yes! All processing happens securely in your web browser. Your PDFs never leave your device." },
+        { question: "Can I reorder the files?", answer: "Yes, once you upload files, you can use the Up/Down buttons to change the order they will appear in the final PDF." }
+      ];
+  const jsonLd = generateToolJsonLd('pdf-merge', 'Merge PDF', faq);
+
+  return (
+    <>
+      {jsonLd.map((schema, idx) => (
+        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
+      <PdfMergeClient />
+    </>
+  );
 }

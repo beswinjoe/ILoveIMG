@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function ResizerPage() {
-  const faq = [];
+  const faq: any[] = [];
   const jsonLd = generateToolJsonLd('image-resizer', 'Image Resizer', faq);
 
   return (

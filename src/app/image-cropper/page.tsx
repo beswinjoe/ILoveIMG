@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function CropperPage() {
-  const faq = [];
+  const faq: any[] = [];
   const jsonLd = generateToolJsonLd('image-cropper', 'Image Cropper', faq);
 
   return (

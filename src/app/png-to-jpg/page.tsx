@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function PngToJpgPage() {
-  const faq = [];
+  const faq: any[] = [];
   const jsonLd = generateToolJsonLd('png-to-jpg', 'PNG to JPG', faq);
 
   return (

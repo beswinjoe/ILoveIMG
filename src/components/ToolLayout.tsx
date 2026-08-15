@@ -97,7 +97,7 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
           <div className="flex flex-col gap-4">
             {faq.map((item, idx) => (
               <div key={idx} className="glass-card p-6" style={{ padding: "1.5rem" }}>
-                <h4 className="mb-2" style={{ fontSize: "1.125rem" }}>{item.question}</h4>
+                <h3 className="mb-2" style={{ fontSize: "1.125rem" }}>{item.question}</h3>
                 <p className="text-muted" style={{ fontSize: "1.125rem" }}>{item.answer}</p>
               </div>
             ))}

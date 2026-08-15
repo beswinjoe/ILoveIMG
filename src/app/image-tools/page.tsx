@@ -6,20 +6,20 @@ import { toolsData } from "@/lib/tools";
 import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Image Tools - Compress, Resize & Convert Images Online | Filoza",
+  title: "Image Tools - Compress, Resize & Convert Online | Filoza",
   description: "Free online image tools to compress, resize, crop, convert, and edit JPG, PNG, WebP, and SVG images. All processing happens in your browser.",
   alternates: {
     canonical: "https://filoza.vercel.app/image-tools"
   },
   openGraph: {
-    title: "Image Tools - Compress, Resize & Convert Images Online | Filoza",
+    title: "Image Tools - Compress, Resize & Convert Online | Filoza",
     description: "Free online image tools to compress, resize, crop, convert, and edit JPG, PNG, WebP, and SVG images. All processing happens in your browser.",
     url: "https://filoza.vercel.app/image-tools",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Tools - Compress, Resize & Convert Images Online | Filoza",
+    title: "Image Tools - Compress, Resize & Convert Online | Filoza",
     description: "Free online image tools to compress, resize, crop, convert, and edit JPG, PNG, WebP, and SVG images. All processing happens in your browser.",
   }
 };

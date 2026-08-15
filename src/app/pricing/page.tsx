@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Premium - Filoza",
-  description: "Upgrade to Filoza Premium for unlimited, faster, and ad-free access to all our tools.",
+  description: "Upgrade to Filoza Premium for unlimited, faster, and ad-free access to all our tools. Enjoy larger file limits and priority support today.",
+  alternates: { canonical: "https://filoza.vercel.app/pricing" }
 };
 
 export default function PricingPage() {

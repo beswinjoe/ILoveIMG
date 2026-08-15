@@ -1,7 +1,7 @@
+import ToolLayout from "@/components/ToolLayout";
 import { Metadata } from 'next';
 import { generateToolJsonLd } from "@/lib/seo";
 import RotateImageClient from './RotateImageClient';
-
 export const metadata: Metadata = {
   title: "Rotate Image Online - Rotate JPG, PNG & WebP | Filoza",
   description: "Rotate images 90°, 180°, or 270° online. Supports JPG, PNG, and WebP. Free tool that processes images locally in your browser.",
@@ -12,27 +12,40 @@ export const metadata: Metadata = {
     title: "Rotate Image Online - Rotate JPG, PNG & WebP | Filoza",
     description: "Rotate images 90°, 180°, or 270° online. Supports JPG, PNG, and WebP. Free tool that processes images locally in your browser.",
     url: "https://filoza.vercel.app/rotate-image",
-    type: "website",
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
     title: "Rotate Image Online - Rotate JPG, PNG & WebP | Filoza",
-    description: "Rotate images 90°, 180°, or 270° online. Supports JPG, PNG, and WebP. Free tool that processes images locally in your browser.",
+    description: "Rotate images 90°, 180°, or 270° online. Supports JPG, PNG, and WebP. Free tool that processes images locally in your browser."
   }
 };
-
 export default function RotateImagePage() {
-  const faq = [
-        { question: "Is my image uploaded?", answer: "No. Filoza processes your image entirely within your browser for 100% privacy." }
-      ];
+  const faq = [{
+    question: "Is my image uploaded?",
+    answer: "No. Filoza processes your image entirely within your browser for 100% privacy."
+  }];
   const jsonLd = generateToolJsonLd('rotate-image', 'Rotate Image', faq);
-
-  return (
-    <>
-      {jsonLd.map((schema, idx) => (
-        <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+  return <>
+      {jsonLd.map((schema, idx) => <script key={idx} type="application/ld+json" dangerouslySetInnerHTML={{
+      __html: JSON.stringify(schema)
+    }} />)}
+      <ToolLayout howItWorks={["Upload your image file.", "Select your preferred settings.", "Click the process button.", "Download your optimized image!"]}
+      supportedFormats="JPG, JPEG, PNG, WebP, SVG"
+      title="Rotate Image"
+      description="Rotate your images clockwise or counter-clockwise instantly in your browser."
+      breadcrumbs={[{
+  label: "Image Tools",
+  href: "/image-tools"
+}, {
+  label: "Rotate Image",
+  href: "/rotate-image"
+}]}
+      faq={[{
+  question: "Is my image uploaded?",
+  answer: "No. Filoza processes your image entirely within your browser for 100% privacy."
+}]}>
       <RotateImageClient />
-    </>
-  );
+    </ToolLayout>
+    </>;
 }

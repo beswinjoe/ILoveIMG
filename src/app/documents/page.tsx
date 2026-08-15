@@ -6,20 +6,20 @@ import { toolsData } from "@/lib/tools";
 import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Document Converter - Convert Word, Excel, CSV & More Online | Filoza",
+  title: "Document Converter - Word, Excel, CSV & More | Filoza",
   description: "Free online document conversion tools. Convert between Word, PDF, Excel, CSV, JSON, Markdown, and HTML formats directly in your browser.",
   alternates: {
     canonical: "https://filoza.vercel.app/documents"
   },
   openGraph: {
-    title: "Document Converter - Convert Word, Excel, CSV & More Online | Filoza",
+    title: "Document Converter - Word, Excel, CSV & More | Filoza",
     description: "Free online document conversion tools. Convert between Word, PDF, Excel, CSV, JSON, Markdown, and HTML formats directly in your browser.",
     url: "https://filoza.vercel.app/documents",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Document Converter - Convert Word, Excel, CSV & More Online | Filoza",
+    title: "Document Converter - Word, Excel, CSV & More | Filoza",
     description: "Free online document conversion tools. Convert between Word, PDF, Excel, CSV, JSON, Markdown, and HTML formats directly in your browser.",
   }
 };

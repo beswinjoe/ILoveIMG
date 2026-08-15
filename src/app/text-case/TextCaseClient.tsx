@@ -2,82 +2,51 @@
 
 import React, { useState } from "react";
 import { CaseSensitive, Copy, Trash2, CheckCircle2, Type } from "lucide-react";
-import ToolLayout from "@/components/ToolLayout";
-
 export default function TextCaseClient() {
   const [text, setText] = useState("");
   const [copied, setCopied] = useState(false);
-
   const toSentenceCase = () => {
-    const result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
+    const result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
     setText(result);
   };
-
   const toLowerCase = () => {
     setText(text.toLowerCase());
   };
-
   const toUpperCase = () => {
     setText(text.toUpperCase());
   };
-
   const toTitleCase = () => {
-    const result = text.toLowerCase().replace(/\b(\w)/g, (s) => s.toUpperCase());
+    const result = text.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
     setText(result);
   };
-
   const toCamelCase = () => {
     const result = text.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
       return index === 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '');
     setText(result);
   };
-  
   const toPascalCase = () => {
-    const result = text.replace(/\w\S*/g, (m) => m.charAt(0).toUpperCase() + m.substr(1).toLowerCase()).replace(/\s+/g, '');
+    const result = text.replace(/\w\S*/g, m => m.charAt(0).toUpperCase() + m.substr(1).toLowerCase()).replace(/\s+/g, '');
     setText(result);
   };
-
   const toSnakeCase = () => {
-    const result = text.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-      ?.map(x => x.toLowerCase())
-      .join('_') || '';
+    const result = text.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)?.map(x => x.toLowerCase()).join('_') || '';
     setText(result);
   };
-
   const toKebabCase = () => {
-    const result = text.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-      ?.map(x => x.toLowerCase())
-      .join('-') || '';
+    const result = text.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)?.map(x => x.toLowerCase()).join('-') || '';
     setText(result);
   };
-
   const copyToClipboard = () => {
     if (!text) return;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
   const clearText = () => {
     setText("");
   };
-
-  return (
-    <ToolLayout
-      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
-      supportedFormats="Various formats supported depending on the tool."
-      title="Text Case Converter"
-      description="Convert text between uppercase, lowercase, title case, camelCase, and more."
-      breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Text Case Converter", href: "/text-case" }]}
-      faq={[
-        { question: "Is my text saved?", answer: "No. The text you enter is processed entirely in your browser and is never sent to our servers." }
-      ]}
-      relatedTools={[
-        { name: "Word Counter", href: "/word-counter", icon: <CheckCircle2 /> },
-        { name: "Base64 Encoder", href: "/base64", icon: <CheckCircle2 /> }
-      ]}
-    >
+  return <>
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         
         {/* Actions */}
@@ -97,33 +66,19 @@ export default function TextCaseClient() {
           <div className="flex justify-between items-center p-4 bg-surface border-b border-border">
             <h3 className="flex items-center gap-2 m-0 text-sm font-medium"><Type size={16} /> Text Editor</h3>
             <div className="flex gap-2">
-              <button 
-                onClick={copyToClipboard}
-                className="btn btn-primary py-1 px-3 text-xs flex items-center gap-1"
-                disabled={!text}
-              >
+              <button onClick={copyToClipboard} className="btn btn-primary py-1 px-3 text-xs flex items-center gap-1" disabled={!text}>
                 {copied ? <CheckCircle2 size={14} /> : <Copy size={14} />} 
                 {copied ? "Copied!" : "Copy"}
               </button>
-              <button 
-                onClick={clearText}
-                className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1 hover:bg-danger/10 hover:text-danger hover:border-danger/30"
-                disabled={!text}
-              >
+              <button onClick={clearText} className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1 hover:bg-danger/10 hover:text-danger hover:border-danger/30" disabled={!text}>
                 <Trash2 size={14} /> Clear
               </button>
             </div>
           </div>
           
-          <textarea
-            className="w-full h-full min-h-[400px] p-6 bg-background resize-none focus:outline-none focus:ring-0 border-none text-base"
-            placeholder="Type or paste your text here..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          ></textarea>
+          <textarea className="w-full h-full min-h-[400px] p-6 bg-background resize-none focus:outline-none focus:ring-0 border-none text-base" placeholder="Type or paste your text here..." value={text} onChange={e => setText(e.target.value)}></textarea>
         </div>
 
       </div>
-    </ToolLayout>
-  );
+    </>;
 }

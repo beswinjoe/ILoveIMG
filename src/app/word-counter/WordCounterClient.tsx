@@ -2,8 +2,6 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import { Type, Copy, Trash2, CheckCircle2, AlignLeft, BarChart2 } from "lucide-react";
-import ToolLayout from "@/components/ToolLayout";
-
 export default function WordCounterClient() {
   const [text, setText] = useState("");
   const [stats, setStats] = useState({
@@ -12,37 +10,33 @@ export default function WordCounterClient() {
     charactersNoSpaces: 0,
     sentences: 0,
     paragraphs: 0,
-    readingTime: 0,
+    readingTime: 0
   });
   const [copied, setCopied] = useState(false);
-
-  
-
   const calculateStats = useCallback((str: string) => {
     const trimmed = str.trim();
-    
+
     // Words
     const wordsMatch = trimmed.match(/\b[-?(\w+)?]+\b/gi);
     const words = wordsMatch ? wordsMatch.length : 0;
-    
+
     // Characters
     const characters = str.length;
-    
+
     // Characters (No Spaces)
     const charactersNoSpaces = str.replace(/\s+/g, '').length;
-    
+
     // Sentences
     const sentencesMatch = trimmed.match(/[^.!?\s][^.!?]*(?:[.!?](?!['"]?\s|$)[^.!?]*)*[.!?]?['"]?(?=\s|$)/g);
     const sentences = sentencesMatch ? sentencesMatch.length : 0;
-    
+
     // Paragraphs
     const paragraphsMatch = trimmed.split(/\n+/).filter(p => p.trim().length > 0);
     const paragraphs = paragraphsMatch.length;
-    
+
     // Reading Time (Avg 200 words per minute)
     const readingTimeMinutes = words / 200;
     const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
-
     setStats({
       words,
       characters,
@@ -52,45 +46,25 @@ export default function WordCounterClient() {
       readingTime: readingTimeSeconds
     });
   }, []);
-
   useEffect(() => {
     calculateStats(text);
   }, [text, calculateStats]);
-
   const copyToClipboard = () => {
     if (!text) return;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
   const clearText = () => {
     setText("");
   };
-
   const formatReadingTime = (seconds: number) => {
     if (seconds < 60) return `${seconds} sec`;
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes} min ${remainingSeconds} sec`;
   };
-
-  return (
-    <ToolLayout
-      howItWorks={["Upload your file or paste your data.","Adjust the tool settings.","Run the tool.","Get your results instantly."]}
-      supportedFormats="Various formats supported depending on the tool."
-      title="Word Counter"
-      description="Count words, characters, sentences, and paragraphs in your text instantly."
-      breadcrumbs={[{ label: "Utilities", href: "/tools" }, { label: "Word Counter", href: "/word-counter" }]}
-      faq={[
-        { question: "Is my text saved?", answer: "No. The text you enter is processed entirely in your browser and is never sent to our servers." },
-        { question: "How is reading time calculated?", answer: "Reading time is based on an average reading speed of 200 words per minute." }
-      ]}
-      relatedTools={[
-        { name: "Text Case Converter", href: "/text-case", icon: <CheckCircle2 /> },
-        { name: "JSON Formatter", href: "/json-formatter", icon: <CheckCircle2 /> }
-      ]}
-    >
+  return <>
       <div className="max-w-4xl mx-auto flex flex-col lg:flex-row gap-6">
         
         {/* Editor Area */}
@@ -98,30 +72,17 @@ export default function WordCounterClient() {
           <div className="flex justify-between items-center p-4 bg-surface border-b border-border">
             <h3 className="flex items-center gap-2 m-0 text-sm font-medium"><AlignLeft size={16} /> Text Editor</h3>
             <div className="flex gap-2">
-              <button 
-                onClick={copyToClipboard}
-                className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1"
-                disabled={!text}
-              >
+              <button onClick={copyToClipboard} className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1" disabled={!text}>
                 {copied ? <CheckCircle2 size={14} /> : <Copy size={14} />} 
                 {copied ? "Copied!" : "Copy"}
               </button>
-              <button 
-                onClick={clearText}
-                className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1 hover:bg-danger/10 hover:text-danger hover:border-danger/30"
-                disabled={!text}
-              >
+              <button onClick={clearText} className="btn btn-secondary py-1 px-3 text-xs flex items-center gap-1 hover:bg-danger/10 hover:text-danger hover:border-danger/30" disabled={!text}>
                 <Trash2 size={14} /> Clear
               </button>
             </div>
           </div>
           
-          <textarea
-            className="w-full h-full min-h-[400px] p-6 bg-background resize-none focus:outline-none focus:ring-0 border-none text-base"
-            placeholder="Type or paste your text here to see real-time statistics..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          ></textarea>
+          <textarea className="w-full h-full min-h-[400px] p-6 bg-background resize-none focus:outline-none focus:ring-0 border-none text-base" placeholder="Type or paste your text here to see real-time statistics..." value={text} onChange={e => setText(e.target.value)}></textarea>
         </div>
 
         {/* Stats Panel */}
@@ -163,6 +124,5 @@ export default function WordCounterClient() {
         </div>
 
       </div>
-    </ToolLayout>
-  );
+    </>;
 }

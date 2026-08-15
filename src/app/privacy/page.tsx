@@ -2,7 +2,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - Filoza",
-  description: "Learn how Filoza protects your privacy and data.",
+  description: "Learn how Filoza protects your privacy and data. We process your files locally in your browser to guarantee complete security without uploading to any servers.",
+  alternates: { canonical: "https://filoza.vercel.app/privacy" }
 };
 
 export default function PrivacyPage() {

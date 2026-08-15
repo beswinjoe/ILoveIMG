@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function WebpPage() {
-  const faq = [];
+  const faq: any[] = [];
   const jsonLd = generateToolJsonLd('webp-converter', 'WebP Converter', faq);
 
   return (

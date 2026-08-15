@@ -6,20 +6,20 @@ import { toolsData } from "@/lib/tools";
 import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+  title: "PDF Tools - Merge, Split, Compress & Convert | Filoza",
   description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
   alternates: {
     canonical: "https://filoza.vercel.app/pdf-tools"
   },
   openGraph: {
-    title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+    title: "PDF Tools - Merge, Split, Compress & Convert | Filoza",
     description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
     url: "https://filoza.vercel.app/pdf-tools",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF Tools - Merge, Split, Compress & Convert PDFs Online | Filoza",
+    title: "PDF Tools - Merge, Split, Compress & Convert | Filoza",
     description: "Free online PDF tools to merge, split, compress, rotate, watermark, and convert PDF files. Works directly in your browser with no uploads.",
   }
 };

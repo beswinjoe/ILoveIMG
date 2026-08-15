@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function CompressorPage() {
-  const faq = [];
+  const faq: any[] = [];
   const jsonLd = generateToolJsonLd('image-compressor', 'Image Compressor', faq);
 
   return (

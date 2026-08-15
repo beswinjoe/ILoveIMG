@@ -6,20 +6,20 @@ import { toolsData } from "@/lib/tools";
 import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Archive Tools - Extract & Create ZIP, RAR Files Online | Filoza",
+  title: "Archive Tools - Extract & Create ZIP, RAR Online | Filoza",
   description: "Free online archive tools to create and extract ZIP and RAR files. All processing happens locally in your browser — no files are uploaded.",
   alternates: {
     canonical: "https://filoza.vercel.app/archive"
   },
   openGraph: {
-    title: "Archive Tools - Extract & Create ZIP, RAR Files Online | Filoza",
+    title: "Archive Tools - Extract & Create ZIP, RAR Online | Filoza",
     description: "Free online archive tools to create and extract ZIP and RAR files. All processing happens locally in your browser — no files are uploaded.",
     url: "https://filoza.vercel.app/archive",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Archive Tools - Extract & Create ZIP, RAR Files Online | Filoza",
+    title: "Archive Tools - Extract & Create ZIP, RAR Online | Filoza",
     description: "Free online archive tools to create and extract ZIP and RAR files. All processing happens locally in your browser — no files are uploaded.",
   }
 };

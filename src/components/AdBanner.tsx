@@ -8,14 +8,13 @@
  */
 export default function AdBanner() {
   return (
-    <div className="flex justify-center items-center w-full my-4 min-h-[50px] overflow-hidden">
+    <div className="flex justify-center items-center w-full my-4 min-h-[50px]">
       <iframe
         src="/ad-320x50.html"
         width="320"
         height="50"
         scrolling="no"
-        sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-top-navigation-by-user-activation"
-        style={{ border: "none", overflow: "hidden", width: "320px", height: "50px" }}
+        style={{ border: "2px solid blue", width: "320px", height: "50px", background: "#ccffff" }}
         title="Advertisement"
       />
     </div>

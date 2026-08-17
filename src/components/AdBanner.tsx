@@ -14,7 +14,7 @@ export default function AdBanner() {
         width="320"
         height="50"
         scrolling="no"
-        style={{ border: "2px solid blue", width: "320px", height: "50px", background: "#ccffff" }}
+        style={{ border: "none", width: "320px", height: "50px", overflow: "hidden" }}
         title="Advertisement"
       />
     </div>

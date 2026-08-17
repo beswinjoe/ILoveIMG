@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
+import AdBanner from "@/components/AdBanner";
+
 interface ToolLayoutProps {
   title: string;
   description: string;
@@ -46,8 +48,10 @@ export default function ToolLayout({ title, description, breadcrumbs, children, 
         {children}
       </div>
 
-      {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mb-16">Advertisement Space</div>
+      {/* Ad Banner */}
+      <div className="max-w-4xl mx-auto">
+        <AdBanner />
+      </div>
 
       {/* How it works */}
       {howItWorks && howItWorks.length > 0 && (

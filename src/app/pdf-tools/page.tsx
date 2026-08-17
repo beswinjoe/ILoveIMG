@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { ArrowRight, FileText } from "lucide-react";
 import { toolsData } from "@/lib/tools";
 import { categorySeo, generateCategoryJsonLd } from "@/lib/seo";
+import AdBanner from "@/components/AdBanner";
 
 export const metadata: Metadata = {
   title: "PDF Tools - Merge, Split, Compress & Convert | Filoza",
@@ -89,8 +90,9 @@ export default function PdfToolsPage() {
         </section>
       )}
 
-      <div className="ad-container" style={{ border: '1px dashed var(--border)', backgroundColor: 'var(--surface)', borderRadius: '16px', maxWidth: '800px', margin: '0 auto' }}>
-        Advertisement Space
+      {/* Ad Banner */}
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <AdBanner />
       </div>
     </div>
   );

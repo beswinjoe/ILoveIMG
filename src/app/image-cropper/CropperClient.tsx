@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import ImagePreview from "@/components/ImagePreview";
+import AdBanner from "@/components/AdBanner";
 import { UploadCloud, Download, Image as ImageIcon, Crop as CropIcon } from "lucide-react";
 
 export default function CropperClient() {
@@ -193,8 +194,10 @@ export default function CropperClient() {
         </div>
       )}
 
-      {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mt-8">Advertisement Space</div>
+      {/* Ad Banner */}
+      <div className="max-w-4xl mx-auto mt-8">
+        <AdBanner />
+      </div>
 
       <div className="max-w-3xl mx-auto mt-12 p-6" style={{ backgroundColor: "var(--surface)", borderRadius: "var(--radius-lg)" }}>
         <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>How to crop an image?</h2>

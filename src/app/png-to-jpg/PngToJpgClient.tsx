@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { UploadCloud, Download, Image as ImageIcon } from "lucide-react";
 import ImagePreview from "@/components/ImagePreview";
+import AdBanner from "@/components/AdBanner";
 
 export default function PngToJpgClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -143,8 +144,10 @@ export default function PngToJpgClient() {
         </div>
       )}
 
-      {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mt-8">Advertisement Space</div>
+      {/* Ad Banner */}
+      <div className="max-w-4xl mx-auto mt-8">
+        <AdBanner />
+      </div>
 
       <div className="max-w-3xl mx-auto mt-12 p-6" style={{ backgroundColor: "var(--surface)", borderRadius: "var(--radius-lg)" }}>
         <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>How to convert PNG to JPG?</h2>

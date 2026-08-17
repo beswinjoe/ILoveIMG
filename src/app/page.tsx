@@ -12,6 +12,7 @@ import {
   Send
 } from 'lucide-react';
 import { toolsData } from '@/lib/tools';
+import AdBanner from '@/components/AdBanner';
 
 export const metadata: Metadata = {
   title: "Free Online File Tools \u2013 Image, PDF, Audio & More | Filoza",
@@ -200,7 +201,7 @@ export default function Home() {
         ======================================== 
       */}
       <div className="container py-8">
-        <div className="ad-container" style={{ border: '1px dashed var(--border)', backgroundColor: 'var(--surface)', backdropFilter: 'var(--glass-blur)', borderRadius: '16px' }}>Advertisement Space</div>
+        <AdBanner />
       </div>
 
       {/* 

@@ -391,18 +391,24 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Ad Container */
 .ad-container {
-  width: 100%;
-  min-height: 90px;
-  background-color: var(--surface);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: var(--muted);
-  font-size: 0.75rem;
-  margin: 2rem 0;
-  backdrop-filter: var(--glass-blur);
+  align-items: center;
+  width: 100%;
+  margin: 24px auto;
+  overflow: hidden;
+}
+
+.ad-banner-320 {
+  min-height: 50px;
+}
+
+@media (max-width: 400px) {
+  .ad-banner-320 {
+    transform: scale(0.9);
+    transform-origin: center;
+    margin: 18px auto;
+  }
 }
 
 /* CMDK Search Palette */

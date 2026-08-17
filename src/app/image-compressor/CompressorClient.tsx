@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import imageCompression from "browser-image-compression";
 import { UploadCloud, Download, Image as ImageIcon } from "lucide-react";
 import ImagePreview from "@/components/ImagePreview";
+import AdBanner from "@/components/AdBanner";
 
 export default function CompressorClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -154,8 +155,10 @@ export default function CompressorClient() {
         </div>
       )}
 
-      {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mt-8 mb-16">Advertisement Space</div>
+      {/* Ad Banner */}
+      <div className="max-w-4xl mx-auto mt-8 mb-16">
+        <AdBanner />
+      </div>
 
       {/* How it works */}
       <section className="max-w-4xl mx-auto mb-16 p-8 glass-card">

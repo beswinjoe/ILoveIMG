@@ -50,6 +50,11 @@ export default function RootLayout({
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
+        <Script
+          id="adsterra-popunder"
+          strategy="lazyOnload"
+          src="https://accedelid.com/18/90/32/189032bd9d9185ec6ee7017d6d182c92.js"
+        />
         <Analytics />
       </body>
     </html>

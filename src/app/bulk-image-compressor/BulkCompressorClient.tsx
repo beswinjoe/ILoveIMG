@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import imageCompression from "browser-image-compression";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import AdBanner from "@/components/AdBanner";
 import { UploadCloud, Download, FileArchive, CheckCircle2, Circle } from "lucide-react";
 
 interface ProcessedFile {
@@ -216,8 +217,10 @@ export default function BulkCompressorClient() {
         </div>
       )}
 
-      {/* Ad Container */}
-      <div className="ad-container max-w-4xl mx-auto mt-8">Advertisement Space</div>
+      {/* Ad Banner */}
+      <div className="max-w-4xl mx-auto mt-8">
+        <AdBanner />
+      </div>
     </div>
   );
 }

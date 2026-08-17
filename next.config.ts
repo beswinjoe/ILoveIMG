@@ -6,11 +6,11 @@ const nextConfig: NextConfig = {
       {
         // COEP/COOP are needed ONLY for audio tools (ffmpeg/SharedArrayBuffer).
         // They must NOT be applied to API routes or file-transfer.
-        source: "/:path((?!api|file-transfer|download).*)",
+        source: "/:path((?!api|file-transfer|download|ad-320x50.html).*)",
         headers: [
           {
             key: "Cross-Origin-Embedder-Policy",
-            value: "credentialless",
+            value: "require-corp",
           },
           {
             key: "Cross-Origin-Opener-Policy",

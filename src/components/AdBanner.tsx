@@ -1,43 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 /**
  * Adsterra 320×50 banner ad component.
- * Uses a ref + useEffect to inject the ad script exactly once per mount,
- * preventing duplicate ads across navigations.
+ * Uses an iframe to load the ad from a static HTML file.
+ * This guarantees `document.write` works securely without breaking the React SPA,
+ * ensures `atOptions` is available before `invoke.js`, and prevents duplicate ads.
  */
 export default function AdBanner() {
-  const adRef = useRef<HTMLDivElement>(null);
-  const injectedRef = useRef(false);
-
-  useEffect(() => {
-    if (!adRef.current || injectedRef.current) return;
-    injectedRef.current = true;
-
-    // Inject atOptions configuration
-    const configScript = document.createElement("script");
-    configScript.type = "text/javascript";
-    configScript.text = `
-      atOptions = {
-        'key' : '43b1992a6cf84cd743850d012ca3be3b',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-    `;
-    adRef.current.appendChild(configScript);
-
-    // Inject the invoke script
-    const invokeScript = document.createElement("script");
-    invokeScript.type = "text/javascript";
-    invokeScript.src =
-      "https://accedelid.com/43b1992a6cf84cd743850d012ca3be3b/invoke.js";
-    adRef.current.appendChild(invokeScript);
-  }, []);
-
   return (
-    <div className="ad-container ad-banner-320" ref={adRef} aria-hidden="true" />
+    <div className="flex justify-center items-center w-full my-4 min-h-[50px] overflow-hidden">
+      <iframe
+        src="/ad-320x50.html"
+        width="320"
+        height="50"
+        scrolling="no"
+        sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-top-navigation-by-user-activation"
+        style={{ border: "none", overflow: "hidden", width: "320px", height: "50px" }}
+        title="Advertisement"
+      />
+    </div>
   );
 }

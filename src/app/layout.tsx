@@ -52,7 +52,7 @@ export default function RootLayout({
         <Footer />
         <Script
           id="adsterra-popunder"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           src="https://accedelid.com/18/90/32/189032bd9d9185ec6ee7017d6d182c92.js"
         />
         <Analytics />

@@ -10,7 +10,7 @@ export default function AdBanner() {
   return (
     <div className="flex justify-center items-center w-full my-4 min-h-[50px]">
       <iframe
-        src="/ad-320x50.html"
+        src="/ad-320x50.html?v=2"
         width="320"
         height="50"
         scrolling="no"
